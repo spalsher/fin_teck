@@ -89,6 +89,17 @@ const navigation: NavItem[] = [
       { name: 'Create Bill', href: '/accounts-receivable/transactions/create-bill', group: 'Transactions' },
       { name: 'Payment Receipt', href: '/accounts-receivable/transactions/payment-receipt', group: 'Transactions' },
       { name: 'Debit / Credit Note', href: '/accounts-receivable/transactions/debit-credit-note', group: 'Transactions' },
+      { name: 'Invoice Print-Out', href: '/accounts-receivable/reports/invoice-printout', group: 'Reports' },
+      { name: 'Detail Report', href: '/accounts-receivable/reports/detail-report', group: 'Reports' },
+      { name: 'Customer Ledger', href: '/accounts-receivable/reports/customer-ledger', group: 'Reports' },
+      { name: 'Receipt Printout', href: '/accounts-receivable/reports/receipt-printout', group: 'Reports' },
+      { name: 'Ageing Report', href: '/accounts-receivable/reports/ageing-report', group: 'Reports' },
+      { name: 'Sales Register', href: '/accounts-receivable/reports/sales-register', group: 'Reports' },
+      { name: 'AR Payment Receipt With / Without Invoice', href: '/accounts-receivable/reports/ar-payment-receipt', group: 'Reports' },
+      { name: 'AR Customer Aging Pivot Table', href: '/accounts-receivable/reports/ar-customer-aging-pivot', group: 'Reports' },
+      { name: 'Load Debit / Credit Note', href: '/accounts-receivable/data-loader/load-debit-credit-note', group: 'Data Loader' },
+      { name: 'Load AR Order Booking', href: '/accounts-receivable/data-loader/load-ar-order-booking', group: 'Data Loader' },
+      { name: 'Update Order Booking Price', href: '/accounts-receivable/data-loader/update-order-booking-price', group: 'Data Loader' },
     ],
   },
   { name: 'Assets', href: '/assets', icon: Building2 },
@@ -141,6 +152,7 @@ export function Sidebar() {
       'Transactions': 'text-emerald-400',
       'Reports': 'text-violet-400',
       'Accounts Payable': 'text-orange-400',
+      'Data Loader': 'text-yellow-400',
     };
 
     return (
