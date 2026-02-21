@@ -6,6 +6,11 @@ import { ChevronRight, Home } from 'lucide-react';
 
 const routeLabels: Record<string, string> = {
   dashboard: 'Dashboard',
+  administration: 'Administration',
+  departments: 'Departments',
+  designations: 'Designations',
+  'employee-types': 'Employee Types',
+  employees: 'Employees',
   finance: 'Finance',
   customers: 'Customers',
   invoices: 'Invoices',
@@ -22,7 +27,6 @@ const routeLabels: Record<string, string> = {
   'purchase-orders': 'Purchase Orders',
   grn: 'Goods Receipt',
   hrms: 'HRMS',
-  employees: 'Employees',
   payroll: 'Payroll',
   assets: 'Assets',
   manufacturing: 'Manufacturing',
@@ -37,6 +41,8 @@ const routeLabels: Record<string, string> = {
   edit: 'Edit',
   permissions: 'Permissions',
   kanban: 'Kanban View',
+  requisitions: 'Requisitions',
+  categories: 'Categories',
 };
 
 export function Breadcrumbs() {

@@ -2,12 +2,14 @@ import { Injectable, NotFoundException, BadRequestException } from '@nestjs/comm
 import { PrismaService } from '../../../shared/database/prisma.service';
 import { Prisma } from '@prisma/client';
 import { DocumentSequenceService } from '../../core/services/document-sequence.service';
+import { FinancePostingService } from './finance-posting.service';
 
 @Injectable()
 export class ReceiptService {
   constructor(
     private prisma: PrismaService,
     private documentSequenceService: DocumentSequenceService,
+    private financePosting: FinancePostingService,
   ) {}
 
   async create(
@@ -277,7 +279,7 @@ export class ReceiptService {
       });
     }
 
-    return this.prisma.receipt.update({
+    const updated = await this.prisma.receipt.update({
       where: { id },
       data: {
         status: 'POSTED',
@@ -296,8 +298,18 @@ export class ReceiptService {
             name: true,
           },
         },
+        branch: { select: { organizationId: true } },
       },
     });
+
+    await this.financePosting.createJournalForReceipt(
+      receipt.branchId,
+      { id: receipt.id, receiptNo: receipt.receiptNo, receiptDate: receipt.receiptDate, amount: Number(receipt.amount) },
+      updated.branch.organizationId,
+      userId,
+    ).catch(() => {});
+
+    return updated;
   }
 
   async void(id: string, userId: string) {

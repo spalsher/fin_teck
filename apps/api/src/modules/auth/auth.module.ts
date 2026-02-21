@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { RoleController } from './controllers/role.controller';
 import { PermissionController } from './controllers/permission.controller';
+import { UserController } from './controllers/user.controller';
 import { RoleService } from './services/role.service';
 import { PermissionService } from './services/permission.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
@@ -27,7 +28,7 @@ import { PermissionsGuard } from '../../shared/guards/permissions.guard';
       }),
     }),
   ],
-  controllers: [AuthController, RoleController, PermissionController],
+  controllers: [AuthController, RoleController, PermissionController, UserController],
   providers: [
     AuthService,
     RoleService,

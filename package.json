@@ -8,10 +8,16 @@
     "pnpm": ">=8.0.0"
   },
   "scripts": {
+    "start": "pnpm --filter @iteck/api start",
     "dev": "turbo run dev",
     "build": "turbo run build",
     "test": "turbo run test",
     "lint": "turbo run lint",
+    "migrate:sqlserver-to-pg": "cd scripts/migrate-sqlserver-to-pg && pnpm install && pnpm run migrate",
+    "migrate:discover": "cd scripts/migrate-sqlserver-to-pg && pnpm install && pnpm run discover",
+    "migrate:schema-convert": "cd scripts/migrate-sqlserver-to-pg && pnpm run schema-convert",
+    "migrate:apply-schema": "cd scripts/migrate-sqlserver-to-pg && pnpm run apply-schema",
+    "migrate:verify": "cd scripts/migrate-sqlserver-to-pg && pnpm run verify",
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "docker:dev": "docker compose -f docker/docker-compose.dev.yml up -d",

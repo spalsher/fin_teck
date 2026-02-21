@@ -2,12 +2,14 @@ import { Injectable, NotFoundException, BadRequestException } from '@nestjs/comm
 import { PrismaService } from '../../../shared/database/prisma.service';
 import { Prisma } from '@prisma/client';
 import { DocumentSequenceService } from '../../core/services/document-sequence.service';
+import { FinancePostingService } from './finance-posting.service';
 
 @Injectable()
 export class InvoiceService {
   constructor(
     private prisma: PrismaService,
     private documentSequenceService: DocumentSequenceService,
+    private financePosting: FinancePostingService,
   ) {}
 
   async create(
@@ -221,7 +223,7 @@ export class InvoiceService {
       throw new BadRequestException('Invoice must have at least one line');
     }
 
-    return this.prisma.invoice.update({
+    const updated = await this.prisma.invoice.update({
       where: { id },
       data: {
         status: 'POSTED',
@@ -236,8 +238,18 @@ export class InvoiceService {
             name: true,
           },
         },
+        branch: { select: { organizationId: true } },
       },
     });
+
+    await this.financePosting.createJournalForInvoice(
+      invoice.branchId,
+      { id: invoice.id, invoiceNo: invoice.invoiceNo, invoiceDate: invoice.invoiceDate, totalAmount: Number(invoice.totalAmount) },
+      updated.branch.organizationId,
+      userId,
+    ).catch(() => {});
+
+    return updated;
   }
 
   async void(id: string, userId: string) {

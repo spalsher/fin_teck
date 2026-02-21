@@ -2,12 +2,14 @@ import { Injectable, NotFoundException, BadRequestException } from '@nestjs/comm
 import { PrismaService } from '../../../shared/database/prisma.service';
 import { Prisma } from '@prisma/client';
 import { DocumentSequenceService } from '../../core/services/document-sequence.service';
+import { FinancePostingService } from './finance-posting.service';
 
 @Injectable()
 export class BillService {
   constructor(
     private prisma: PrismaService,
     private documentSequenceService: DocumentSequenceService,
+    private financePosting: FinancePostingService,
   ) {}
 
   async create(
@@ -197,7 +199,7 @@ export class BillService {
       throw new BadRequestException('Only draft bills can be posted');
     }
 
-    return this.prisma.bill.update({
+    const updated = await this.prisma.bill.update({
       where: { id },
       data: {
         status: 'POSTED',
@@ -211,8 +213,18 @@ export class BillService {
             name: true,
           },
         },
+        branch: { select: { organizationId: true } },
       },
     });
+
+    await this.financePosting.createJournalForBill(
+      bill.branchId,
+      { id: bill.id, billNo: bill.billNo, billDate: bill.billDate, totalAmount: Number(bill.totalAmount), vendorId: bill.vendorId },
+      updated.branch.organizationId,
+      userId,
+    ).catch(() => {});
+
+    return updated;
   }
 
   async void(id: string, userId: string) {

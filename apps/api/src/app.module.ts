@@ -5,12 +5,6 @@ import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { CoreModule } from './modules/core/core.module';
 import { FinanceModule } from './modules/finance/finance.module';
-import { ScmModule } from './modules/scm/scm.module';
-import { AssetModule } from './modules/asset/asset.module';
-import { HrmsModule } from './modules/hrms/hrms.module';
-import { ManufacturingModule } from './modules/manufacturing/manufacturing.module';
-// import { IntegrationModule } from './modules/integration/integration.module';
-import { ReportingModule } from './modules/reporting/reporting.module';
 
 @Module({
   imports: [
@@ -35,12 +29,6 @@ import { ReportingModule } from './modules/reporting/reporting.module';
     AuthModule,
     CoreModule,
     FinanceModule,
-    ScmModule,
-    AssetModule,
-    HrmsModule,
-    ManufacturingModule,
-    // IntegrationModule, // TODO: Fix schema alignment issues
-    ReportingModule,
   ],
 })
 export class AppModule {}

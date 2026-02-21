@@ -1,4 +1,3 @@
-// This is your Prisma schema file
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,100 +7,101 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ====================================
-// CORE MODULE
-// ====================================
-
 model Organization {
-  id        String   @id @default(uuid())
-  name      String
-  code      String   @unique
-  taxId     String?
-  address   Json
-  settings  Json     @default("{}")
-  currency  String   @default("PKR")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relations
-  branches            Branch[]
-  users               User[]
-  serviceOfferings    ServiceOffering[]
-  chartOfAccounts     ChartOfAccount[]
-  fiscalPeriods       FiscalPeriod[]
-  items               Item[]
-  assets              Asset[]
-  assetCategories     AssetCategory[]
-  depreciationMethods DepreciationMethod[]
-  employees           Employee[]
-  payrollRuns         PayrollRun[]
-  boms                BOM[]
-  paymentProviders    PaymentProvider[]
-  crmSyncLogs         CRMSyncLog[]
-  leaveTypes          LeaveType[]
-  leavePolicies       LeavePolicy[]
-  shifts              Shift[]
-  benefitPlans        BenefitPlan[]
-  trainingPrograms    TrainingProgram[]
-  skills              Skill[]
-  costCenters         CostCenter[]
-  designations        Designation[]
-  jobRequisitions     JobRequisition[]
-  surveys             Survey[]
+  id                    String                @id @default(uuid())
+  name                  String
+  code                  String                @unique
+  taxId                 String?
+  address               Json
+  settings              Json                  @default("{}")
+  currency              String                @default("PKR")
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  assetCategories       AssetCategory[]
+  assets                Asset[]
+  benefitPlans          BenefitPlan[]
+  boms                  BOM[]
+  branches              Branch[]
+  chartOfAccounts       ChartOfAccount[]
+  costCenters           CostCenter[]
+  crmSyncLogs           CRMSyncLog[]
+  depreciationMethods   DepreciationMethod[]
+  designations          Designation[]
+  employees             Employee[]
+  fiscalPeriods         FiscalPeriod[]
+  grades                Grade[]
+  items                 Item[]
+  jobRequisitions       JobRequisition[]
+  leavePolicies         LeavePolicy[]
+  leaveTypes            LeaveType[]
+  paymentProviders      PaymentProvider[]
+  payrollRuns           PayrollRun[]
+  requisitionCategories RequisitionCategory[]
+  requisitions          Requisition[]
+  serviceOfferings      ServiceOffering[]
+  shifts                Shift[]
+  skills                Skill[]
+  surveys               Survey[]
+  taxCategories         TaxCategory[]
+  trainingPrograms      TrainingProgram[]
+  unitOfMeasures        UnitOfMeasure[]
+  employeeTypes         EmployeeType[]
+  users                 User[]
+  vehicleBookings       VehicleBooking[]
+  tenant                Tenant?
 
   @@map("organizations")
 }
 
 model Branch {
-  id             String   @id @default(uuid())
-  organizationId String
-  name           String
-  code           String
-  address        Json
-  phone          String?
-  email          String?
-  isActive       Boolean  @default(true)
-  isHeadOffice   Boolean  @default(false)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  // Relations
-  organization      Organization       @relation(fields: [organizationId], references: [id])
-  users             User[]
-  documentSequences DocumentSequence[]
-  customers         Customer[]
-  invoices          Invoice[]
-  receipts          Receipt[]
-  vendors           Vendor[]
-  bills             Bill[]
-  journalEntries    JournalEntry[]
-  warehouses        Warehouse[]
-  purchaseOrders    PurchaseOrder[]
-  employees         Employee[]
-  payrollRuns       PayrollRun[]
+  id                String             @id @default(uuid())
+  organizationId    String
+  name              String
+  code              String
+  address           Json
+  phone             String?
+  email             String?
+  isActive          Boolean            @default(true)
+  isHeadOffice      Boolean            @default(false)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
   assets            Asset[]
-  productionOrders  ProductionOrder[]
+  bills             Bill[]
+  organization      Organization       @relation(fields: [organizationId], references: [id])
+  customers         Customer[]
   departments       Department[]
+  documentSequences DocumentSequence[]
+  employees         Employee[]
+  invoices          Invoice[]
   jobRequisitions   JobRequisition[]
+  journalEntries    JournalEntry[]
+  payrollRuns       PayrollRun[]
+  productionOrders  ProductionOrder[]
+  proformaInvoices  ProformaInvoice[]
+  purchaseOrders    PurchaseOrder[]
+  receipts          Receipt[]
+  requisitions      Requisition[]
+  users             User[]
+  vendors           Vendor[]
+  vehicleBookings   VehicleBooking[]
+  warehouses        Warehouse[]
 
   @@unique([organizationId, code])
   @@map("branches")
 }
 
 model ServiceOffering {
-  id             String   @id @default(uuid())
-  organizationId String
-  code           String
-  name           String
-  serviceType    String
-  billingConfig  Json
-  isActive       Boolean  @default(true)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  // Relations
-  organization     Organization      @relation(fields: [organizationId], references: [id])
+  id               String            @id @default(uuid())
+  organizationId   String
+  code             String
+  name             String
+  serviceType      String
+  billingConfig    Json
+  isActive         Boolean           @default(true)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
   customerServices CustomerService[]
+  organization     Organization      @relation(fields: [organizationId], references: [id])
 
   @@unique([organizationId, code])
   @@map("service_offerings")
@@ -118,78 +118,70 @@ model DocumentSequence {
   suffix       String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-
-  // Relations
-  branch Branch @relation(fields: [branchId], references: [id])
+  branch       Branch   @relation(fields: [branchId], references: [id])
 
   @@unique([branchId, module, documentType])
   @@map("document_sequences")
 }
 
-// ====================================
-// AUTH & RBAC MODULE
-// ====================================
-
 model User {
-  id             String    @id @default(uuid())
-  organizationId String
-  branchId       String?
-  email          String    @unique
-  passwordHash   String
-  firstName      String
-  lastName       String
-  isActive       Boolean   @default(true)
-  lastLogin      DateTime?
-  preferences    Json      @default("{}")
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  deletedAt      DateTime?
-
-  // Relations
-  organization    Organization    @relation(fields: [organizationId], references: [id])
-  branch          Branch?         @relation(fields: [branchId], references: [id])
-  userRoles       UserRole[]
-  refreshTokens   RefreshToken[]
-  auditLogs       AuditLog[]
-  notifications   Notification[]
-  filterPresets   FilterPreset[]
-  createdInvoices Invoice[]       @relation("InvoiceCreatedBy")
-  createdReceipts Receipt[]       @relation("ReceiptCreatedBy")
-  postedJournals  JournalEntry[]  @relation("JournalPostedBy")
-  createdPOs      PurchaseOrder[] @relation("POCreatedBy")
-  createdGRNs     GoodsReceipt[]  @relation("GRNCreatedBy")
-  qcInspections   QCInspection[]  @relation("QCInspectedBy")
+  id                   String                   @id @default(uuid())
+  organizationId       String
+  branchId             String?
+  employeeId           String?
+  email                String                   @unique
+  passwordHash         String
+  firstName            String
+  lastName             String
+  isActive             Boolean                  @default(true)
+  lastLogin            DateTime?
+  preferences          Json                     @default("{}")
+  createdAt            DateTime                 @default(now())
+  updatedAt            DateTime                 @updatedAt
+  deletedAt            DateTime?
+  auditLogs            AuditLog[]
+  filterPresets        FilterPreset[]
+  createdGRNs          GoodsReceipt[]           @relation("GRNCreatedBy")
+  createdInvoices      Invoice[]                @relation("InvoiceCreatedBy")
+  postedJournals       JournalEntry[]           @relation("JournalPostedBy")
+  notifications        Notification[]
+  createdPOs           PurchaseOrder[]          @relation("POCreatedBy")
+  qcInspections        QCInspection[]           @relation("QCInspectedBy")
+  createdReceipts      Receipt[]                @relation("ReceiptCreatedBy")
+  refreshTokens        RefreshToken[]
+  userRoles            UserRole[]
+  requisitionsCreated  Requisition[]            @relation("RequisitionCreatedBy")
+  requisitionsApproved RequisitionApprovalLog[] @relation("RequisitionApprovedBy")
+  branch               Branch?                  @relation(fields: [branchId], references: [id])
+  employee             Employee?                @relation(fields: [employeeId], references: [id])
+  organization         Organization             @relation(fields: [organizationId], references: [id])
 
   @@map("users")
 }
 
 model Role {
-  id          String   @id @default(uuid())
-  name        String
-  code        String   @unique
-  description String?
-  isSystem    Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
-  userRoles       UserRole[]
+  id              String           @id @default(uuid())
+  name            String
+  code            String           @unique
+  description     String?
+  isSystem        Boolean          @default(false)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
   rolePermissions RolePermission[]
+  userRoles       UserRole[]
 
   @@map("roles")
 }
 
 model Permission {
-  id          String   @id @default(uuid())
-  module      String
-  entity      String
-  action      String
-  code        String   @unique
-  description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
+  id              String           @id @default(uuid())
+  module          String
+  entity          String
+  action          String
+  code            String           @unique
+  description     String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
   rolePermissions RolePermission[]
 
   @@unique([module, entity, action])
@@ -201,24 +193,20 @@ model UserRole {
   userId    String
   roleId    String
   createdAt DateTime @default(now())
-
-  // Relations
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  role      Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, roleId])
   @@map("user_roles")
 }
 
 model RolePermission {
-  id           String   @id @default(uuid())
+  id           String     @id @default(uuid())
   roleId       String
   permissionId String
-  createdAt    DateTime @default(now())
-
-  // Relations
-  role       Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
-  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
 
   @@unique([roleId, permissionId])
   @@map("role_permissions")
@@ -232,9 +220,7 @@ model RefreshToken {
   isRevoked  Boolean  @default(false)
   deviceInfo String?
   createdAt  DateTime @default(now())
-
-  // Relations
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@map("refresh_tokens")
@@ -251,9 +237,7 @@ model AuditLog {
   userAgent     String?
   correlationId String
   createdAt     DateTime @default(now())
-
-  // Relations
-  user User @relation(fields: [userId], references: [id])
+  user          User     @relation(fields: [userId], references: [id])
 
   @@index([userId])
   @@index([entity])
@@ -264,16 +248,14 @@ model AuditLog {
 model Notification {
   id        String    @id @default(uuid())
   userId    String
-  type      String // info, success, warning, error
+  type      String
   title     String
   message   String
   link      String?
   isRead    Boolean   @default(false)
   createdAt DateTime  @default(now())
   readAt    DateTime?
-
-  // Relations
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, isRead])
   @@index([createdAt])
@@ -284,25 +266,19 @@ model FilterPreset {
   id        String   @id @default(uuid())
   userId    String
   name      String
-  entity    String // e.g., "invoice", "customer"
-  filters   Json // Store filter conditions
+  entity    String
+  filters   Json
   isPublic  Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  // Relations
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, entity])
   @@map("filter_presets")
 }
 
-// ====================================
-// FINANCE MODULE - AR
-// ====================================
-
 model Customer {
-  id                String    @id @default(uuid())
+  id                String            @id @default(uuid())
   branchId          String
   customerCode      String
   name              String
@@ -310,27 +286,26 @@ model Customer {
   customerType      String
   billingAddress    Json
   shippingAddress   Json?
-  creditLimit       Decimal   @db.Decimal(19, 4)
+  creditLimit       Decimal           @db.Decimal(19, 4)
   paymentTermDays   Int
-  billingPreference String    @default("UNIFIED")
+  billingPreference String            @default("UNIFIED")
   externalCrmId     String?
-  isActive          Boolean   @default(true)
-  externalId        String?
-  externalSource    String?
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
+  isActive          Boolean           @default(true)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
   createdBy         String
   updatedBy         String
   deletedAt         DateTime?
-
-  // Relations
-  paymentIntents   PaymentIntent[]
-  branch           Branch            @relation(fields: [branchId], references: [id])
-  customerContacts CustomerContact[]
-  customerServices CustomerService[]
-  invoices         Invoice[]
-  creditNotes      CreditNote[]
-  receipts         Receipt[]
+  externalId        String?
+  externalSource    String?
+  creditNotes       CreditNote[]
+  customerContacts  CustomerContact[]
+  customerServices  CustomerService[]
+  branch            Branch            @relation(fields: [branchId], references: [id])
+  invoices          Invoice[]
+  paymentIntents    PaymentIntent[]
+  proformaInvoices  ProformaInvoice[]
+  receipts          Receipt[]
 
   @@unique([branchId, customerCode])
   @@map("customers")
@@ -345,68 +320,62 @@ model CustomerContact {
   isPrimary  Boolean  @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-
-  // Relations
-  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
 
   @@map("customer_contacts")
 }
 
 model CustomerService {
-  id                String    @id @default(uuid())
+  id                String          @id @default(uuid())
   customerId        String
   serviceOfferingId String
   contractNo        String
   startDate         DateTime
   endDate           DateTime?
   billingCycle      String
-  monthlyRate       Decimal   @db.Decimal(19, 4)
-  usageConfig       Json      @default("{}")
+  monthlyRate       Decimal         @db.Decimal(19, 4)
+  usageConfig       Json            @default("{}")
   status            String
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
   createdBy         String
   updatedBy         String
-
-  // Relations
-  customer        Customer        @relation(fields: [customerId], references: [id])
-  serviceOffering ServiceOffering @relation(fields: [serviceOfferingId], references: [id])
-  invoices        Invoice[]
+  customer          Customer        @relation(fields: [customerId], references: [id])
+  serviceOffering   ServiceOffering @relation(fields: [serviceOfferingId], references: [id])
+  invoices          Invoice[]
 
   @@unique([customerId, contractNo])
   @@map("customer_services")
 }
 
 model Invoice {
-  id                String   @id @default(uuid())
-  branchId          String
-  customerId        String
-  customerServiceId String?
-  invoiceNo         String   @unique
-  invoiceDate       DateTime
-  dueDate           DateTime
-  invoiceType       String
-  subtotal          Decimal  @db.Decimal(19, 4)
-  taxAmount         Decimal  @db.Decimal(19, 4)
-  totalAmount       Decimal  @db.Decimal(19, 4)
-  paidAmount        Decimal  @default(0) @db.Decimal(19, 4)
-  balanceDue        Decimal  @db.Decimal(19, 4)
-  status            String   @default("DRAFT")
-  externalRef       String?
-  notes             String?
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-  createdBy         String
-  updatedBy         String
-
-  // Relations
+  id                 String              @id @default(uuid())
+  branchId           String
+  customerId         String
+  customerServiceId  String?
+  invoiceNo          String              @unique
+  invoiceDate        DateTime
+  dueDate            DateTime
+  invoiceType        String
+  subtotal           Decimal             @db.Decimal(19, 4)
+  taxAmount          Decimal             @db.Decimal(19, 4)
+  totalAmount        Decimal             @db.Decimal(19, 4)
+  paidAmount         Decimal             @default(0) @db.Decimal(19, 4)
+  balanceDue         Decimal             @db.Decimal(19, 4)
+  status             String              @default("DRAFT")
+  externalRef        String?
+  notes              String?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  createdBy          String
+  updatedBy          String
+  invoiceLines       InvoiceLine[]
   branch             Branch              @relation(fields: [branchId], references: [id])
+  creator            User                @relation("InvoiceCreatedBy", fields: [createdBy], references: [id])
   customer           Customer            @relation(fields: [customerId], references: [id])
   customerService    CustomerService?    @relation(fields: [customerServiceId], references: [id])
-  creator            User                @relation("InvoiceCreatedBy", fields: [createdBy], references: [id])
-  invoiceLines       InvoiceLine[]
-  receiptAllocations ReceiptAllocation[]
   paymentIntents     PaymentIntent[]
+  receiptAllocations ReceiptAllocation[]
 
   @@index([customerId])
   @@index([invoiceDate])
@@ -430,10 +399,8 @@ model InvoiceLine {
   updatedAt   DateTime @updatedAt
   createdBy   String
   updatedBy   String
-
-  // Relations
-  invoice Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
-  item    Item?   @relation(fields: [itemId], references: [id])
+  invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  item        Item?    @relation(fields: [itemId], references: [id])
 
   @@unique([invoiceId, lineNo])
   @@map("invoice_lines")
@@ -452,37 +419,33 @@ model CreditNote {
   updatedAt    DateTime @updatedAt
   createdBy    String
   updatedBy    String
-
-  // Relations
-  customer Customer @relation(fields: [customerId], references: [id])
+  customer     Customer @relation(fields: [customerId], references: [id])
 
   @@map("credit_notes")
 }
 
 model Receipt {
-  id            String   @id @default(uuid())
-  branchId      String
-  customerId    String
-  receiptNo     String   @unique
-  receiptDate   DateTime
-  amount        Decimal  @db.Decimal(19, 4)
-  paymentMethod String
-  referenceNo   String?
-  bankAccountId String?
-  status        String   @default("DRAFT")
-  notes         String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  createdBy     String
-  updatedBy     String
-
-  // Relations
-  branch              Branch               @relation(fields: [branchId], references: [id])
-  customer            Customer             @relation(fields: [customerId], references: [id])
-  creator             User                 @relation("ReceiptCreatedBy", fields: [createdBy], references: [id])
-  bankAccount         BankAccount?         @relation(fields: [bankAccountId], references: [id])
-  receiptAllocations  ReceiptAllocation[]
+  id                  String               @id @default(uuid())
+  branchId            String
+  customerId          String
+  receiptNo           String               @unique
+  receiptDate         DateTime
+  amount              Decimal              @db.Decimal(19, 4)
+  paymentMethod       String
+  referenceNo         String?
+  bankAccountId       String?
+  status              String               @default("DRAFT")
+  notes               String?
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  createdBy           String
+  updatedBy           String
   paymentTransactions PaymentTransaction[]
+  receiptAllocations  ReceiptAllocation[]
+  bankAccount         BankAccount?         @relation(fields: [bankAccountId], references: [id])
+  branch              Branch               @relation(fields: [branchId], references: [id])
+  creator             User                 @relation("ReceiptCreatedBy", fields: [createdBy], references: [id])
+  customer            Customer             @relation(fields: [customerId], references: [id])
 
   @@index([customerId])
   @@index([receiptDate])
@@ -495,40 +458,33 @@ model ReceiptAllocation {
   invoiceId String
   amount    Decimal  @db.Decimal(19, 4)
   createdAt DateTime @default(now())
-
-  // Relations
-  receipt Receipt @relation(fields: [receiptId], references: [id], onDelete: Cascade)
-  invoice Invoice @relation(fields: [invoiceId], references: [id])
+  invoice   Invoice  @relation(fields: [invoiceId], references: [id])
+  receipt   Receipt  @relation(fields: [receiptId], references: [id], onDelete: Cascade)
 
   @@unique([receiptId, invoiceId])
   @@map("receipt_allocations")
 }
 
-// ====================================
-// FINANCE MODULE - AP
-// ====================================
-
 model Vendor {
-  id              String    @id @default(uuid())
-  branchId        String
-  vendorCode      String
-  name            String
-  taxId           String?
-  address         Json
-  phone           String?
-  email           String?
-  paymentTermDays Int
-  isActive        Boolean   @default(true)
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  createdBy       String
-  updatedBy       String
-  deletedAt       DateTime?
-
-  // Relations
-  branch         Branch          @relation(fields: [branchId], references: [id])
-  bills          Bill[]
-  purchaseOrders PurchaseOrder[]
+  id               String            @id @default(uuid())
+  branchId         String
+  vendorCode       String
+  name             String
+  taxId            String?
+  address          Json
+  phone            String?
+  email            String?
+  paymentTermDays  Int
+  isActive         Boolean           @default(true)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  createdBy        String
+  updatedBy        String
+  deletedAt        DateTime?
+  bills            Bill[]
+  proformaInvoices ProformaInvoice[]
+  purchaseOrders   PurchaseOrder[]
+  branch           Branch            @relation(fields: [branchId], references: [id])
 
   @@unique([branchId, vendorCode])
   @@map("vendors")
@@ -549,20 +505,14 @@ model Bill {
   updatedAt   DateTime @updatedAt
   createdBy   String
   updatedBy   String
-
-  // Relations
-  branch Branch @relation(fields: [branchId], references: [id])
-  vendor Vendor @relation(fields: [vendorId], references: [id])
+  branch      Branch   @relation(fields: [branchId], references: [id])
+  vendor      Vendor   @relation(fields: [vendorId], references: [id])
 
   @@map("bills")
 }
 
-// ====================================
-// FINANCE MODULE - GL
-// ====================================
-
 model ChartOfAccount {
-  id                 String   @id @default(uuid())
+  id                 String             @id @default(uuid())
   organizationId     String
   accountCode        String
   accountName        String
@@ -570,38 +520,34 @@ model ChartOfAccount {
   accountCategory    String
   parentId           String?
   level              Int
-  isControlAccount   Boolean  @default(false)
-  isActive           Boolean  @default(true)
-  allowDirectPosting Boolean  @default(true)
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  isControlAccount   Boolean            @default(false)
+  isActive           Boolean            @default(true)
+  allowDirectPosting Boolean            @default(true)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
   createdBy          String
   updatedBy          String
-
-  // Relations
-  organization      Organization       @relation(fields: [organizationId], references: [id])
-  parent            ChartOfAccount?    @relation("AccountHierarchy", fields: [parentId], references: [id])
-  children          ChartOfAccount[]   @relation("AccountHierarchy")
-  journalEntryLines JournalEntryLine[]
+  organization       Organization       @relation(fields: [organizationId], references: [id])
+  parent             ChartOfAccount?    @relation("AccountHierarchy", fields: [parentId], references: [id])
+  children           ChartOfAccount[]   @relation("AccountHierarchy")
+  journalEntryLines  JournalEntryLine[]
 
   @@unique([organizationId, accountCode])
   @@map("chart_of_accounts")
 }
 
 model FiscalPeriod {
-  id             String   @id @default(uuid())
+  id             String         @id @default(uuid())
   organizationId String
   periodName     String
   fiscalYear     Int
   periodNumber   Int
   startDate      DateTime
   endDate        DateTime
-  status         String   @default("OPEN")
-  isClosed       Boolean  @default(false)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  // Relations
+  status         String         @default("OPEN")
+  isClosed       Boolean        @default(false)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
   organization   Organization   @relation(fields: [organizationId], references: [id])
   journalEntries JournalEntry[]
 
@@ -609,31 +555,111 @@ model FiscalPeriod {
   @@map("fiscal_periods")
 }
 
+model TaxCategory {
+  id             String       @id @default(uuid())
+  organizationId String
+  code           String
+  name           String
+  description    String?
+  isActive       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  taxDetails     TaxDetail[]
+
+  @@unique([organizationId, code])
+  @@map("tax_categories")
+}
+
+model TaxDetail {
+  id            String      @id @default(uuid())
+  taxCategoryId String
+  rate          Decimal     @db.Decimal(5, 2)
+  effectiveFrom DateTime
+  effectiveTo   DateTime?
+  description   String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  taxCategory   TaxCategory @relation(fields: [taxCategoryId], references: [id], onDelete: Cascade)
+
+  @@map("tax_details")
+}
+
+model VehicleBooking {
+  id             String       @id @default(uuid())
+  organizationId String
+  branchId       String
+  vehicleRef     String
+  bookingDate    DateTime
+  purpose        String?
+  status         String       @default("BOOKED")
+  createdBy      String
+  updatedBy      String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  branch         Branch       @relation(fields: [branchId], references: [id])
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  @@map("vehicle_bookings")
+}
+
+model ProformaInvoice {
+  id          String                    @id @default(uuid())
+  branchId    String
+  piNo        String
+  piDate      DateTime
+  customerId  String?
+  vendorId    String?
+  totalAmount Decimal                   @db.Decimal(19, 4)
+  status      String                    @default("DRAFT")
+  notes       String?
+  createdBy   String
+  updatedBy   String
+  createdAt   DateTime                  @default(now())
+  updatedAt   DateTime                  @updatedAt
+  branch      Branch                    @relation(fields: [branchId], references: [id])
+  customer    Customer?                 @relation(fields: [customerId], references: [id])
+  vendor      Vendor?                   @relation(fields: [vendorId], references: [id])
+  issuances   ProformaInvoiceIssuance[]
+
+  @@unique([branchId, piNo])
+  @@map("proforma_invoices")
+}
+
+model ProformaInvoiceIssuance {
+  id                String          @id @default(uuid())
+  proformaInvoiceId String
+  issuanceDate      DateTime
+  notes             String?
+  createdAt         DateTime        @default(now())
+  proformaInvoice   ProformaInvoice @relation(fields: [proformaInvoiceId], references: [id], onDelete: Cascade)
+
+  @@map("proforma_invoice_issuances")
+}
+
 model JournalEntry {
-  id             String    @id @default(uuid())
+  id             String             @id @default(uuid())
   branchId       String
   fiscalPeriodId String
-  journalNo      String    @unique
+  journalNo      String             @unique
   entryDate      DateTime
   description    String
   journalType    String
   source         String
   sourceRef      String?
-  totalDebit     Decimal   @db.Decimal(19, 4)
-  totalCredit    Decimal   @db.Decimal(19, 4)
-  status         String    @default("DRAFT")
+  totalDebit     Decimal            @db.Decimal(19, 4)
+  totalCredit    Decimal            @db.Decimal(19, 4)
+  status         String             @default("DRAFT")
   postedBy       String?
   postedAt       DateTime?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
   createdBy      String
   updatedBy      String
-
-  // Relations
-  branch       Branch             @relation(fields: [branchId], references: [id])
-  fiscalPeriod FiscalPeriod       @relation(fields: [fiscalPeriodId], references: [id])
-  poster       User?              @relation("JournalPostedBy", fields: [postedBy], references: [id])
-  journalLines JournalEntryLine[]
+  branch         Branch             @relation(fields: [branchId], references: [id])
+  fiscalPeriod   FiscalPeriod       @relation(fields: [fiscalPeriodId], references: [id])
+  poster         User?              @relation("JournalPostedBy", fields: [postedBy], references: [id])
+  journalLines   JournalEntryLine[]
 
   @@index([entryDate])
   @@index([status])
@@ -641,85 +667,104 @@ model JournalEntry {
 }
 
 model JournalEntryLine {
-  id          String   @id @default(uuid())
-  journalId   String
-  accountId   String
-  lineNo      Int
-  description String
-  debit       Decimal  @default(0) @db.Decimal(19, 4)
-  credit      Decimal  @default(0) @db.Decimal(19, 4)
-  createdAt   DateTime @default(now())
-
-  // Relations
-  journalEntry JournalEntry   @relation(fields: [journalId], references: [id], onDelete: Cascade)
+  id           String         @id @default(uuid())
+  journalId    String
+  accountId    String
+  costCenterId String?
+  lineNo       Int
+  description  String
+  debit        Decimal        @default(0) @db.Decimal(19, 4)
+  credit       Decimal        @default(0) @db.Decimal(19, 4)
+  createdAt    DateTime       @default(now())
   account      ChartOfAccount @relation(fields: [accountId], references: [id])
+  costCenter   CostCenter?    @relation(fields: [costCenterId], references: [id])
+  journalEntry JournalEntry   @relation(fields: [journalId], references: [id], onDelete: Cascade)
 
   @@unique([journalId, lineNo])
   @@map("journal_entry_lines")
 }
 
 model BankAccount {
-  id             String   @id @default(uuid())
-  organizationId String
-  accountName    String
-  accountNumber  String
-  bankName       String
-  branchName     String?
-  iban           String?
-  swiftCode      String?
-  isActive       Boolean  @default(true)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  // Relations
-  receipts     Receipt[]
-  transactions BankTransaction[]
+  id                 String              @id @default(uuid())
+  organizationId     String
+  accountName        String
+  accountNumber      String
+  bankName           String
+  branchName         String?
+  iban               String?
+  swiftCode          String?
+  isActive           Boolean             @default(true)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  transactions       BankTransaction[]
+  unPresentedCheques UnPresentedCheque[]
+  receipts           Receipt[]
 
   @@map("bank_accounts")
 }
 
 model BankTransaction {
-  id              String   @id @default(uuid())
+  id              String      @id @default(uuid())
   bankAccountId   String
   transactionDate DateTime
   description     String
   referenceNo     String?
-  debit           Decimal  @default(0) @db.Decimal(19, 4)
-  credit          Decimal  @default(0) @db.Decimal(19, 4)
-  balance         Decimal  @db.Decimal(19, 4)
-  isReconciled    Boolean  @default(false)
-  createdAt       DateTime @default(now())
-
-  // Relations
-  bankAccount BankAccount @relation(fields: [bankAccountId], references: [id])
+  debit           Decimal     @default(0) @db.Decimal(19, 4)
+  credit          Decimal     @default(0) @db.Decimal(19, 4)
+  balance         Decimal     @db.Decimal(19, 4)
+  isReconciled    Boolean     @default(false)
+  createdAt       DateTime    @default(now())
+  bankAccount     BankAccount @relation(fields: [bankAccountId], references: [id])
 
   @@map("bank_transactions")
 }
 
-// ====================================
-// SCM MODULE
-// ====================================
+model UnPresentedCheque {
+  id            String      @id @default(uuid())
+  bankAccountId String
+  chequeNo      String
+  amount        Decimal     @db.Decimal(19, 4)
+  chequeDate    DateTime
+  status        String      @default("PENDING")
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id])
+
+  @@map("un_presented_cheques")
+}
 
 model ItemCategory {
-  id          String   @id @default(uuid())
+  id          String         @id @default(uuid())
   code        String
   name        String
   description String?
   parentId    String?
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
-  parent   ItemCategory?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
-  children ItemCategory[] @relation("CategoryHierarchy")
-  items    Item[]
+  isActive    Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  parent      ItemCategory?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children    ItemCategory[] @relation("CategoryHierarchy")
+  items       Item[]
 
   @@map("item_categories")
 }
 
+model UnitOfMeasure {
+  id             String       @id @default(uuid())
+  organizationId String
+  code           String
+  name           String
+  isActive       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  @@unique([organizationId, code])
+  @@map("unit_of_measures")
+}
+
 model Item {
-  id                 String    @id @default(uuid())
+  id                 String              @id @default(uuid())
   organizationId     String
   itemCode           String
   name               String
@@ -727,70 +772,64 @@ model Item {
   categoryId         String?
   itemType           String
   uom                String
-  unitCost           Decimal   @db.Decimal(19, 4)
-  reorderLevel       Decimal   @default(0) @db.Decimal(19, 4)
-  reorderQty         Decimal   @default(0) @db.Decimal(19, 4)
-  isActive           Boolean   @default(true)
-  isHarnessComponent Boolean   @default(false)
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
+  unitCost           Decimal             @db.Decimal(19, 4)
+  reorderLevel       Decimal             @default(0) @db.Decimal(19, 4)
+  reorderQty         Decimal             @default(0) @db.Decimal(19, 4)
+  isActive           Boolean             @default(true)
+  isHarnessComponent Boolean             @default(false)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
   createdBy          String
   updatedBy          String
   deletedAt          DateTime?
-
-  // Relations
-  organization   Organization        @relation(fields: [organizationId], references: [id])
-  category       ItemCategory?       @relation(fields: [categoryId], references: [id])
-  stockLedgers   StockLedger[]
-  invoiceLines   InvoiceLine[]
-  poLines        PurchaseOrderLine[]
-  grnLines       GoodsReceiptLine[]
-  bomsAsFinished BOM[]               @relation("BOMFinishedItem")
-  bomLines       BOMLine[]
+  bomLines           BOMLine[]
+  bomsAsFinished     BOM[]               @relation("BOMFinishedItem")
+  grnLines           GoodsReceiptLine[]
+  invoiceLines       InvoiceLine[]
+  category           ItemCategory?       @relation(fields: [categoryId], references: [id])
+  organization       Organization        @relation(fields: [organizationId], references: [id])
+  poLines            PurchaseOrderLine[]
+  stockLedgers       StockLedger[]
 
   @@unique([organizationId, itemCode])
   @@map("items")
 }
 
 model Warehouse {
-  id            String   @id @default(uuid())
-  branchId      String
-  warehouseCode String
-  name          String
-  address       Json
-  isActive      Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  // Relations
-  branch           Branch            @relation(fields: [branchId], references: [id])
-  stockLedgers     StockLedger[]
+  id               String            @id @default(uuid())
+  branchId         String
+  warehouseCode    String
+  name             String
+  address          Json
+  isActive         Boolean           @default(true)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
   goodsReceipts    GoodsReceipt[]
   productionOrders ProductionOrder[]
+  stockLedgers     StockLedger[]
+  branch           Branch            @relation(fields: [branchId], references: [id])
 
   @@unique([branchId, warehouseCode])
   @@map("warehouses")
 }
 
 model StockLedger {
-  id              String   @id @default(uuid())
+  id              String    @id @default(uuid())
   itemId          String
   warehouseId     String
   transactionDate DateTime
   transactionType String
   referenceNo     String
   referenceType   String
-  qtyIn           Decimal  @default(0) @db.Decimal(19, 4)
-  qtyOut          Decimal  @default(0) @db.Decimal(19, 4)
-  balanceQty      Decimal  @db.Decimal(19, 4)
-  unitCost        Decimal  @db.Decimal(19, 4)
-  totalValue      Decimal  @db.Decimal(19, 4)
-  createdAt       DateTime @default(now())
+  qtyIn           Decimal   @default(0) @db.Decimal(19, 4)
+  qtyOut          Decimal   @default(0) @db.Decimal(19, 4)
+  balanceQty      Decimal   @db.Decimal(19, 4)
+  unitCost        Decimal   @db.Decimal(19, 4)
+  totalValue      Decimal   @db.Decimal(19, 4)
+  createdAt       DateTime  @default(now())
   createdBy       String
-
-  // Relations
-  item      Item      @relation(fields: [itemId], references: [id])
-  warehouse Warehouse @relation(fields: [warehouseId], references: [id])
+  item            Item      @relation(fields: [itemId], references: [id])
+  warehouse       Warehouse @relation(fields: [warehouseId], references: [id])
 
   @@index([itemId, warehouseId])
   @@index([transactionDate])
@@ -798,26 +837,24 @@ model StockLedger {
 }
 
 model PurchaseOrder {
-  id           String    @id @default(uuid())
-  branchId     String
-  vendorId     String
-  orderNo      String    @unique
-  orderDate    DateTime
-  expectedDate DateTime?
-  totalAmount  Decimal   @db.Decimal(19, 4)
-  status       String    @default("DRAFT")
-  notes        String?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  createdBy    String
-  updatedBy    String
-
-  // Relations
-  branch        Branch              @relation(fields: [branchId], references: [id])
-  vendor        Vendor              @relation(fields: [vendorId], references: [id])
-  creator       User                @relation("POCreatedBy", fields: [createdBy], references: [id])
-  poLines       PurchaseOrderLine[]
+  id            String              @id @default(uuid())
+  branchId      String
+  vendorId      String
+  orderNo       String              @unique
+  orderDate     DateTime
+  expectedDate  DateTime?
+  totalAmount   Decimal             @db.Decimal(19, 4)
+  status        String              @default("DRAFT")
+  notes         String?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+  createdBy     String
+  updatedBy     String
   goodsReceipts GoodsReceipt[]
+  poLines       PurchaseOrderLine[]
+  branch        Branch              @relation(fields: [branchId], references: [id])
+  creator       User                @relation("POCreatedBy", fields: [createdBy], references: [id])
+  vendor        Vendor              @relation(fields: [vendorId], references: [id])
 
   @@index([vendorId])
   @@index([orderDate])
@@ -825,111 +862,97 @@ model PurchaseOrder {
 }
 
 model PurchaseOrderLine {
-  id        String   @id @default(uuid())
-  poId      String
-  itemId    String
-  lineNo    Int
-  quantity  Decimal  @db.Decimal(19, 4)
-  unitPrice Decimal  @db.Decimal(19, 4)
-  lineTotal Decimal  @db.Decimal(19, 4)
-  createdAt DateTime @default(now())
-
-  // Relations
-  purchaseOrder PurchaseOrder @relation(fields: [poId], references: [id], onDelete: Cascade)
+  id            String        @id @default(uuid())
+  poId          String
+  itemId        String
+  lineNo        Int
+  quantity      Decimal       @db.Decimal(19, 4)
+  unitPrice     Decimal       @db.Decimal(19, 4)
+  lineTotal     Decimal       @db.Decimal(19, 4)
+  createdAt     DateTime      @default(now())
   item          Item          @relation(fields: [itemId], references: [id])
+  purchaseOrder PurchaseOrder @relation(fields: [poId], references: [id], onDelete: Cascade)
 
   @@unique([poId, lineNo])
   @@map("purchase_order_lines")
 }
 
 model GoodsReceipt {
-  id          String   @id @default(uuid())
-  poId        String
-  warehouseId String
-  grnNo       String   @unique
-  receiptDate DateTime
-  status      String   @default("DRAFT")
-  notes       String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  createdBy   String
-  updatedBy   String
-
-  // Relations
+  id            String             @id @default(uuid())
+  poId          String
+  warehouseId   String
+  grnNo         String             @unique
+  receiptDate   DateTime
+  status        String             @default("DRAFT")
+  notes         String?
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  createdBy     String
+  updatedBy     String
+  grnLines      GoodsReceiptLine[]
+  creator       User               @relation("GRNCreatedBy", fields: [createdBy], references: [id])
   purchaseOrder PurchaseOrder      @relation(fields: [poId], references: [id])
   warehouse     Warehouse          @relation(fields: [warehouseId], references: [id])
-  creator       User               @relation("GRNCreatedBy", fields: [createdBy], references: [id])
-  grnLines      GoodsReceiptLine[]
 
   @@index([receiptDate])
   @@map("goods_receipts")
 }
 
 model GoodsReceiptLine {
-  id               String   @id @default(uuid())
+  id               String       @id @default(uuid())
   grnId            String
   itemId           String
   lineNo           Int
-  quantityOrdered  Decimal  @db.Decimal(19, 4)
-  quantityReceived Decimal  @db.Decimal(19, 4)
-  unitCost         Decimal  @db.Decimal(19, 4)
-  createdAt        DateTime @default(now())
-
-  // Relations
-  goodsReceipt GoodsReceipt @relation(fields: [grnId], references: [id], onDelete: Cascade)
-  item         Item         @relation(fields: [itemId], references: [id])
+  quantityOrdered  Decimal      @db.Decimal(19, 4)
+  quantityReceived Decimal      @db.Decimal(19, 4)
+  unitCost         Decimal      @db.Decimal(19, 4)
+  createdAt        DateTime     @default(now())
+  goodsReceipt     GoodsReceipt @relation(fields: [grnId], references: [id], onDelete: Cascade)
+  item             Item         @relation(fields: [itemId], references: [id])
 
   @@unique([grnId, lineNo])
   @@map("goods_receipt_lines")
 }
 
-// ====================================
-// ASSET MODULE
-// ====================================
-
 model AssetCategory {
-  id                          String   @id @default(uuid())
+  id                          String              @id @default(uuid())
   organizationId              String
   code                        String
   name                        String
   description                 String?
   defaultDepreciationMethodId String?
   defaultUsefulLife           Int
-  createdAt                   DateTime @default(now())
-  updatedAt                   DateTime @updatedAt
+  createdAt                   DateTime            @default(now())
+  updatedAt                   DateTime            @updatedAt
   createdBy                   String
   updatedBy                   String
-
-  // Relations
-  organization              Organization        @relation(fields: [organizationId], references: [id])
-  defaultDepreciationMethod DepreciationMethod? @relation(fields: [defaultDepreciationMethodId], references: [id])
-  assets                    Asset[]
+  defaultDepreciationMethod   DepreciationMethod? @relation(fields: [defaultDepreciationMethodId], references: [id])
+  organization                Organization        @relation(fields: [organizationId], references: [id])
+  assets                      Asset[]
 
   @@unique([organizationId, code])
   @@map("asset_categories")
 }
 
 model DepreciationMethod {
-  id             String   @id @default(uuid())
-  organizationId String
-  name           String
-  code           String
-  formula        String
-  description    String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  // Relations
-  organization    Organization    @relation(fields: [organizationId], references: [id])
-  assets          Asset[]
+  id              String          @id @default(uuid())
+  organizationId  String
+  name            String
+  code            String
+  formula         String
+  description     String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
   assetCategories AssetCategory[]
+  assets          Asset[]
+  organization    Organization    @relation(fields: [organizationId], references: [id])
 
   @@unique([organizationId, code])
   @@map("depreciation_methods")
 }
 
 model Asset {
-  id                      String    @id @default(uuid())
+  id                      String             @id @default(uuid())
   organizationId          String
   branchId                String
   assetCode               String
@@ -937,36 +960,29 @@ model Asset {
   description             String?
   categoryId              String
   acquisitionDate         DateTime
-  acquisitionCost         Decimal   @db.Decimal(19, 4)
+  acquisitionCost         Decimal            @db.Decimal(19, 4)
   depreciationMethodId    String
   usefulLife              Int
-  salvageValue            Decimal   @db.Decimal(19, 4)
-  accumulatedDepreciation Decimal   @default(0) @db.Decimal(19, 4)
-  netBookValue            Decimal   @db.Decimal(19, 4)
-  status                  String    @default("ACTIVE")
-  createdAt               DateTime  @default(now())
-  updatedAt               DateTime  @updatedAt
+  salvageValue            Decimal            @db.Decimal(19, 4)
+  accumulatedDepreciation Decimal            @default(0) @db.Decimal(19, 4)
+  netBookValue            Decimal            @db.Decimal(19, 4)
+  status                  String             @default("ACTIVE")
+  createdAt               DateTime           @default(now())
+  updatedAt               DateTime           @updatedAt
   createdBy               String
   updatedBy               String
   deletedAt               DateTime?
-
-  // Relations
-  organization       Organization       @relation(fields: [organizationId], references: [id])
-  branch             Branch             @relation(fields: [branchId], references: [id])
-  category           AssetCategory      @relation(fields: [categoryId], references: [id])
-  depreciationMethod DepreciationMethod @relation(fields: [depreciationMethodId], references: [id])
+  branch                  Branch             @relation(fields: [branchId], references: [id])
+  category                AssetCategory      @relation(fields: [categoryId], references: [id])
+  depreciationMethod      DepreciationMethod @relation(fields: [depreciationMethodId], references: [id])
+  organization            Organization       @relation(fields: [organizationId], references: [id])
 
   @@unique([organizationId, assetCode])
   @@map("assets")
 }
 
-// ====================================
-// HRMS MODULE
-// ====================================
-
-// Organization Structure
 model Department {
-  id             String   @id @default(uuid())
+  id             String        @id @default(uuid())
   organizationId String
   branchId       String?
   code           String
@@ -975,133 +991,181 @@ model Department {
   managerId      String?
   parentId       String?
   costCenterId   String?
-  isActive       Boolean  @default(true)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  isActive       Boolean       @default(true)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
   createdBy      String
   updatedBy      String
-
-  // Relations
-  branch    Branch?      @relation(fields: [branchId], references: [id])
-  employees Employee[]
-  parent    Department?  @relation("DepartmentHierarchy", fields: [parentId], references: [id])
-  children  Department[] @relation("DepartmentHierarchy")
+  branch         Branch?       @relation(fields: [branchId], references: [id])
+  parent         Department?   @relation("DepartmentHierarchy", fields: [parentId], references: [id])
+  children       Department[]  @relation("DepartmentHierarchy")
+  employees      Employee[]
+  requisitions   Requisition[]
 
   @@unique([organizationId, code])
   @@map("departments")
 }
 
 model Designation {
-  id               String   @id @default(uuid())
+  id               String       @id @default(uuid())
   organizationId   String
   code             String
   title            String
   level            Int
   grade            String?
-  salaryBandMin    Decimal? @db.Decimal(19, 4)
-  salaryBandMax    Decimal? @db.Decimal(19, 4)
+  salaryBandMin    Decimal?     @db.Decimal(19, 4)
+  salaryBandMax    Decimal?     @db.Decimal(19, 4)
   description      String?
   responsibilities Json?
   requirements     Json?
-  isActive         Boolean  @default(true)
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-
-  // Relations
-  employees    Employee[]
-  Organization Organization @relation(fields: [organizationId], references: [id])
+  isActive         Boolean      @default(true)
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  Organization     Organization @relation(fields: [organizationId], references: [id])
+  employees        Employee[]
 
   @@unique([organizationId, code])
   @@map("designations")
 }
 
 model CostCenter {
-  id             String       @id @default(uuid())
-  organizationId String
-  code           String
-  name           String
-  description    String?
-  managerId      String?
-  budget         Decimal?     @db.Decimal(19, 4)
-  isActive       Boolean      @default(true)
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-  Organization   Organization @relation(fields: [organizationId], references: [id])
+  id                String             @id @default(uuid())
+  organizationId    String
+  code              String
+  name              String
+  description       String?
+  managerId         String?
+  budget            Decimal?           @db.Decimal(19, 4)
+  isActive          Boolean            @default(true)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  Organization      Organization       @relation(fields: [organizationId], references: [id])
+  journalEntryLines JournalEntryLine[]
 
   @@unique([organizationId, code])
   @@map("cost_centers")
 }
 
-// Employee Management
+model Grade {
+  id             String       @id @default(uuid())
+  organizationId String
+  code           String
+  name           String
+  description    String?
+  isActive       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  employees      Employee[]
+
+  @@unique([organizationId, code])
+  @@map("grades")
+}
+
+model EmployeeType {
+  id             String       @id @default(uuid())
+  organizationId String
+  code           String
+  name           String
+  isActive       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  employees      Employee[]
+
+  @@unique([organizationId, code])
+  @@unique([organizationId, name])
+  @@map("employee_type")
+}
+
+model Tenant {
+  id             String        @id @default(uuid())
+  code           String        @unique
+  name           String
+  subdomain      String?
+  databaseName   String?       @map("database_name")
+  schemaName     String?       @map("schema_name")
+  isActive       Boolean       @default(true)
+  settings       Json          @default("{}")
+  organizationId String?       @unique
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updatedAt      DateTime      @updatedAt @map("updated_at")
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+
+  @@map("tenants")
+}
+
 model Employee {
-  id               String    @id @default(uuid())
-  organizationId   String
-  branchId         String
-  employeeCode     String
-  firstName        String
-  lastName         String
-  email            String
-  phone            String?
-  alternatePhone   String?
-  dateOfBirth      DateTime?
-  gender           String?
-  maritalStatus    String?
-  nationality      String?
-  address          Json?
-  emergencyContact Json?
-  hireDate         DateTime
-  confirmationDate DateTime?
-  terminationDate  DateTime?
-  departmentId     String?
-  designationId    String?
-  managerId        String?
-  employeeType     String    @default("FULL_TIME") // FULL_TIME, PART_TIME, CONTRACT, INTERN
-  status           String    @default("ACTIVE") // ACTIVE, ON_LEAVE, SUSPENDED, TERMINATED
-  probationEndDate DateTime?
-  bloodGroup       String?
-  taxId            String?
-  bankAccount      Json?
-  profilePicture   String?
-  notes            String?
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
-  createdBy        String
-  updatedBy        String
-  deletedAt        DateTime?
-
-  // Relations
-  organization Organization @relation(fields: [organizationId], references: [id])
-  branch       Branch       @relation(fields: [branchId], references: [id])
-  department   Department?  @relation(fields: [departmentId], references: [id])
-  designation  Designation? @relation(fields: [designationId], references: [id])
-  manager      Employee?    @relation("EmployeeManager", fields: [managerId], references: [id])
-  subordinates Employee[]   @relation("EmployeeManager")
-
-  // HRMS Relations
-  documents           EmployeeDocument[]
-  salaryStructure     SalaryStructure[]
-  attendances         Attendance[]
-  leaveRequests       LeaveRequest[]
-  leaveBalances       LeaveBalance[]
-  overtimeRequests    OvertimeRequest[]
-  shiftAssignments    ShiftAssignment[]
-  payslips            Payslip[]
-  loans               Loan[]
-  advances            Advance[]
-  performanceReviews  PerformanceReview[]
-  goals               Goal[]
-  feedbackGiven       Feedback[]           @relation("FeedbackFrom")
-  feedbackReceived    Feedback[]           @relation("FeedbackTo")
-  trainings           TrainingEnrollment[]
-  skills              EmployeeSkill[]
-  certifications      Certification[]
-  benefitEnrollments  BenefitEnrollment[]
-  claims              Claim[]
-  recognitions        Recognition[]        @relation("RecognitionTo")
-  recognitionsGiven   Recognition[]        @relation("RecognitionFrom")
-  surveyResponses     SurveyResponse[]
-  interviews          Interview[]          @relation("InterviewCandidate")
-  interviewsConducted Interview[]          @relation("InterviewInterviewer")
+  id                            String               @id @default(uuid())
+  organizationId                String
+  branchId                      String
+  employeeCode                  String
+  firstName                     String
+  lastName                      String
+  email                         String
+  phone                         String?
+  dateOfBirth                   DateTime?
+  hireDate                      DateTime
+  terminationDate               DateTime?
+  departmentId                  String?
+  designationId                 String?
+  gradeId                       String?
+  employeeTypeId                String?
+  status                        String               @default("ACTIVE")
+  createdAt                     DateTime             @default(now())
+  updatedAt                     DateTime             @updatedAt
+  createdBy                     String
+  updatedBy                     String
+  deletedAt                     DateTime?
+  address                       Json?
+  alternatePhone                String?
+  bankAccount                   Json?
+  bloodGroup                    String?
+  confirmationDate              DateTime?
+  emergencyContact              Json?
+  employeeType                  String               @default("FULL_TIME")
+  gender                        String?
+  managerId                     String?
+  maritalStatus                 String?
+  nationality                   String?
+  notes                         String?
+  probationEndDate              DateTime?
+  profilePicture                String?
+  taxId                         String?
+  advances                      Advance[]
+  attendances                   Attendance[]
+  benefitEnrollments            BenefitEnrollment[]
+  certifications                Certification[]
+  claims                        Claim[]
+  documents                     EmployeeDocument[]
+  skills                        EmployeeSkill[]
+  branch                        Branch               @relation(fields: [branchId], references: [id])
+  department                    Department?          @relation(fields: [departmentId], references: [id])
+  designation                   Designation?         @relation(fields: [designationId], references: [id])
+  grade                         Grade?               @relation(fields: [gradeId], references: [id])
+  employeeTypeRef               EmployeeType?        @relation(fields: [employeeTypeId], references: [id])
+  manager                       Employee?            @relation("EmployeeManager", fields: [managerId], references: [id])
+  subordinates                  Employee[]           @relation("EmployeeManager")
+  organization                  Organization         @relation(fields: [organizationId], references: [id])
+  feedbackGiven                 Feedback[]           @relation("FeedbackFrom")
+  feedbackReceived              Feedback[]           @relation("FeedbackTo")
+  goals                         Goal[]
+  leaveBalances                 LeaveBalance[]
+  leaveRequests                 LeaveRequest[]
+  loans                         Loan[]
+  overtimeRequests              OvertimeRequest[]
+  payslips                      Payslip[]
+  performanceReviews            PerformanceReview[]
+  recognitionsGiven             Recognition[]        @relation("RecognitionFrom")
+  recognitions                  Recognition[]        @relation("RecognitionTo")
+  salaryStructure               SalaryStructure[]
+  shiftAssignments              ShiftAssignment[]
+  surveyResponses               SurveyResponse[]
+  trainings                     TrainingEnrollment[]
+  interviews                    Interview[]          @relation("InterviewCandidate")
+  interviewsConducted           Interview[]          @relation("InterviewInterviewer")
+  requisitionsCreatedAsEmployee Requisition[]        @relation("RequisitionCreatedByEmployee")
+  users                         User[]
 
   @@unique([organizationId, employeeCode])
   @@index([status])
@@ -1113,7 +1177,7 @@ model Employee {
 model EmployeeDocument {
   id           String    @id @default(uuid())
   employeeId   String
-  documentType String // ID, PASSPORT, VISA, CONTRACT, CERTIFICATE, etc
+  documentType String
   documentNo   String?
   title        String
   filePath     String
@@ -1123,82 +1187,73 @@ model EmployeeDocument {
   notes        String?
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
-
-  // Relations
-  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  employee     Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
   @@index([employeeId])
   @@index([expiryDate])
   @@map("employee_documents")
 }
 
-// Leave Management
 model LeaveType {
-  id               String   @id @default(uuid())
+  id               String         @id @default(uuid())
   organizationId   String
   code             String
   name             String
   description      String?
-  isPaid           Boolean  @default(true)
-  maxDaysPerYear   Decimal? @db.Decimal(10, 2)
-  carryForward     Boolean  @default(false)
-  maxCarryForward  Decimal? @db.Decimal(10, 2)
-  encashable       Boolean  @default(false)
-  requiresDoc      Boolean  @default(false)
-  accrualRate      Decimal? @db.Decimal(10, 4) // Days per month
-  applicableGender String? // MALE, FEMALE, ALL
+  isPaid           Boolean        @default(true)
+  maxDaysPerYear   Decimal?       @db.Decimal(10, 2)
+  carryForward     Boolean        @default(false)
+  maxCarryForward  Decimal?       @db.Decimal(10, 2)
+  encashable       Boolean        @default(false)
+  requiresDoc      Boolean        @default(false)
+  accrualRate      Decimal?       @db.Decimal(10, 4)
+  applicableGender String?
   minServiceMonths Int?
   color            String?
-  isActive         Boolean  @default(true)
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-
-  // Relations
-  policies     LeavePolicy[]
-  balances     LeaveBalance[]
-  requests     LeaveRequest[]
-  Organization Organization   @relation(fields: [organizationId], references: [id])
+  isActive         Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  balances         LeaveBalance[]
+  policies         LeavePolicy[]
+  requests         LeaveRequest[]
+  Organization     Organization   @relation(fields: [organizationId], references: [id])
 
   @@unique([organizationId, code])
   @@map("leave_types")
 }
 
 model LeavePolicy {
-  id             String    @id @default(uuid())
+  id             String       @id @default(uuid())
   organizationId String
   leaveTypeId    String
   name           String
   description    String?
-  rules          Json // Complex rules as JSON
+  rules          Json
   effectiveFrom  DateTime
   effectiveTo    DateTime?
-  isActive       Boolean   @default(true)
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-
-  // Relations
-  leaveType    LeaveType    @relation(fields: [leaveTypeId], references: [id])
-  Organization Organization @relation(fields: [organizationId], references: [id])
+  isActive       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  leaveType      LeaveType    @relation(fields: [leaveTypeId], references: [id])
+  Organization   Organization @relation(fields: [organizationId], references: [id])
 
   @@map("leave_policies")
 }
 
 model LeaveBalance {
-  id             String   @id @default(uuid())
+  id             String    @id @default(uuid())
   employeeId     String
   leaveTypeId    String
   year           Int
-  opening        Decimal  @default(0) @db.Decimal(10, 2)
-  accrued        Decimal  @default(0) @db.Decimal(10, 2)
-  used           Decimal  @default(0) @db.Decimal(10, 2)
-  carriedForward Decimal  @default(0) @db.Decimal(10, 2)
-  encashed       Decimal  @default(0) @db.Decimal(10, 2)
-  balance        Decimal  @default(0) @db.Decimal(10, 2)
-  updatedAt      DateTime @updatedAt
-
-  // Relations
-  employee  Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  leaveType LeaveType @relation(fields: [leaveTypeId], references: [id])
+  opening        Decimal   @default(0) @db.Decimal(10, 2)
+  accrued        Decimal   @default(0) @db.Decimal(10, 2)
+  used           Decimal   @default(0) @db.Decimal(10, 2)
+  carriedForward Decimal   @default(0) @db.Decimal(10, 2)
+  encashed       Decimal   @default(0) @db.Decimal(10, 2)
+  balance        Decimal   @default(0) @db.Decimal(10, 2)
+  updatedAt      DateTime  @updatedAt
+  employee       Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  leaveType      LeaveType @relation(fields: [leaveTypeId], references: [id])
 
   @@unique([employeeId, leaveTypeId, year])
   @@index([employeeId])
@@ -1215,17 +1270,15 @@ model LeaveRequest {
   reason        String
   contactDuring String?
   document      String?
-  status        String    @default("PENDING") // PENDING, APPROVED, REJECTED, CANCELLED
+  status        String    @default("PENDING")
   appliedDate   DateTime  @default(now())
   reviewedBy    String?
   reviewedDate  DateTime?
   reviewNotes   String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-
-  // Relations
-  employee  Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  leaveType LeaveType @relation(fields: [leaveTypeId], references: [id])
+  employee      Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  leaveType     LeaveType @relation(fields: [leaveTypeId], references: [id])
 
   @@index([employeeId])
   @@index([status])
@@ -1233,26 +1286,23 @@ model LeaveRequest {
   @@map("leave_requests")
 }
 
-// Attendance & Time Tracking
 model Shift {
-  id             String   @id @default(uuid())
+  id             String            @id @default(uuid())
   organizationId String
   code           String
   name           String
-  startTime      String // HH:MM format
-  endTime        String // HH:MM format
-  breakDuration  Int      @default(0) // minutes
-  graceTime      Int      @default(0) // minutes
-  weeklyOffs     Json // Array of day numbers [0=Sunday, 6=Saturday]
-  isNightShift   Boolean  @default(false)
+  startTime      String
+  endTime        String
+  breakDuration  Int               @default(0)
+  graceTime      Int               @default(0)
+  weeklyOffs     Json
+  isNightShift   Boolean           @default(false)
   overtimeRules  Json?
-  isActive       Boolean  @default(true)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  // Relations
-  assignments  ShiftAssignment[]
-  Organization Organization      @relation(fields: [organizationId], references: [id])
+  isActive       Boolean           @default(true)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  assignments    ShiftAssignment[]
+  Organization   Organization      @relation(fields: [organizationId], references: [id])
 
   @@unique([organizationId, code])
   @@map("shifts")
@@ -1267,10 +1317,8 @@ model ShiftAssignment {
   isActive   Boolean   @default(true)
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
-
-  // Relations
-  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  shift    Shift    @relation(fields: [shiftId], references: [id])
+  employee   Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  shift      Shift     @relation(fields: [shiftId], references: [id])
 
   @@index([employeeId])
   @@index([shiftId])
@@ -1286,17 +1334,15 @@ model Attendance {
   workHours     Decimal?  @db.Decimal(10, 2)
   breakHours    Decimal?  @db.Decimal(10, 2)
   overtimeHours Decimal?  @db.Decimal(10, 2)
-  status        String    @default("PRESENT") // PRESENT, ABSENT, HALF_DAY, LEAVE, HOLIDAY, WEEKEND
-  lateBy        Int?      @default(0) // minutes
-  earlyBy       Int?      @default(0) // minutes
-  location      Json? // GPS coordinates for remote check-in
+  status        String    @default("PRESENT")
+  lateBy        Int?      @default(0)
+  earlyBy       Int?      @default(0)
+  location      Json?
   deviceInfo    Json?
   notes         String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-
-  // Relations
-  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  employee      Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
   @@unique([employeeId, date])
   @@index([employeeId])
@@ -1311,41 +1357,36 @@ model OvertimeRequest {
   date         DateTime  @db.Date
   hours        Decimal   @db.Decimal(10, 2)
   reason       String
-  status       String    @default("PENDING") // PENDING, APPROVED, REJECTED
+  status       String    @default("PENDING")
   appliedDate  DateTime  @default(now())
   reviewedBy   String?
   reviewedDate DateTime?
   reviewNotes  String?
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
-
-  // Relations
-  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  employee     Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
   @@index([employeeId])
   @@index([status])
   @@map("overtime_requests")
 }
 
-// Payroll Enhancement
 model SalaryStructure {
-  id            String    @id @default(uuid())
+  id            String            @id @default(uuid())
   employeeId    String
   effectiveFrom DateTime
   effectiveTo   DateTime?
-  basicSalary   Decimal   @db.Decimal(19, 4)
-  currency      String    @default("PKR")
-  payFrequency  String    @default("MONTHLY") // MONTHLY, BIWEEKLY, WEEKLY
-  isActive      Boolean   @default(true)
+  basicSalary   Decimal           @db.Decimal(19, 4)
+  currency      String            @default("PKR")
+  payFrequency  String            @default("MONTHLY")
+  isActive      Boolean           @default(true)
   notes         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
   createdBy     String
   updatedBy     String
-
-  // Relations
-  employee   Employee          @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  components SalaryComponent[]
+  components    SalaryComponent[]
+  employee      Employee          @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
   @@index([employeeId])
   @@index([effectiveFrom])
@@ -1353,47 +1394,43 @@ model SalaryStructure {
 }
 
 model SalaryComponent {
-  id                String  @id @default(uuid())
+  id                String          @id @default(uuid())
   salaryStructureId String
-  componentType     String // EARNING, DEDUCTION
-  componentName     String // HRA, TA, PF, TAX, etc
-  calculationType   String // FIXED, PERCENTAGE_OF_BASIC, PERCENTAGE_OF_GROSS
-  value             Decimal @db.Decimal(19, 4)
-  isTaxable         Boolean @default(true)
-  isStatutory       Boolean @default(false)
-  displayOrder      Int     @default(0)
-
-  // Relations
-  salaryStructure SalaryStructure @relation(fields: [salaryStructureId], references: [id], onDelete: Cascade)
+  componentType     String
+  componentName     String
+  calculationType   String
+  value             Decimal         @db.Decimal(19, 4)
+  isTaxable         Boolean         @default(true)
+  isStatutory       Boolean         @default(false)
+  displayOrder      Int             @default(0)
+  salaryStructure   SalaryStructure @relation(fields: [salaryStructureId], references: [id], onDelete: Cascade)
 
   @@index([salaryStructureId])
   @@map("salary_components")
 }
 
 model PayrollRun {
-  id              String    @id @default(uuid())
+  id              String       @id @default(uuid())
   organizationId  String
   branchId        String
-  runNo           String    @unique
+  runNo           String       @unique
   periodStart     DateTime
   periodEnd       DateTime
   paymentDate     DateTime
-  totalGross      Decimal   @db.Decimal(19, 4)
-  totalDeductions Decimal   @db.Decimal(19, 4)
-  totalNet        Decimal   @db.Decimal(19, 4)
-  status          String    @default("DRAFT") // DRAFT, PROCESSING, APPROVED, PAID
-  processedAt     DateTime?
-  approvedBy      String?
-  approvedAt      DateTime?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  totalGross      Decimal      @db.Decimal(19, 4)
+  totalDeductions Decimal      @db.Decimal(19, 4)
+  totalNet        Decimal      @db.Decimal(19, 4)
+  status          String       @default("DRAFT")
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
   createdBy       String
   updatedBy       String
-
-  // Relations
-  organization Organization @relation(fields: [organizationId], references: [id])
-  branch       Branch       @relation(fields: [branchId], references: [id])
-  payslips     Payslip[]
+  approvedAt      DateTime?
+  approvedBy      String?
+  processedAt     DateTime?
+  branch          Branch       @relation(fields: [branchId], references: [id])
+  organization    Organization @relation(fields: [organizationId], references: [id])
+  payslips        Payslip[]
 
   @@index([periodStart, periodEnd])
   @@index([status])
@@ -1401,25 +1438,23 @@ model PayrollRun {
 }
 
 model Payslip {
-  id               String   @id @default(uuid())
+  id               String     @id @default(uuid())
   payrollRunId     String
   employeeId       String
-  basicSalary      Decimal  @db.Decimal(19, 4)
-  grossSalary      Decimal  @db.Decimal(19, 4)
-  deductions       Decimal  @db.Decimal(19, 4)
-  netSalary        Decimal  @db.Decimal(19, 4)
-  earnings         Json // Array of earning components
-  deductionDetails Json // Array of deduction components
-  workingDays      Decimal  @db.Decimal(10, 2)
-  presentDays      Decimal  @db.Decimal(10, 2)
-  leaveDays        Decimal  @db.Decimal(10, 2)
-  lopDays          Decimal  @default(0) @db.Decimal(10, 2)
-  overtimeHours    Decimal  @default(0) @db.Decimal(10, 2)
-  createdAt        DateTime @default(now())
-
-  // Relations
-  payrollRun PayrollRun @relation(fields: [payrollRunId], references: [id], onDelete: Cascade)
-  employee   Employee   @relation(fields: [employeeId], references: [id])
+  grossSalary      Decimal    @db.Decimal(19, 4)
+  deductions       Decimal    @db.Decimal(19, 4)
+  netSalary        Decimal    @db.Decimal(19, 4)
+  createdAt        DateTime   @default(now())
+  basicSalary      Decimal    @db.Decimal(19, 4)
+  deductionDetails Json
+  earnings         Json
+  leaveDays        Decimal    @db.Decimal(10, 2)
+  lopDays          Decimal    @default(0) @db.Decimal(10, 2)
+  overtimeHours    Decimal    @default(0) @db.Decimal(10, 2)
+  presentDays      Decimal    @db.Decimal(10, 2)
+  workingDays      Decimal    @db.Decimal(10, 2)
+  employee         Employee   @relation(fields: [employeeId], references: [id])
+  payrollRun       PayrollRun @relation(fields: [payrollRunId], references: [id], onDelete: Cascade)
 
   @@unique([payrollRunId, employeeId])
   @@index([employeeId])
@@ -1429,24 +1464,22 @@ model Payslip {
 model Loan {
   id             String    @id @default(uuid())
   employeeId     String
-  loanType       String // PERSONAL, VEHICLE, HOME, EMERGENCY
+  loanType       String
   amount         Decimal   @db.Decimal(19, 4)
   interestRate   Decimal   @default(0) @db.Decimal(10, 4)
-  tenure         Int // months
+  tenure         Int
   emiAmount      Decimal   @db.Decimal(19, 4)
   disbursedDate  DateTime
   startDate      DateTime
   endDate        DateTime
   outstandingAmt Decimal   @db.Decimal(19, 4)
-  status         String    @default("ACTIVE") // ACTIVE, CLOSED, DEFAULTED
+  status         String    @default("ACTIVE")
   approvedBy     String?
   approvedDate   DateTime?
   notes          String?
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
-
-  // Relations
-  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  employee       Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
   @@index([employeeId])
   @@index([status])
@@ -1460,44 +1493,39 @@ model Advance {
   reason       String
   requestDate  DateTime  @default(now())
   requiredDate DateTime
-  status       String    @default("PENDING") // PENDING, APPROVED, REJECTED, PAID, ADJUSTED
+  status       String    @default("PENDING")
   approvedBy   String?
   approvedDate DateTime?
   paidDate     DateTime?
-  adjustedIn   String? // PayrollRun ID where adjusted
+  adjustedIn   String?
   notes        String?
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
-
-  // Relations
-  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  employee     Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
   @@index([employeeId])
   @@index([status])
   @@map("advances")
 }
 
-// Performance Management
 model PerformanceReview {
   id             String    @id @default(uuid())
   employeeId     String
   reviewerId     String
-  reviewPeriod   String // Q1-2024, 2024, etc
+  reviewPeriod   String
   reviewDate     DateTime
-  reviewType     String // ANNUAL, QUARTERLY, PROBATION
+  reviewType     String
   overallRating  Decimal?  @db.Decimal(3, 2)
   strengths      String?
   improvements   String?
   achievements   String?
   goals          String?
   comments       String?
-  status         String    @default("DRAFT") // DRAFT, SUBMITTED, ACKNOWLEDGED
+  status         String    @default("DRAFT")
   acknowledgedAt DateTime?
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
-
-  // Relations
-  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  employee       Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
   @@index([employeeId])
   @@index([reviewPeriod])
@@ -1509,18 +1537,16 @@ model Goal {
   employeeId  String
   title       String
   description String?
-  category    String? // INDIVIDUAL, TEAM, DEPARTMENTAL
+  category    String?
   targetDate  DateTime
-  weight      Decimal? @db.Decimal(5, 2) // Percentage weight
+  weight      Decimal? @db.Decimal(5, 2)
   progress    Decimal  @default(0) @db.Decimal(5, 2)
-  status      String   @default("NOT_STARTED") // NOT_STARTED, IN_PROGRESS, COMPLETED, CANCELLED
+  status      String   @default("NOT_STARTED")
   achievement Decimal? @db.Decimal(5, 2)
   notes       String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
-  // Relations
-  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  employee    Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
   @@index([employeeId])
   @@index([status])
@@ -1531,84 +1557,77 @@ model Feedback {
   id           String   @id @default(uuid())
   fromId       String
   toId         String
-  feedbackType String // PRAISE, CONSTRUCTIVE, PEER_REVIEW, MANAGER_REVIEW
+  feedbackType String
   subject      String?
   content      String
   isAnonymous  Boolean  @default(false)
   createdAt    DateTime @default(now())
-
-  // Relations
-  from Employee @relation("FeedbackFrom", fields: [fromId], references: [id], onDelete: Cascade)
-  to   Employee @relation("FeedbackTo", fields: [toId], references: [id], onDelete: Cascade)
+  from         Employee @relation("FeedbackFrom", fields: [fromId], references: [id], onDelete: Cascade)
+  to           Employee @relation("FeedbackTo", fields: [toId], references: [id], onDelete: Cascade)
 
   @@index([toId])
   @@index([fromId])
   @@map("feedbacks")
 }
 
-// Recruitment & ATS
 model JobRequisition {
-  id               String    @id @default(uuid())
+  id               String       @id @default(uuid())
   organizationId   String
   branchId         String?
   departmentId     String?
-  requisitionNo    String    @unique
+  requisitionNo    String       @unique
   jobTitle         String
   designationId    String?
   vacancies        Int
-  employmentType   String // FULL_TIME, PART_TIME, CONTRACT, INTERN
-  minSalary        Decimal?  @db.Decimal(19, 4)
-  maxSalary        Decimal?  @db.Decimal(19, 4)
+  employmentType   String
+  minSalary        Decimal?     @db.Decimal(19, 4)
+  maxSalary        Decimal?     @db.Decimal(19, 4)
   description      String
   requirements     String
   responsibilities String
   benefits         String?
   location         String?
   deadline         DateTime?
-  status           String    @default("DRAFT") // DRAFT, OPEN, CLOSED, CANCELLED
+  status           String       @default("DRAFT")
   approvedBy       String?
   approvedDate     DateTime?
   openedDate       DateTime?
   closedDate       DateTime?
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
   createdBy        String
   updatedBy        String
-
-  // Relations
-  branch       Branch?      @relation(fields: [branchId], references: [id])
-  candidates   Candidate[]
-  Organization Organization @relation(fields: [organizationId], references: [id])
+  candidates       Candidate[]
+  branch           Branch?      @relation(fields: [branchId], references: [id])
+  Organization     Organization @relation(fields: [organizationId], references: [id])
 
   @@index([status])
   @@map("job_requisitions")
 }
 
 model Candidate {
-  id             String   @id @default(uuid())
+  id             String         @id @default(uuid())
   requisitionId  String
   firstName      String
   lastName       String
   email          String
   phone          String
   resumePath     String?
-  source         String? // PORTAL, REFERRAL, AGENCY, LINKEDIN
+  source         String?
   currentCompany String?
-  experience     Decimal? @db.Decimal(5, 2) // years
-  expectedSalary Decimal? @db.Decimal(19, 4)
-  noticePeriod   Int? // days
+  experience     Decimal?       @db.Decimal(5, 2)
+  expectedSalary Decimal?       @db.Decimal(19, 4)
+  noticePeriod   Int?
   location       String?
-  status         String   @default("NEW") // NEW, SCREENING, INTERVIEW, SELECTED, OFFERED, REJECTED, JOINED
-  rating         Decimal? @db.Decimal(3, 2)
+  status         String         @default("NEW")
+  rating         Decimal?       @db.Decimal(3, 2)
   notes          String?
-  appliedDate    DateTime @default(now())
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  // Relations
-  requisition JobRequisition @relation(fields: [requisitionId], references: [id], onDelete: Cascade)
-  interviews  Interview[]
-  offers      Offer[]
+  appliedDate    DateTime       @default(now())
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  requisition    JobRequisition @relation(fields: [requisitionId], references: [id], onDelete: Cascade)
+  interviews     Interview[]
+  offers         Offer[]
 
   @@index([requisitionId])
   @@index([status])
@@ -1617,26 +1636,24 @@ model Candidate {
 }
 
 model Interview {
-  id             String   @id @default(uuid())
+  id             String     @id @default(uuid())
   candidateId    String
-  interviewerIds Json // Array of employee IDs
+  interviewerIds Json
   round          Int
-  roundName      String? // SCREENING, TECHNICAL, HR, FINAL
+  roundName      String?
   scheduledDate  DateTime
-  duration       Int // minutes
+  duration       Int
   location       String?
   meetingLink    String?
-  status         String   @default("SCHEDULED") // SCHEDULED, COMPLETED, CANCELLED, NO_SHOW
+  status         String     @default("SCHEDULED")
   feedback       String?
-  rating         Decimal? @db.Decimal(3, 2)
-  decision       String? // SELECTED, REJECTED, ON_HOLD
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  // Relations
-  candidate    Candidate  @relation(fields: [candidateId], references: [id], onDelete: Cascade)
-  interviewers Employee[] @relation("InterviewInterviewer")
-  interviewed  Employee[] @relation("InterviewCandidate")
+  rating         Decimal?   @db.Decimal(3, 2)
+  decision       String?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  candidate      Candidate  @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  interviewed    Employee[] @relation("InterviewCandidate")
+  interviewers   Employee[] @relation("InterviewInterviewer")
 
   @@index([candidateId])
   @@index([scheduledDate])
@@ -1652,8 +1669,8 @@ model Offer {
   salary        Decimal   @db.Decimal(19, 4)
   salaryBreakup Json?
   benefits      Json?
-  offerLetter   String? // File path
-  status        String    @default("DRAFT") // DRAFT, SENT, ACCEPTED, REJECTED, WITHDRAWN
+  offerLetter   String?
+  status        String    @default("DRAFT")
   validUntil    DateTime
   sentDate      DateTime?
   responseDate  DateTime?
@@ -1661,58 +1678,51 @@ model Offer {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   createdBy     String
-
-  // Relations
-  candidate Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  candidate     Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
 
   @@index([candidateId])
   @@index([status])
   @@map("offers")
 }
 
-// Benefits Administration
 model BenefitPlan {
-  id             String    @id @default(uuid())
+  id             String              @id @default(uuid())
   organizationId String
   code           String
   name           String
   description    String?
-  planType       String // HEALTH_INSURANCE, LIFE_INSURANCE, RETIREMENT, WELLNESS, PERKS
+  planType       String
   provider       String?
   coverage       String?
-  employeeCost   Decimal?  @db.Decimal(19, 4)
-  employerCost   Decimal?  @db.Decimal(19, 4)
+  employeeCost   Decimal?            @db.Decimal(19, 4)
+  employerCost   Decimal?            @db.Decimal(19, 4)
   eligibility    Json?
-  isActive       Boolean   @default(true)
+  isActive       Boolean             @default(true)
   effectiveFrom  DateTime
   effectiveTo    DateTime?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-
-  // Relations
-  enrollments  BenefitEnrollment[]
-  Organization Organization        @relation(fields: [organizationId], references: [id])
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  enrollments    BenefitEnrollment[]
+  Organization   Organization        @relation(fields: [organizationId], references: [id])
 
   @@unique([organizationId, code])
   @@map("benefit_plans")
 }
 
 model BenefitEnrollment {
-  id            String    @id @default(uuid())
+  id            String      @id @default(uuid())
   employeeId    String
   planId        String
   enrollDate    DateTime
   effectiveFrom DateTime
   effectiveTo   DateTime?
-  dependents    Json? // Array of dependent info
-  status        String    @default("ACTIVE") // ACTIVE, INACTIVE, CANCELLED
+  dependents    Json?
+  status        String      @default("ACTIVE")
   notes         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  // Relations
-  employee Employee    @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  plan     BenefitPlan @relation(fields: [planId], references: [id])
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  employee      Employee    @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  plan          BenefitPlan @relation(fields: [planId], references: [id])
 
   @@index([employeeId])
   @@index([planId])
@@ -1722,12 +1732,12 @@ model BenefitEnrollment {
 model Claim {
   id           String    @id @default(uuid())
   employeeId   String
-  claimType    String // MEDICAL, TRAVEL, MOBILE, EXPENSE
+  claimType    String
   amount       Decimal   @db.Decimal(19, 4)
   claimDate    DateTime  @db.Date
   description  String
-  receipts     Json? // Array of file paths
-  status       String    @default("PENDING") // PENDING, APPROVED, REJECTED, PAID
+  receipts     Json?
+  status       String    @default("PENDING")
   approvedBy   String?
   approvedDate DateTime?
   paidDate     DateTime?
@@ -1736,59 +1746,52 @@ model Claim {
   notes        String?
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
-
-  // Relations
-  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  employee     Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
   @@index([employeeId])
   @@index([status])
   @@map("claims")
 }
 
-// Learning & Development
 model TrainingProgram {
-  id              String   @id @default(uuid())
+  id              String               @id @default(uuid())
   organizationId  String
   code            String
   title           String
   description     String?
-  category        String? // TECHNICAL, SOFT_SKILLS, COMPLIANCE, LEADERSHIP
-  duration        Int? // hours
+  category        String?
+  duration        Int?
   provider        String?
-  cost            Decimal? @db.Decimal(19, 4)
+  cost            Decimal?             @db.Decimal(19, 4)
   maxParticipants Int?
   location        String?
-  isOnline        Boolean  @default(false)
+  isOnline        Boolean              @default(false)
   materials       Json?
-  isActive        Boolean  @default(true)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  // Relations
-  enrollments  TrainingEnrollment[]
-  Organization Organization         @relation(fields: [organizationId], references: [id])
+  isActive        Boolean              @default(true)
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+  enrollments     TrainingEnrollment[]
+  Organization    Organization         @relation(fields: [organizationId], references: [id])
 
   @@unique([organizationId, code])
   @@map("training_programs")
 }
 
 model TrainingEnrollment {
-  id             String    @id @default(uuid())
+  id             String          @id @default(uuid())
   employeeId     String
   programId      String
-  enrollDate     DateTime  @default(now())
+  enrollDate     DateTime        @default(now())
   startDate      DateTime?
   completionDate DateTime?
-  status         String    @default("ENROLLED") // ENROLLED, IN_PROGRESS, COMPLETED, CANCELLED
-  score          Decimal?  @db.Decimal(5, 2)
+  status         String          @default("ENROLLED")
+  score          Decimal?        @db.Decimal(5, 2)
   feedback       String?
   certificate    String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-
-  // Relations
-  employee Employee        @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  program  TrainingProgram @relation(fields: [programId], references: [id])
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  employee       Employee        @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  program        TrainingProgram @relation(fields: [programId], references: [id])
 
   @@index([employeeId])
   @@index([programId])
@@ -1796,15 +1799,13 @@ model TrainingEnrollment {
 }
 
 model Skill {
-  id             String   @id @default(uuid())
+  id             String          @id @default(uuid())
   organizationId String
   code           String
   name           String
   description    String?
-  category       String? // TECHNICAL, SOFT, DOMAIN, LANGUAGE
-  createdAt      DateTime @default(now())
-
-  // Relations
+  category       String?
+  createdAt      DateTime        @default(now())
   employeeSkills EmployeeSkill[]
   Organization   Organization    @relation(fields: [organizationId], references: [id])
 
@@ -1816,17 +1817,15 @@ model EmployeeSkill {
   id          String    @id @default(uuid())
   employeeId  String
   skillId     String
-  proficiency String // BEGINNER, INTERMEDIATE, ADVANCED, EXPERT
+  proficiency String
   yearsOfExp  Decimal?  @db.Decimal(5, 2)
   lastUsed    DateTime?
   isCertified Boolean   @default(false)
   notes       String?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-
-  // Relations
-  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  skill    Skill    @relation(fields: [skillId], references: [id])
+  employee    Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  skill       Skill     @relation(fields: [skillId], references: [id])
 
   @@unique([employeeId, skillId])
   @@map("employee_skills")
@@ -1845,48 +1844,41 @@ model Certification {
   notes             String?
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
-
-  // Relations
-  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  employee          Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
   @@index([employeeId])
   @@index([expiryDate])
   @@map("certifications")
 }
 
-// Employee Engagement
 model Survey {
-  id             String   @id @default(uuid())
+  id             String           @id @default(uuid())
   organizationId String
   title          String
   description    String?
-  questions      Json // Array of questions with types
+  questions      Json
   startDate      DateTime
   endDate        DateTime
-  isAnonymous    Boolean  @default(true)
-  targetAudience Json? // Filters for who can respond
-  status         String   @default("DRAFT") // DRAFT, ACTIVE, CLOSED
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  isAnonymous    Boolean          @default(true)
+  targetAudience Json?
+  status         String           @default("DRAFT")
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
   createdBy      String
-
-  // Relations
-  responses    SurveyResponse[]
-  Organization Organization     @relation(fields: [organizationId], references: [id])
+  responses      SurveyResponse[]
+  Organization   Organization     @relation(fields: [organizationId], references: [id])
 
   @@map("surveys")
 }
 
 model SurveyResponse {
-  id          String   @id @default(uuid())
+  id          String    @id @default(uuid())
   surveyId    String
-  employeeId  String? // Null if anonymous
-  answers     Json // Array of answers
-  submittedAt DateTime @default(now())
-
-  // Relations
-  survey   Survey    @relation(fields: [surveyId], references: [id], onDelete: Cascade)
-  employee Employee? @relation(fields: [employeeId], references: [id], onDelete: SetNull)
+  employeeId  String?
+  answers     Json
+  submittedAt DateTime  @default(now())
+  employee    Employee? @relation(fields: [employeeId], references: [id])
+  survey      Survey    @relation(fields: [surveyId], references: [id], onDelete: Cascade)
 
   @@index([surveyId])
   @@map("survey_responses")
@@ -1896,47 +1888,39 @@ model Recognition {
   id        String   @id @default(uuid())
   fromId    String
   toId      String
-  type      String // APPRECIATION, AWARD, SPOT_RECOGNITION, PEER_RECOGNITION
+  type      String
   title     String
   message   String
   points    Int?
   badge     String?
   isPublic  Boolean  @default(true)
   createdAt DateTime @default(now())
-
-  // Relations
-  from Employee @relation("RecognitionFrom", fields: [fromId], references: [id], onDelete: Cascade)
-  to   Employee @relation("RecognitionTo", fields: [toId], references: [id], onDelete: Cascade)
+  from      Employee @relation("RecognitionFrom", fields: [fromId], references: [id], onDelete: Cascade)
+  to        Employee @relation("RecognitionTo", fields: [toId], references: [id], onDelete: Cascade)
 
   @@index([toId])
   @@index([fromId])
   @@map("recognitions")
 }
 
-// ====================================
-// MANUFACTURING MODULE
-// ====================================
-
 model BOM {
-  id             String   @id @default(uuid())
-  organizationId String
-  bomCode        String
-  name           String
-  finishedItemId String
-  outputQty      Decimal  @db.Decimal(19, 4)
-  outputUom      String
-  status         String   @default("DRAFT")
-  version        Int      @default(1)
-  isActive       Boolean  @default(true)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  createdBy      String
-  updatedBy      String
-
-  // Relations
-  organization     Organization      @relation(fields: [organizationId], references: [id])
-  finishedItem     Item              @relation("BOMFinishedItem", fields: [finishedItemId], references: [id])
+  id               String            @id @default(uuid())
+  organizationId   String
+  bomCode          String
+  name             String
+  finishedItemId   String
+  outputQty        Decimal           @db.Decimal(19, 4)
+  outputUom        String
+  status           String            @default("DRAFT")
+  version          Int               @default(1)
+  isActive         Boolean           @default(true)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  createdBy        String
+  updatedBy        String
   bomLines         BOMLine[]
+  finishedItem     Item              @relation("BOMFinishedItem", fields: [finishedItemId], references: [id])
+  organization     Organization      @relation(fields: [organizationId], references: [id])
   productionOrders ProductionOrder[]
 
   @@unique([organizationId, bomCode])
@@ -1953,36 +1937,32 @@ model BOMLine {
   isOptional      Boolean  @default(false)
   notes           String?
   createdAt       DateTime @default(now())
-
-  // Relations
-  bom           BOM  @relation(fields: [bomId], references: [id], onDelete: Cascade)
-  componentItem Item @relation(fields: [componentItemId], references: [id])
+  bom             BOM      @relation(fields: [bomId], references: [id], onDelete: Cascade)
+  componentItem   Item     @relation(fields: [componentItemId], references: [id])
 
   @@unique([bomId, sequence])
   @@map("bom_lines")
 }
 
 model ProductionOrder {
-  id           String    @id @default(uuid())
-  branchId     String
-  orderNo      String    @unique
-  bomId        String
-  plannedQty   Decimal   @db.Decimal(19, 4)
-  producedQty  Decimal   @default(0) @db.Decimal(19, 4)
-  plannedStart DateTime
-  plannedEnd   DateTime
-  actualStart  DateTime?
-  actualEnd    DateTime?
-  status       String    @default("PLANNED")
-  warehouseId  String
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  createdBy    String
-  updatedBy    String
-
-  // Relations
-  branch        Branch         @relation(fields: [branchId], references: [id])
+  id            String         @id @default(uuid())
+  branchId      String
+  orderNo       String         @unique
+  bomId         String
+  plannedQty    Decimal        @db.Decimal(19, 4)
+  producedQty   Decimal        @default(0) @db.Decimal(19, 4)
+  plannedStart  DateTime
+  plannedEnd    DateTime
+  actualStart   DateTime?
+  actualEnd     DateTime?
+  status        String         @default("PLANNED")
+  warehouseId   String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  createdBy     String
+  updatedBy     String
   bom           BOM            @relation(fields: [bomId], references: [id])
+  branch        Branch         @relation(fields: [branchId], references: [id])
   warehouse     Warehouse      @relation(fields: [warehouseId], references: [id])
   qcInspections QCInspection[]
 
@@ -1990,71 +1970,61 @@ model ProductionOrder {
 }
 
 model QCInspection {
-  id                String   @id @default(uuid())
+  id                String          @id @default(uuid())
   productionOrderId String
-  inspectionNo      String   @unique
+  inspectionNo      String          @unique
   inspectionDate    DateTime
   inspectedBy       String
-  sampleSize        Decimal  @db.Decimal(19, 4)
-  passedQty         Decimal  @db.Decimal(19, 4)
-  failedQty         Decimal  @db.Decimal(19, 4)
+  sampleSize        Decimal         @db.Decimal(19, 4)
+  passedQty         Decimal         @db.Decimal(19, 4)
+  failedQty         Decimal         @db.Decimal(19, 4)
   result            String
   checklistResults  Json
   notes             String?
-  createdAt         DateTime @default(now())
-
-  // Relations
-  productionOrder ProductionOrder @relation(fields: [productionOrderId], references: [id])
-  inspector       User            @relation("QCInspectedBy", fields: [inspectedBy], references: [id])
+  createdAt         DateTime        @default(now())
+  inspector         User            @relation("QCInspectedBy", fields: [inspectedBy], references: [id])
+  productionOrder   ProductionOrder @relation(fields: [productionOrderId], references: [id])
 
   @@map("qc_inspections")
 }
 
-// ====================================
-// INTEGRATION MODULE
-// ====================================
-
 model PaymentProvider {
-  id             String   @id @default(uuid())
+  id             String          @id @default(uuid())
   organizationId String
   providerCode   String
   providerType   String
   displayName    String
   credentials    Json
-  settings       Json     @default("{}")
-  isActive       Boolean  @default(true)
-  isDefault      Boolean  @default(false)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  // Relations
-  organization   Organization    @relation(fields: [organizationId], references: [id])
+  settings       Json            @default("{}")
+  isActive       Boolean         @default(true)
+  isDefault      Boolean         @default(false)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
   paymentIntents PaymentIntent[]
+  organization   Organization    @relation(fields: [organizationId], references: [id])
 
   @@unique([organizationId, providerCode])
   @@map("payment_providers")
 }
 
 model PaymentIntent {
-  id          String   @id @default(uuid())
-  invoiceId   String
-  providerId  String
-  customerId  String
-  intentRef   String   @unique
-  amount      Decimal  @db.Decimal(19, 4)
-  currency    String
-  paymentLink String
-  expiresAt   DateTime
-  status      String   @default("CREATED")
-  metadata    Json     @default("{}")
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
+  id           String               @id @default(uuid())
+  invoiceId    String
+  providerId   String
+  intentRef    String               @unique
+  amount       Decimal              @db.Decimal(19, 4)
+  currency     String
+  paymentLink  String
+  expiresAt    DateTime
+  status       String               @default("CREATED")
+  metadata     Json                 @default("{}")
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  customerId   String
+  customer     Customer             @relation(fields: [customerId], references: [id])
   invoice      Invoice              @relation(fields: [invoiceId], references: [id])
   provider     PaymentProvider      @relation(fields: [providerId], references: [id])
   transactions PaymentTransaction[]
-  customer     Customer             @relation(fields: [customerId], references: [id])
 
   @@index([invoiceId])
   @@index([status])
@@ -2062,41 +2032,37 @@ model PaymentIntent {
 }
 
 model PaymentTransaction {
-  id             String    @id @default(uuid())
+  id             String        @id @default(uuid())
   intentId       String
   receiptId      String?
-  transactionRef String    @unique
+  transactionRef String        @unique
   providerRef    String?
-  amount         Decimal   @db.Decimal(19, 4)
+  amount         Decimal       @db.Decimal(19, 4)
   status         String
   processedAt    DateTime?
   rawResponse    Json?
   failureReason  String?
-  createdAt      DateTime  @default(now())
-
-  // Relations
-  intent  PaymentIntent @relation(fields: [intentId], references: [id])
-  receipt Receipt?      @relation(fields: [receiptId], references: [id])
+  createdAt      DateTime      @default(now())
+  intent         PaymentIntent @relation(fields: [intentId], references: [id])
+  receipt        Receipt?      @relation(fields: [receiptId], references: [id])
 
   @@index([intentId])
   @@map("payment_transactions")
 }
 
 model CRMSyncLog {
-  id               String    @id @default(uuid())
+  id               String       @id @default(uuid())
   organizationId   String
   syncType         String
   startedAt        DateTime
   completedAt      DateTime?
   status           String
-  recordsProcessed Int       @default(0)
-  recordsSuccess   Int       @default(0)
-  recordsFailed    Int       @default(0)
+  recordsProcessed Int          @default(0)
+  recordsSuccess   Int          @default(0)
+  recordsFailed    Int          @default(0)
   errorLog         Json?
-  createdAt        DateTime  @default(now())
-
-  // Relations
-  organization Organization @relation(fields: [organizationId], references: [id])
+  createdAt        DateTime     @default(now())
+  organization     Organization @relation(fields: [organizationId], references: [id])
 
   @@index([startedAt])
   @@index([status])
@@ -2121,3 +2087,1680 @@ model BillingLog {
   @@index([status])
   @@map("billing_logs")
 }
+
+// ==================== REQUISITION MODELS ====================
+
+model RequisitionCategory {
+  id                String                 @id @default(uuid())
+  organizationId    String
+  code              String
+  name              String
+  description       String?
+  executionDept     String
+  requiresQuotation Boolean                @default(false)
+  isActive          Boolean                @default(true)
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
+  createdBy         String
+  updatedBy         String
+  approvalSteps     CategoryApprovalStep[]
+  requisitions      Requisition[]
+  organization      Organization           @relation(fields: [organizationId], references: [id])
+
+  @@unique([organizationId, code])
+  @@index([isActive])
+  @@map("requisition_categories")
+}
+
+model CategoryApprovalStep {
+  id             String              @id @default(uuid())
+  categoryId     String
+  sequenceNumber Int
+  roleCode       String
+  approvalType   String
+  minAmount      Decimal?            @db.Decimal(19, 4)
+  maxAmount      Decimal?            @db.Decimal(19, 4)
+  isMandatory    Boolean             @default(true)
+  isActive       Boolean             @default(true)
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  category       RequisitionCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, sequenceNumber])
+  @@index([categoryId])
+  @@map("category_approval_steps")
+}
+
+model Requisition {
+  id                     String                   @id @default(uuid())
+  organizationId         String
+  branchId               String
+  categoryId             String
+  departmentId           String
+  requisitionNo          String                   @unique
+  amount                 Decimal?                 @db.Decimal(19, 4)
+  description            String
+  status                 String                   @default("INITIATED")
+  currentStep            Int                      @default(0)
+  requiresQuotation      Boolean                  @default(false)
+  executionDept          String
+  executedBy             String?
+  executedAt             DateTime?
+  executionNotes         String?
+  attachments            Json?
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
+  createdBy              String
+  updatedBy              String
+  createdByEmployeeId    String?
+  location               String?
+  priority               String?                  @default("Medium")
+  business               String?
+  hodApproval            Boolean                  @default(false)
+  hodApprovalDate        DateTime?
+  hodApprovedById        String?
+  committeeApproval      Boolean                  @default(false)
+  committeeApprovalDate  DateTime?
+  committeeApprovedById  String?
+  ceoApproval            Boolean                  @default(false)
+  ceoApprovalDate        DateTime?
+  ceoApprovedById        String?
+  procurementAck         Boolean                  @default(false)
+  procurementAckDate     DateTime?
+  procurementAckById     String?
+  quotation1Url          String?
+  quotation2Url          String?
+  quotation3Url          String?
+  handedToFinance        Boolean                  @default(false)
+  handedToFinanceDate    DateTime?
+  financeApproval        Boolean                  @default(false)
+  financeApprovalDate    DateTime?
+  financeApprovedById    String?
+  approvedQuotationIndex Int?
+  isRejected             Boolean                  @default(false)
+  rejectedById           String?
+  rejectedAt             DateTime?
+  rejectionReason        String?
+  expectedHandoverDate   DateTime?
+  quotations             Quotation[]
+  approvalLogs           RequisitionApprovalLog[]
+  items                  RequisitionItem[]
+  branch                 Branch                   @relation(fields: [branchId], references: [id])
+  category               RequisitionCategory      @relation(fields: [categoryId], references: [id])
+  creator                User                     @relation("RequisitionCreatedBy", fields: [createdBy], references: [id])
+  department             Department               @relation(fields: [departmentId], references: [id])
+  organization           Organization             @relation(fields: [organizationId], references: [id])
+  createdByEmployee      Employee?                @relation("RequisitionCreatedByEmployee", fields: [createdByEmployeeId], references: [id])
+
+  @@index([organizationId])
+  @@index([status])
+  @@index([categoryId])
+  @@index([departmentId])
+  @@index([createdBy])
+  @@index([createdAt])
+  @@index([createdByEmployeeId])
+  @@map("requisitions")
+}
+
+model RequisitionItem {
+  id            String      @id @default(uuid())
+  requisitionId String
+  itemDesc      String?
+  itemSize      String?
+  itemBrand     String?
+  itemQty       Int         @default(1)
+  itemEstCost   String?
+  itemRemarks   String?
+  createdAt     DateTime    @default(now())
+  requisition   Requisition @relation(fields: [requisitionId], references: [id], onDelete: Cascade)
+
+  @@index([requisitionId])
+  @@map("requisition_items")
+}
+
+model RequisitionApprovalLog {
+  id            String      @id @default(uuid())
+  requisitionId String
+  stepNumber    Int
+  roleCode      String
+  action        String
+  comments      String?
+  approvedBy    String
+  approvedAt    DateTime    @default(now())
+  metadata      Json?
+  approver      User        @relation("RequisitionApprovedBy", fields: [approvedBy], references: [id])
+  requisition   Requisition @relation(fields: [requisitionId], references: [id], onDelete: Cascade)
+
+  @@index([requisitionId])
+  @@index([approvedBy])
+  @@index([approvedAt])
+  @@map("requisition_approval_logs")
+}
+
+model Quotation {
+  id            String      @id @default(uuid())
+  requisitionId String
+  vendorName    String
+  vendorContact String?
+  amount        Decimal     @db.Decimal(19, 4)
+  currency      String      @default("PKR")
+  quotationDate DateTime
+  validityDate  DateTime?
+  filePath      String?
+  notes         String?
+  isSelected    Boolean     @default(false)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  createdBy     String
+  requisition   Requisition @relation(fields: [requisitionId], references: [id], onDelete: Cascade)
+
+  @@index([requisitionId])
+  @@index([isSelected])
+  @@map("quotations")
+}
+
+// Legacy ATS_GL compatibility models (from Excel/Database.csv)
+model LegacyAccountCombination {
+  combinationId BigInt   @id @map("COMBINATION_ID")
+  segment1      String   @map("SEGMENT1")
+  segment2      String   @map("SEGMENT2")
+  segment3      String   @map("SEGMENT3")
+  segment4      String   @map("SEGMENT4")
+  active        Boolean? @map("ACTIVE")
+  noteId        Float?   @map("NoteID")
+
+  @@map("ACCOUNT_COMBINATION")
+}
+
+model LegacyNaturalAccount {
+  naId   String @id @map("NA_ID")
+  naName String @map("NA_NAME")
+
+  @@map("NATURAL_ACCOUNT")
+}
+
+model LegacySubAccount {
+  saId   String @id @map("SA_ID")
+  saName String @map("SA_NAME")
+
+  @@map("SUB_ACCOUNT")
+}
+
+model LegacyOrganizationalUnit {
+  orgId   String @id @map("ORG_ID")
+  orgName String @map("ORG_NAME")
+
+  @@map("Organizational_Unit")
+}
+
+model LegacyCostCenter {
+  ccId   String @id @map("CC_ID")
+  ccName String @map("CC_NAME")
+
+  @@map("COST_CENTER")
+}
+
+model LegacyBankMaster {
+  bankId   Int    @id @map("BANK_ID")
+  bankName String @map("BANK_NAME")
+  bankAcId BigInt @map("BANK_AC_ID")
+
+  @@map("Bank_Master")
+}
+
+model LegacyApSupplier {
+  asId           Int     @id @map("AS_ID")
+  supplierName   String? @map("AS_Supplier_Name")
+  accountId      BigInt? @map("AS_AC_ID")
+  strNo          String? @map("AS_strno")
+  ntnNo          String? @map("AS_ntnno")
+  address        String? @map("AS_address")
+  openingBalance Float?  @map("AS_opbal_r")
+  crDays         Int?    @map("CRDays")
+
+  @@map("AP_SUPPLIER")
+}
+
+model LegacyArCompany {
+  coId        Int      @id @map("CO_ID")
+  crDays      Int?     @map("CRDays")
+  companyCode Int?     @map("CO_Company_Id")
+  companyName String?  @map("CO_Company_Name")
+  accountId   BigInt?  @map("CO_AC_ID")
+  strNo       String?  @map("co_strno")
+  ntnNo       String?  @map("co_ntnno")
+  address     String?  @map("co_address")
+  openingBal  Float?   @map("co_opbal_r")
+  isCorporate Boolean? @map("CO_Corporate")
+
+  @@map("AR_Companies")
+}
+
+model LegacyApInvoice {
+  aiNo        BigInt    @id @map("AI_NO")
+  aiDate      DateTime? @map("AI_DATE")
+  remarks     String?   @map("AI_REMARKS")
+  supplierRef String?   @map("AI_SUPPLIER_REF")
+  supplierId  Int?      @map("AI_AC_ID")
+  amount      Float?    @map("AI_AMOUNT")
+  invoiceType String?   @map("AI_TYPE")
+  isPosted    Boolean?  @map("AI_POST")
+  isCancelled Boolean?  @map("AI_CANCEL")
+  cancelDate  DateTime? @map("AI_CANCEL_DATE")
+  payTo       String?   @map("AI_PAY_TO")
+
+  @@map("AP_INVOICE")
+}
+
+model LegacyArInvoice {
+  aiNo             BigInt    @id @map("AI_NO")
+  aiDate           DateTime? @map("AI_DATE")
+  orderNo          Int?      @map("AI_AO_NO")
+  packageName      String?   @map("AI_PACKAGE_NAME")
+  invoiceElementId Int?      @map("AI_IM_ID")
+  amount           Float?    @map("AI_AMOUNT")
+  vehicleMake      String?   @map("AI_vehicle_make")
+  vehicleModel     String?   @map("AI_VEHICLE_MODEL")
+  engineNo         String?   @map("AI_VEHICLE_ENGINENO")
+  chassisNo        String?   @map("AI_VEHICLE_CHASISNO")
+  registrationNo   String?   @map("AI_VEHICLE_REGISTRATIONNO")
+  customerName     String?   @map("AI_CUSTOMER_NAME")
+  customerNic      String?   @map("AI_CUSTOMER_NIC")
+  companyId        Int?      @map("AI_CO_ID")
+  doi              String?   @map("AI_VEHICLE_DOI")
+  isPosted         Boolean?  @map("AI_POST")
+  isCancelled      Boolean?  @map("AI_CANCEL")
+  cancelDate       DateTime? @map("AI_CANCEL_DATE")
+
+  @@map("AR_INVOICE")
+}
+
+model LegacyApPaymentReceipt {
+  aprNo         BigInt    @id @map("APR_NO")
+  aprDate       DateTime? @map("APR_DATE")
+  description   String?   @map("APR_DESCRIPTION")
+  supplierId    BigInt?   @map("APR_AS_ID")
+  bankId        Int?      @map("APR_BANK_ID")
+  paymentAmount Float?    @map("APR_PAYMENT_AMOUNT")
+  isPosted      Boolean?  @map("APR_POST")
+  isGlPosted    Boolean?  @map("APR_GL")
+  isCancelled   Boolean?  @map("APR_Cancel")
+  cancelDate    DateTime? @map("apr_Can_date")
+  chequeNo      String?   @map("APR_CHQ_NO")
+
+  @@map("AP_PAYMENT_RECEIPT")
+}
+
+model LegacyArPaymentReceipt {
+  aprNo         BigInt    @id @map("APR_NO")
+  aprDate       DateTime? @map("APR_DATE")
+  description   String?   @map("APR_DESCRIPTION")
+  companyId     BigInt?   @map("APR_CO_ID")
+  bankId        Int?      @map("APR_BANK_ID")
+  receiptAmount Float?    @map("APR_RECEIPT_AMOUNT")
+  isPosted      Boolean?  @map("APR_POST")
+  isGlPosted    Boolean?  @map("APR_GL")
+  isCancelled   Boolean?  @map("APR_Cancel")
+  cancelDate    DateTime? @map("apr_Can_date")
+  chequeNo      String?   @map("APR_CHQ_NO")
+  postedBy      String?   @map("PostedBy")
+
+  @@map("AR_PAYMENT_RECEIPT")
+}
+
+model LegacyGlJeHeaderAll {
+  jeHeaderId  BigInt    @id @map("JE_HEADER_ID")
+  voucherNo   BigInt?   @map("JE_VOUCHER_NO")
+  jeDate      DateTime  @map("JE_DATE")
+  description String    @map("JE_DESCRIPTION")
+  jeType      String    @map("JE_TYPE")
+  postFlag    Boolean?  @map("JE_POST_FLAG")
+  createdBy   Int?      @map("JE_CREATED_BY")
+  createdDate DateTime? @map("JE_CREATED_DATE")
+  updatedBy   Int?      @map("JE_UPDATED_BY")
+  updatedDate DateTime? @map("JE_UPDATED_DATE")
+  jeName      String?   @map("JE_NAME")
+
+  @@map("GL_JE_HEADER_ALL")
+}
+
+model LegacyGlJeLinesAll {
+  jeLineId   BigInt  @id @map("JE_LINE_ID")
+  jeHeaderId BigInt  @map("JE_HEADER_ID")
+  accountId  BigInt  @map("JE_AC_ID")
+  enteredDr  Float?  @map("JE_ENTERED_DR")
+  enteredCr  Float?  @map("JE_ENTERED_CR")
+  lineDesc   String? @map("JE_DESCRIPTION_LINE")
+
+  @@map("GL_JE_LINES_ALL")
+}
+
+model LegacyTaxMaster {
+  tmId          Int    @id @map("TM_ID")
+  tmDescription String @map("TM_DESCRIPTION")
+
+  @@map("TAX_MASTER")
+}
+
+model LegacyTaxDetail {
+  tdId        Int      @id @map("TD_ID")
+  activeOn    DateTime @map("TD_ACTIVE_ON")
+  description String   @map("TD_DESCRIPTION")
+  accountId   BigInt   @map("TD_AC_ID")
+  age         Float    @map("TD_AGE")
+  taxMasterId Int      @map("TD_TM_ID")
+  wht         BigInt?  @map("TD_WHT")
+
+  @@map("TAX_DETAIL")
+}
+
+model LegacyPiInvoice {
+  piNo         BigInt    @id @map("PI_NO")
+  piDate       DateTime? @map("PI_DATE")
+  purchaseType String?   @map("PI_Pur_Type")
+  remarks      String?   @map("PI_REMARKS")
+  supplierRef  String?   @map("PI_SUPPLIER_REF")
+  itemCombId   BigInt?   @map("PI_Item_Combination_ID")
+  supplierId   Int?      @map("PI_AC_ID")
+  qty          Float?    @map("PI_QTY")
+  rate         Float?    @map("PI_RATE")
+  amount       Float?    @map("PI_AMOUNT")
+  gst          Float?    @map("PI_GST")
+  ast          Float?    @map("PI_AST")
+  netAmount    Float?    @map("PI_NET_AMOUNT")
+  invoiceType  String?   @map("PI_TYPE")
+  isPosted     Boolean?  @map("PI_POST")
+  isCancelled  Boolean?  @map("PI_CANCEL")
+  cancelDate   DateTime? @map("PI_CANCEL_DATE")
+  payTo        String?   @map("PI_PAY_TO")
+
+  @@map("PI_INVOICE")
+}
+
+model LegacyPiIssuance {
+  idsrmNo     Int      @id @map("IDSRM_No")
+  idsrmDate   DateTime @map("IDSRM_Date")
+  itemType    String   @map("Item_Type")
+  remarks     String?  @map("IDSRM_Remarks")
+  itemCombId  Int      @map("PI_Item_Combination_ID")
+  issueQty    Float    @map("Iss_Qty")
+  isPosted    Boolean? @map("IDSRM_Post")
+  isCancelled Boolean? @map("IDSRM_Cancel")
+
+  @@map("PI_Issuance")
+}
+
+model LegacyInvItem {
+  productId   BigInt  @id @map("product_id")
+  productName String  @map("product_name")
+  productUm   String? @map("product_um")
+  itemType    String? @map("Type")
+  productAcId Int?    @map("product_ac_id")
+
+  @@map("INV_ITEM")
+}
+
+model LegacyInvRequisition {
+  reqNo     BigInt    @id @map("Req_No")
+  reqDate   DateTime? @map("Req_Date")
+  remarks   String?   @map("Remarks")
+  productId BigInt?   @map("Product_ID")
+  reqQty    Float?    @map("Req_Qty")
+  adminQty  Float?    @map("Admin_Qty")
+  seqNo     BigInt?   @map("SeqNO")
+
+  @@map("INV_Requisition")
+}
+
+model LegacyInvUnitOfMeasure {
+  uomId    Int     @id @map("UOM_ID")
+  uomCode  String? @map("UOM_Code")
+  uomDescr String? @map("UOM_Descr")
+
+  @@map("INV_UnitOfMeasure")
+}
+
+model LegacyUserLogin {
+  userId   Int    @id @map("USERID")
+  username String @map("USERNAME")
+  password String @map("PASSWORD")
+
+  @@map("UserLogin")
+}
+
+model LegacyResponsibility {
+  respId   Int    @id @map("RESPID")
+  respName String @map("RESPNAME")
+
+  @@map("Responsibilties")
+}
+
+model LegacyMenuOption {
+  menuId         BigInt @id @map("menu_id")
+  menuRespId     Int    @map("menu_respid")
+  menuOptionKey  String @map("menu_option_key")
+  menuOptionName String @map("menu_option_name")
+
+  @@map("Menu_option")
+}
+
+model LegacyUserResp {
+  urId   Int @id @map("UR_ID")
+  userId Int @map("USERID")
+  respId Int @map("RESPID")
+
+  @@map("User_Resp")
+}
+
+model LegacyUserMenuAssign {
+  uaId   BigInt @id @map("UA_ID")
+  userId Int    @map("UA_UserID")
+  menuId BigInt @map("UA_MENU_ID")
+
+  @@map("USER_MENU_ASSIGN")
+}
+
+// AUTO-GENERATED LEGACY TABLES START
+
+model LegacyAutoApAdjustInvoice {
+  aaiId        BigInt    @id @map("AAI_ID")
+  aaiAprNo     BigInt?   @map("AAI_APR_NO")
+  aaiAiNo      BigInt?   @map("AAI_AI_NO")
+  aaiAiDate    DateTime? @map("AAI_AI_DATE")
+  aaiAiAmount  Float?    @map("AAI_AI_AMOUNT")
+  aaiPenAmount Float?    @map("AAI_PEN_AMOUNT")
+  aaiAdjust    Float?    @map("AAI_ADJUST")
+  aaiAsId      Int?      @map("AAI_AS_ID")
+
+  @@map("AP_ADJUST_INVOICE")
+}
+
+model LegacyAutoApDebitNote {
+  acnNo     BigInt    @id @map("ACN_NO")
+  acnDate   DateTime? @map("ACN_DATE")
+  acnAiNo   Int?      @map("ACN_AI_NO")
+  acnName   String?   @map("ACN_NAME")
+  acnCcId   Int?      @map("ACN_CC_ID")
+  acnAmount Float?    @map("ACN_AMOUNT")
+  acnType   String?   @map("ACN_TYPE")
+  acnPost   Boolean?  @map("ACN_POST")
+  acnInvGl  Boolean?  @map("ACN_INV_GL")
+  acnAsId   BigInt?   @map("ACN_AS_ID")
+  acnTmId   Int?      @map("ACN_TM_ID")
+
+  @@map("AP_DEBIT_NOTE")
+}
+
+model LegacyAutoApInvDelData {
+  aiAoAcId String  @id @map("AI_AO_AC_ID")
+  aiAmount BigInt? @map("AI_AMOUNT")
+
+  @@map("AP_INV_DEL_DATA")
+}
+
+model LegacyAutoApPaymentTax {
+  aptId        BigInt  @id @map("APT_ID")
+  aptAprNo     BigInt? @map("APT_APR_NO")
+  aptTdId      BigInt? @map("APT_TD_ID")
+  aptTaxAmount Float?  @map("APT_TAX_AMOUNT")
+
+  @@map("AP_PAYMENT_TAX")
+}
+
+model LegacyAutoArAdjustInvoice {
+  aaiId        BigInt    @id @map("AAI_ID")
+  aaiAprNo     BigInt?   @map("AAI_APR_NO")
+  aaiAiNo      BigInt?   @map("AAI_AI_NO")
+  aaiAiDate    DateTime? @map("AAI_AI_DATE")
+  aaiAiAmount  Float?    @map("AAI_AI_AMOUNT")
+  aaiPenAmount Float?    @map("AAI_PEN_AMOUNT")
+  aaiAdjust    Float?    @map("AAI_ADJUST")
+  aaiCoId      Int?      @map("AAI_CO_ID")
+
+  @@map("AR_ADJUST_INVOICE")
+}
+
+model LegacyAutoArCreditNote {
+  acnNo     BigInt    @id @map("ACN_NO")
+  acnDate   DateTime? @map("ACN_DATE")
+  acnAiNo   Int?      @map("ACN_AI_NO")
+  acnName   String?   @map("ACN_NAME")
+  acnImId   Int       @map("ACN_IM_ID")
+  acnAmount Float?    @map("ACN_AMOUNT")
+  acnType   String?   @map("ACN_TYPE")
+  acnPost   Boolean?  @map("ACN_POST")
+  acnInvGl  Boolean?  @map("ACN_INV_GL")
+  acnCoId   BigInt?   @map("ACN_CO_ID")
+  acnDescr  String?   @map("ACN_DESCR")
+
+  @@map("AR_CREDIT_NOTE")
+}
+
+model LegacyAutoArDealDetail {
+  ddId           Int      @id @map("DD_ID")
+  ddDescription  String   @map("DD_DESCRIPTION")
+  ddCoId         Int      @map("DD_CO_ID")
+  ddVehicleMake  String?  @map("DD_VEHICLE_MAKE")
+  ddVehicleModel String?  @map("DD_VEHICLE_MODEL")
+  ddVehicleCc    BigInt?  @map("DD_VEHICLE_CC")
+  ddVehicleValue BigInt?  @map("DD_VEHICLE_VALUE")
+  ddRbfy         Boolean? @map("DD_RBFY")
+  ddTtlins       Int?     @map("DD_TTLINS")
+  ddInst         Int?     @map("DD_INST")
+  ddMafd         Boolean? @map("DD_MAFD")
+  ddDetailId     Int      @map("DD_DETAIL_ID")
+  ddPrice1       Float?   @map("DD_PRICE1")
+  ddAge1         Float?   @map("DD_AGE1")
+  ddPrice2       Float?   @map("DD_PRICE2")
+  ddAge2         Float?   @map("DD_AGE2")
+  ddPrice3       Float?   @map("DD_PRICE3")
+  ddAge3         Float?   @map("DD_AGE3")
+  ddPrice4       Float?   @map("DD_PRICE4")
+  ddAge4         Float?   @map("DD_AGE4")
+  ddTmId         Int?     @map("DD_TM_ID")
+  ddAcId         Int?     @map("DD_AC_ID")
+
+  @@map("AR_DEAL_DETAIL")
+}
+
+model LegacyAutoArDealMaster {
+  admId               Int     @id @map("ADM_ID")
+  admAcId             Int     @map("ADM_AC_ID")
+  admAvVehicleMake    String? @map("ADM_AV_Vehicle_Make")
+  admAvVehicleModel   String? @map("ADM_AV_Vehicle_Model")
+  admAvVehicleCc      String? @map("ADM_AV_Vehicle_CC")
+  admVehicleValue     Float?  @map("ADM_Vehicle_Value")
+  admUnitValue        Float?  @map("ADM_UNIT_VALUE")
+  admUnitAge          Float?  @map("ADM_UNIT_AGE")
+  admRentalValue      Float?  @map("ADM_RENTAL_VALUE")
+  admRentalAge        Float?  @map("ADM_RENTAL_AGE")
+  admDealerCommission Float?  @map("ADM_DEALER_COMMISSION")
+  admDealerPoints     Float?  @map("ADM_DEALER_POINTS")
+  admSalesCommission  Float?  @map("ADM_SALES_COMMISSION")
+
+  @@map("AR_DEAL_MASTER")
+}
+
+model LegacyAutoArInvoiceAgeing {
+  aiNo            BigInt?   @map("AI_NO")
+  aiDate          DateTime? @map("AI_DATE")
+  aiCoId          BigInt?   @map("AI_CO_ID")
+  orgAmt          Float?    @map("ORG_AMT")
+  penAmt          Float?    @map("PEN_AMT")
+  vehicleEngineno String?   @map("VEHICLE_ENGINENO")
+  vehicleDoi      String?   @map("VEHICLE_DOI")
+  invType         String    @id @map("Inv_Type")
+
+  @@map("AR_INVOICE_AGEING")
+}
+
+model LegacyAutoArInvoiceElements {
+  imId          Int     @id @map("IM_ID")
+  imDescription String? @map("IM_DESCRIPTION")
+  imAcId        BigInt? @map("IM_AC_ID")
+  imTmId        Int?    @map("IM_TM_ID")
+  imExpDays     Int?    @map("IM_EXP_DAYS")
+  imExpOn       String? @map("IM_EXP_ON")
+
+  @@map("AR_INVOICE_ELEMENTS")
+}
+
+model LegacyAutoArInvoiceTemp {
+  aitNo                    String    @id @map("AIT_NO")
+  aitDate                  DateTime? @map("AIT_DATE")
+  aitAoNo                  Int?      @map("AIT_AO_NO")
+  aitPackageName           String?   @map("AIT_PACKAGE_NAME")
+  aitImId                  Int       @map("AIT_IM_ID")
+  aitAmount                Float?    @map("AIT_AMOUNT")
+  aitVehicleMake           String?   @map("AIT_vehicle_make")
+  aitVehicleModel          String?   @map("AIT_VEHICLE_MODEL")
+  aitVehicleEngineno       String?   @map("AIT_VEHICLE_ENGINENO")
+  aitVehicleChasisno       String?   @map("AIT_VEHICLE_CHASISNO")
+  aitVehiclePono           String?   @map("AIT_VEHICLE_PONO")
+  aitVehicleRegistrationno String?   @map("AIT_VEHICLE_REGISTRATIONNO")
+  aitCustomerNic           String?   @map("AIT_CUSTOMER_NIC")
+  aitCustomerName          String?   @map("AIT_CUSTOMER_NAME")
+  aitType                  String?   @map("AIT_TYPE")
+  aitCol                   Int?      @map("AIT_COL")
+  aitVehicleDoi            String?   @map("AIT_VEHICLE_DOI")
+  aitid                    Int?      @map("AITID")
+  aitId                    Int?      @map("AIT_ID")
+  aoBookingcat             String?   @map("AO_BookingCat")
+  aiTempPost               BigInt?   @map("AI_TEMP_POST")
+
+  @@map("AR_INVOICE_TEMP")
+}
+
+model LegacyAutoArOrder {
+  aoId           BigInt    @id @map("AO_ID")
+  aoNo           Int       @map("AO_NO")
+  aoDate         DateTime  @map("AO_DATE")
+  aoDescription  String?   @map("AO_DESCRIPTION")
+  aoCoId         Int?      @map("AO_CO_ID")
+  aoVehicleId    String?   @map("AO_VEHICLE_ID")
+  aoPackageName  String?   @map("AO_PACKAGE_NAME")
+  aoMafd         Boolean?  @map("AO_MAFD")
+  aoDeactiveDate DateTime? @map("AO_DEACTIVE_DATE")
+  aoImId         Int?      @map("AO_IM_ID")
+  aoPrice1       Float?    @map("AO_PRICE1")
+  aoPrice2       Float?    @map("AO_PRICE2")
+  aoPrice3       Float?    @map("AO_PRICE3")
+  aoPrice4       Float?    @map("AO_PRICE4")
+  aoPrice5       Float?    @map("AO_PRICE5")
+  aoPrice6       Float?    @map("AO_PRICE6")
+  aoPrice7       Float?    @map("AO_PRICE7")
+  aoPrice8       Float?    @map("AO_PRICE8")
+  aoPrice9       Float?    @map("AO_PRICE9")
+  aoPrice10      Float?    @map("AO_PRICE10")
+  aoPrice11      Float?    @map("AO_PRICE11")
+  aoPrice12      Float?    @map("AO_PRICE12")
+  aoInv1Id       Int?      @map("AO_INV1_ID")
+  aoInv2Id       Int?      @map("AO_INV2_ID")
+  aoInv3Id       Int?      @map("AO_INV3_ID")
+  aoInv4Id       Int?      @map("AO_INV4_ID")
+  aoInv5Id       Int?      @map("AO_INV5_ID")
+  aoInv6Id       Int?      @map("AO_INV6_ID")
+  aoInv7Id       Int?      @map("AO_INV7_ID")
+  aoInv8Id       Int?      @map("AO_INV8_ID")
+  aoInv9Id       Int?      @map("AO_INV9_ID")
+  aoInv10Id      Int?      @map("AO_INV10_ID")
+  aoInv11Id      Float?    @map("AO_INV11_ID")
+  aoInv12Id      Float?    @map("AO_INV12_ID")
+  aoMafdDate     DateTime? @map("AO_MAFD_DATE")
+  aoBookingcat   String?   @map("AO_BookingCat")
+  seqno          Int?      @map("SeqNo")
+
+  @@map("AR_ORDER")
+}
+
+model LegacyAutoArOrderVTemp {
+  aoId                      BigInt    @id @map("AO_ID")
+  aoNo                      BigInt?   @map("AO_NO")
+  aoDate                    DateTime? @map("AO_DATE")
+  aoDescription             String?   @map("AO_DESCRIPTION")
+  aoCoId                    BigInt?   @map("AO_CO_ID")
+  aoVehicleId               BigInt?   @map("AO_VEHICLE_ID")
+  aoPackageName             String?   @map("AO_PACKAGE_NAME")
+  aoMafd                    Boolean?  @map("AO_MAFD")
+  aoDeactiveDate            DateTime? @map("AO_DEACTIVE_DATE")
+  aoImId                    BigInt?   @map("AO_IM_ID")
+  aoPrice1                  BigInt?   @map("AO_PRICE1")
+  aoPrice2                  BigInt?   @map("AO_PRICE2")
+  aoPrice3                  BigInt?   @map("AO_PRICE3")
+  aoPrice4                  BigInt?   @map("AO_PRICE4")
+  aoPrice5                  BigInt?   @map("AO_PRICE5")
+  aoPrice6                  BigInt?   @map("AO_PRICE6")
+  aoPrice7                  BigInt?   @map("AO_PRICE7")
+  aoPrice8                  BigInt?   @map("AO_PRICE8")
+  aoPrice9                  BigInt?   @map("AO_PRICE9")
+  aoPrice10                 BigInt?   @map("AO_PRICE10")
+  aoPrice11                 BigInt?   @map("AO_PRICE11")
+  aoPrice12                 BigInt?   @map("AO_PRICE12")
+  aoInv1Id                  BigInt?   @map("AO_INV1_ID")
+  aoInv2Id                  BigInt?   @map("AO_INV2_ID")
+  aoInv3Id                  BigInt?   @map("AO_INV3_ID")
+  aoInv4Id                  BigInt?   @map("AO_INV4_ID")
+  aoInv5Id                  BigInt?   @map("AO_INV5_ID")
+  aoInv6Id                  BigInt?   @map("AO_INV6_ID")
+  aoInv7Id                  BigInt?   @map("AO_INV7_ID")
+  aoInv8Id                  BigInt?   @map("AO_INV8_ID")
+  aoInv9Id                  BigInt?   @map("AO_INV9_ID")
+  aoInv10Id                 BigInt?   @map("AO_INV10_ID")
+  aoInv11Id                 BigInt?   @map("AO_INV11_ID")
+  aoInv12Id                 BigInt?   @map("AO_INV12_ID")
+  imDescription             String?   @map("IM_DESCRIPTION")
+  coCompanyName             String?   @map("CO_Company_Name")
+  vehicleMake               String?   @map("Vehicle_Make")
+  vehicleModel              String?   @map("Vehicle_Model")
+  vehicleEngineno           String?   @map("Vehicle_EngineNo")
+  vehicleChasisno           String?   @map("Vehicle_ChasisNo")
+  vehicleRegistrationno     String?   @map("Vehicle_RegistrationNo")
+  vehiclePono               String?   @map("Vehicle_PONo")
+  customername              String?   @map("CustomerName")
+  address1                  String?   @map("Address1")
+  address2                  String?   @map("Address2")
+  telephoneno               String?   @map("TelephoneNo")
+  vehicleDateofinstallation DateTime? @map("Vehicle_DateOfInstallation")
+  aoMafdDate                DateTime? @map("AO_MAFD_DATE")
+  nic                       String?   @map("NIC")
+  aoBookingcat              String?   @map("AO_BookingCat")
+  insuredby                 String?   @map("InsuredBy")
+  product                   String?   @map("PRODUCT")
+  corporateId               BigInt?   @map("CORPORATE_ID")
+  packageType               String?   @map("PACKAGE_TYPE")
+  customerid                BigInt?   @map("CustomerId")
+  vehid                     BigInt?   @map("vehid")
+  vehicleId                 BigInt?   @map("Vehicle_Id")
+  objectid                  BigInt?   @map("ObjectID")
+  price                     BigInt?   @map("Price")
+
+  @@map("AR_ORDER_V_TEMP")
+}
+
+model LegacyAutoArPackageDetail {
+  pdId          Int    @id @map("PD_ID")
+  pdDescription String @map("PD_DESCRIPTION")
+  pdDetailId    Int    @map("PD_DETAIL_ID")
+  pdPrice       Float  @map("PD_PRICE")
+  pdTmId        Int?   @map("PD_TM_ID")
+  pdAcId        Int?   @map("PD_AC_ID")
+
+  @@map("AR_PACKAGE_DETAIL")
+}
+
+model LegacyAutoArPaymentReceiptLog {
+  aprNo             BigInt    @id @map("APR_NO")
+  pcInsert          String?   @map("PC_INSERT")
+  logDatetimeInsert DateTime? @map("LOG_DATETIME_INSERT")
+  pcUpdate          String?   @map("PC_UPDATE")
+  logDatetimeUpdate DateTime? @map("LOG_DATETIME_UPDATE")
+
+  @@map("AR_PAYMENT_RECEIPT_LOG")
+}
+
+model LegacyAutoArPaymentTax {
+  aptId        BigInt  @id @map("APT_ID")
+  aptAprNo     BigInt? @map("APT_APR_NO")
+  aptTdId      BigInt? @map("APT_TD_ID")
+  aptTaxAmount Float?  @map("APT_TAX_AMOUNT")
+
+  @@map("AR_PAYMENT_TAX")
+}
+
+model LegacyAutoArPendingPayment {
+  id            Int       @id @map("id")
+  aiNo          BigInt?   @map("AI_NO")
+  firstSmsdate  DateTime? @map("First_SMSDate")
+  firstSms      Boolean?  @map("First_SMS")
+  secondSmsdate DateTime? @map("Second_SMSDate")
+  secondSms     Boolean?  @map("Second_SMS")
+  thirdSmsdate  DateTime? @map("Third_SMSDate")
+  thirdSms      Boolean?  @map("Third_SMS")
+  closed        Boolean?  @map("CLOSED")
+  cellno        String?   @map("cellNo")
+  closedDate    DateTime? @map("closed_date")
+  engno         String?   @map("engNo")
+  makemodel     String?   @map("MakeModel")
+
+  @@map("AR_Pending_Payment")
+}
+
+model LegacyAutoArPreparedInvoiceTable {
+  aoNo                      BigInt    @id @map("AO_NO")
+  price1                    BigInt?   @map("PRICE1")
+  price2                    BigInt?   @map("PRICE2")
+  price3                    BigInt?   @map("PRICE3")
+  price4                    BigInt?   @map("PRICE4")
+  price5                    BigInt?   @map("PRICE5")
+  price6                    BigInt?   @map("PRICE6")
+  price7                    BigInt?   @map("PRICE7")
+  price8                    BigInt?   @map("PRICE8")
+  price9                    BigInt?   @map("PRICE9")
+  price10                   BigInt?   @map("PRICE10")
+  price11                   BigInt?   @map("PRICE11")
+  price12                   BigInt?   @map("PRICE12")
+  inv1                      BigInt?   @map("INV1")
+  inv2                      BigInt?   @map("INV2")
+  inv3                      BigInt?   @map("INV3")
+  inv4                      BigInt?   @map("INV4")
+  inv5                      BigInt?   @map("INV5")
+  inv6                      BigInt?   @map("INV6")
+  inv7                      BigInt?   @map("INV7")
+  inv8                      BigInt?   @map("INV8")
+  inv9                      BigInt?   @map("INV9")
+  inv10                     BigInt?   @map("INV10")
+  inv11                     BigInt?   @map("INV11")
+  inv12                     BigInt?   @map("INV12")
+  aoDate1                   DateTime? @map("AO_DATE1")
+  aoDate2                   DateTime? @map("AO_DATE2")
+  aoDate3                   DateTime? @map("AO_DATE3")
+  aoDate4                   DateTime? @map("AO_DATE4")
+  aoDate5                   DateTime? @map("AO_DATE5")
+  aoDate6                   DateTime? @map("AO_DATE6")
+  aoDate7                   DateTime? @map("AO_DATE7")
+  aoDate8                   DateTime? @map("AO_DATE8")
+  aoDate9                   DateTime? @map("AO_DATE9")
+  aoDate10                  DateTime? @map("AO_DATE10")
+  aoDate11                  DateTime? @map("AO_DATE11")
+  aoDate12                  DateTime? @map("AO_DATE12")
+  aoMafd                    Boolean?  @map("AO_MAFD")
+  vehicleDateofinstallation DateTime? @map("Vehicle_DateOfInstallation")
+  aoMafdDate                DateTime? @map("AO_MAFD_DATE")
+  aoCoId                    BigInt?   @map("AO_CO_ID")
+
+  @@map("AR_Prepared_Invoice_Table")
+}
+
+model LegacyAutoArUeElements {
+  entryid         Int     @id @map("EntryID")
+  imIdUe          Int?    @map("IM_ID_UE")
+  imDescriptionUe String? @map("IM_DESCRIPTION_UE")
+  imAcIdUe        BigInt? @map("IM_AC_ID_UE")
+  imIdE           Int?    @map("IM_ID_E")
+  imDescriptionE  String? @map("IM_DESCRIPTION_E")
+  imAcIdE         BigInt? @map("IM_AC_ID_E")
+  seqno           Int?    @map("SEQNO")
+
+  @@map("AR_UE_ELEMENTS")
+}
+
+model LegacyAutoArUeMstr {
+  entrytypeid Int      @id @map("ENTRYTYPEID")
+  entryno     Int      @map("ENTRYNO")
+  jeHeaderId  BigInt   @map("JE_HEADER_ID")
+  aiNo        BigInt   @map("AI_NO")
+  aiDate      DateTime @map("AI_DATE")
+  vchstatus   String   @map("VCHSTATUS")
+  aiImId      Int      @map("AI_IM_ID")
+  jeAcId      BigInt   @map("JE_AC_ID")
+  jeEnteredDr Float    @map("JE_ENTERED_DR")
+  jeEnteredCr Float    @map("JE_ENTERED_CR")
+  closeFlag   Boolean? @map("CLOSE_FLAG")
+
+  @@map("AR_UE_MSTR")
+}
+
+model LegacyAutoArVehicle {
+  avId                    Int     @id @map("AV_ID")
+  avVehicleId             Int     @map("AV_Vehicle_Id")
+  avCoId                  Int     @map("AV_CO_ID")
+  avVehicleMake           String? @map("AV_Vehicle_Make")
+  avVehicleModel          String? @map("AV_Vehicle_Model")
+  avVehicleCc             String? @map("AV_Vehicle_CC")
+  avVehicleInsurancevalue Float?  @map("AV_Vehicle_InsuranceValue")
+  avDdId                  Int?    @map("AV_DD_ID")
+  avPdId                  Int?    @map("AV_PD_ID")
+
+  @@map("AR_VEHICLE")
+}
+
+model LegacyAutoCancelinvoice {
+  date1       DateTime? @map("Date1")
+  jeVoucherNo Float?    @map("JE_VOUCHER_NO")
+  narration   String    @id @map("Narration")
+  particular  String?   @map("Particular")
+  aiNo        Float?    @map("AI_NO")
+  debit       Float?    @map("Debit")
+  credit      Float?    @map("credit")
+  balance     Float?    @map("Balance")
+  comment     String?   @map("Comment")
+
+  @@map("CancelInvoice")
+}
+
+model LegacyAutoCrm14062022 {
+  vehicleId                          BigInt    @id @map("Vehicle_Id")
+  customerid                         BigInt?   @map("CustomerId")
+  packageid                          BigInt?   @map("PackageID")
+  vehicleMake                        String?   @map("Vehicle_Make")
+  vehicleModel                       String?   @map("Vehicle_Model")
+  vehicleYear                        String?   @map("Vehicle_Year")
+  vehicleColor                       String?   @map("Vehicle_Color")
+  vehicleCc                          String?   @map("Vehicle_CC")
+  vehicleTransmission                String?   @map("Vehicle_Transmission")
+  vehicleEngineno                    String?   @map("Vehicle_EngineNo")
+  vehicleChasisno                    String?   @map("Vehicle_ChasisNo")
+  vehicleRegistrationno              String?   @map("Vehicle_RegistrationNo")
+  vehicleIsleased                    String?   @map("Vehicle_IsLeased")
+  vehicleLeasedCompanyid             BigInt?   @map("Vehicle_Leased_CompanyId")
+  vehicleLeasedContactid             BigInt?   @map("Vehicle_Leased_ContactId")
+  vehicleLessee                      String?   @map("Vehicle_Lessee")
+  vehicleLeaseteanure                String?   @map("Vehicle_LeaseTeanure")
+  vehicleIsinsured                   String?   @map("Vehicle_IsInsured")
+  vehicleInsuranceCompanyid          BigInt?   @map("Vehicle_Insurance_CompanyId")
+  vehicleInsuranceContactid          BigInt?   @map("Vehicle_Insurance_ContactId")
+  vehicleInsurancevalue              BigInt?   @map("Vehicle_InsuranceValue")
+  vehiclePaymentterms                Int?      @map("Vehicle_PaymentTerms")
+  vehicleTrackingpassword            String?   @map("Vehicle_TrackingPassword")
+  vehicleTrackingaveragekmperday     Int?      @map("Vehicle_TrackingAverageKmPerDay")
+  vehicleTrackingspecialinstructions String?   @map("Vehicle_TrackingSpecialInstructions")
+  vehicleDeviceserial                String?   @map("Vehicle_DeviceSerial")
+  vehicleSim                         String?   @map("Vehicle_SIM")
+  vehicleSalespersonname             String?   @map("Vehicle_SalesPersonName")
+  vehicleSalescode                   Int?      @map("Vehicle_SalesCode")
+  vehicleImeino                      String?   @map("Vehicle_IMEINo")
+  vehicleSalesok                     String?   @map("Vehicle_SalesOk")
+  vehicleCicok                       String?   @map("Vehicle_CICOk")
+  vehicleDatacenterok                String?   @map("Vehicle_DataCenterOk")
+  vehicleSecurityok                  String?   @map("Vehicle_SecurityOk")
+  vehicleCallcenterok                String?   @map("Vehicle_CallCenterOk")
+  vehicleFinanceok                   String?   @map("Vehicle_FinanceOk")
+  vehicleAgreementdate               String?   @map("Vehicle_AgreementDate")
+  vehicleAgreementfiepath            String?   @map("Vehicle_AgreementFiePath")
+  vehicleBonnetlock                  String?   @map("Vehicle_BonnetLock")
+  vehicleMname                       String?   @map("Vehicle_MName")
+  vehicleInstallationLocation        String?   @map("Vehicle_Installation_location")
+  vehiclePono                        String?   @map("Vehicle_PONo")
+  vehicleTechnician                  String?   @map("Vehicle_Technician")
+  firstinstallment                   Int?      @map("FirstInstallment")
+  secinstallment                     Int?      @map("SecInstallment")
+  thirdinstallment                   Int?      @map("ThirdInstallment")
+  forthinstallment                   Int?      @map("ForthInstallment")
+  fifthinstallment                   Int?      @map("FifthInstallment")
+  sixthinstallment                   Int?      @map("SixthInstallment")
+  lnl                                String?   @map("LNL")
+  vehiclePolicy                      Int?      @map("Vehicle_Policy")
+  firstDuedate                       Int?      @map("First_DueDate")
+  secondDuedate                      Int?      @map("Second_DueDate")
+  thirdDuedate                       Int?      @map("Third_DueDate")
+  forthDuedate                       Int?      @map("Forth_DueDate")
+  fifthDuedate                       Int?      @map("Fifth_DueDate")
+  sixthDuedate                       Int?      @map("Sixth_DueDate")
+  firstClosing                       Int?      @map("First_Closing")
+  secClosing                         Int?      @map("Sec_Closing")
+  thirdClosing                       Int?      @map("Third_Closing")
+  forthClosing                       Int?      @map("Forth_Closing")
+  fifthClosing                       Int?      @map("Fifth_Closing")
+  sixthClosing                       Int?      @map("Sixth_Closing")
+  vehicleDevice                      String?   @map("Vehicle_Device")
+  customername                       String?   @map("CustomerName")
+  address1                           String?   @map("Address1")
+  address2                           String?   @map("Address2")
+  telephoneno                        String?   @map("TelephoneNo")
+  cellno                             String?   @map("CellNo")
+  vehid                              BigInt?   @map("vehid")
+  nic                                String?   @map("NIC")
+  insuredby                          String?   @map("InsuredBy")
+  vehicleDateofinstallation          DateTime? @map("Vehicle_DateOfInstallation")
+  product                            String?   @map("PRODUCT")
+  corporateId                        BigInt?   @map("CORPORATE_ID")
+  bId                                BigInt?   @map("B_ID")
+  packageType                        String?   @map("PACKAGE_TYPE")
+  fleetType                          String?   @map("FLEET_TYPE")
+  branchName                         String?   @map("BRANCH_NAME")
+  poSpecialInstructions              String?   @map("PO_SPECIAL_INSTRUCTIONS")
+  objectid                           BigInt?   @map("OBJECTID")
+  amount                             Float?    @map("Amount")
+  commissionvalue                    Float?    @map("CommissionValue")
+
+  @@map("CRM_14062022")
+}
+
+model LegacyAutoCrm250621 {
+  vehicleId                          BigInt    @id @map("Vehicle_Id")
+  customerid                         BigInt    @map("CustomerId")
+  packageid                          BigInt?   @map("PackageID")
+  vehicleMake                        String?   @map("Vehicle_Make")
+  vehicleModel                       String?   @map("Vehicle_Model")
+  vehicleYear                        String?   @map("Vehicle_Year")
+  vehicleColor                       String?   @map("Vehicle_Color")
+  vehicleCc                          String?   @map("Vehicle_CC")
+  vehicleTransmission                String    @map("Vehicle_Transmission")
+  vehicleEngineno                    String?   @map("Vehicle_EngineNo")
+  vehicleChasisno                    String?   @map("Vehicle_ChasisNo")
+  vehicleRegistrationno              String    @map("Vehicle_RegistrationNo")
+  vehicleIsleased                    String    @map("Vehicle_IsLeased")
+  vehicleLeasedCompanyid             Int?      @map("Vehicle_Leased_CompanyId")
+  vehicleLeasedContactid             Int?      @map("Vehicle_Leased_ContactId")
+  vehicleLessee                      String?   @map("Vehicle_Lessee")
+  vehicleLeaseteanure                Int?      @map("Vehicle_LeaseTeanure")
+  vehicleIsinsured                   String    @map("Vehicle_IsInsured")
+  vehicleInsuranceCompanyid          Int?      @map("Vehicle_Insurance_CompanyId")
+  vehicleInsuranceContactid          Int?      @map("Vehicle_Insurance_ContactId")
+  vehicleInsurancevalue              String?   @map("Vehicle_InsuranceValue")
+  vehiclePaymentterms                Int?      @map("Vehicle_PaymentTerms")
+  vehicleTrackingpassword            String    @map("Vehicle_TrackingPassword")
+  vehicleTrackingaveragekmperday     Int?      @map("Vehicle_TrackingAverageKmPerDay")
+  vehicleTrackingspecialinstructions String?   @map("Vehicle_TrackingSpecialInstructions")
+  vehicleDeviceserial                String?   @map("Vehicle_DeviceSerial")
+  vehicleSim                         String?   @map("Vehicle_SIM")
+  vehicleSalespersonname             String?   @map("Vehicle_SalesPersonName")
+  vehicleSalescode                   Int?      @map("Vehicle_SalesCode")
+  vehicleImeino                      String?   @map("Vehicle_IMEINo")
+  vehicleSalesok                     Int?      @map("Vehicle_SalesOk")
+  vehicleCicok                       Int?      @map("Vehicle_CICOk")
+  vehicleDatacenterok                Int?      @map("Vehicle_DataCenterOk")
+  vehicleSecurityok                  Int?      @map("Vehicle_SecurityOk")
+  vehicleCallcenterok                Int?      @map("Vehicle_CallCenterOk")
+  vehicleFinanceok                   Int?      @map("Vehicle_FinanceOk")
+  vehicleAgreementdate               Int?      @map("Vehicle_AgreementDate")
+  vehicleAgreementfiepath            Int?      @map("Vehicle_AgreementFiePath")
+  vehicleDateofinstallation          DateTime? @map("Vehicle_DateOfInstallation")
+  vehicleBonnetlock                  Int?      @map("Vehicle_BonnetLock")
+  vehicleMname                       Int?      @map("Vehicle_MName")
+  vehicleInstallationLocation        String?   @map("Vehicle_Installation_location")
+  vehiclePono                        String?   @map("Vehicle_PONo")
+  vehicleTechnician                  String?   @map("Vehicle_Technician")
+  firstinstallment                   Int?      @map("FirstInstallment")
+  secinstallment                     Int?      @map("SecInstallment")
+  thirdinstallment                   Int?      @map("ThirdInstallment")
+  forthinstallment                   Int?      @map("ForthInstallment")
+  fifthinstallment                   Int?      @map("FifthInstallment")
+  sixthinstallment                   Int?      @map("SixthInstallment")
+  lnl                                String    @map("LNL")
+  vehiclePolicy                      Int?      @map("Vehicle_Policy")
+  firstDuedate                       Int?      @map("First_DueDate")
+  secondDuedate                      Int?      @map("Second_DueDate")
+  thirdDuedate                       Int?      @map("Third_DueDate")
+  forthDuedate                       Int?      @map("Forth_DueDate")
+  fifthDuedate                       Int?      @map("Fifth_DueDate")
+  sixthDuedate                       Int?      @map("Sixth_DueDate")
+  firstClosing                       Int?      @map("First_Closing")
+  secClosing                         Int?      @map("Sec_Closing")
+  thirdClosing                       Int?      @map("Third_Closing")
+  forthClosing                       Int?      @map("Forth_Closing")
+  fifthClosing                       Int?      @map("Fifth_Closing")
+  sixthClosing                       Int?      @map("Sixth_Closing")
+  vehicleDevice                      String?   @map("Vehicle_Device")
+  customername                       String?   @map("CustomerName")
+  address1                           String?   @map("Address1")
+  address2                           String?   @map("Address2")
+  telephoneno                        String    @map("TelephoneNo")
+  cellno                             String?   @map("CellNo")
+  vehid                              BigInt    @map("vehid")
+  nic                                String?   @map("NIC")
+  insuredby                          String?   @map("InsuredBy")
+  product                            String?   @map("PRODUCT")
+  corporateId                        Int?      @map("CORPORATE_ID")
+  bId                                BigInt?   @map("B_ID")
+  packageType                        String?   @map("PACKAGE_TYPE")
+
+  @@map("CRM_250621")
+}
+
+model LegacyAutoCrmArTaxTemp {
+  refno        String  @id @map("RefNo")
+  taxdetails   String? @map("TAXDETAILS")
+  aiNo         BigInt? @map("AI_NO")
+  aptTdId      Int?    @map("APT_TD_ID")
+  aptTaxAmount Float?  @map("APT_TAX_AMOUNT")
+  seqno        Int?    @map("SEQNO")
+
+  @@map("CRM_AR_TAX_TEMP")
+}
+
+model LegacyAutoCrmArTaxTempTest {
+  refno        String  @id @map("RefNo")
+  taxdetails   String? @map("TAXDETAILS")
+  aiNo         BigInt? @map("AI_NO")
+  aptTdId      Int?    @map("APT_TD_ID")
+  aptTaxAmount Float?  @map("APT_TAX_AMOUNT")
+  seqno        Int?    @map("SEQNO")
+
+  @@map("CRM_AR_TAX_TEMP_TEST")
+}
+
+model LegacyAutoCrmAtsPaymentReceiptVTbl {
+  aprNo                   BigInt    @id @map("APR_NO")
+  aprDate                 DateTime? @map("APR_DATE")
+  aprDescription          String?   @map("APR_DESCRIPTION")
+  aprCoId                 BigInt?   @map("APR_CO_ID")
+  aprBankId               Int?      @map("APR_BANK_ID")
+  aprPost                 Boolean?  @map("APR_POST")
+  aprGl                   Boolean?  @map("APR_GL")
+  aprCancel               Boolean?  @map("APR_Cancel")
+  aaiAiNo                 BigInt?   @map("AAI_AI_NO")
+  aaiAiDate               DateTime? @map("AAI_AI_DATE")
+  aaiAiAmount             Float?    @map("AAI_AI_AMOUNT")
+  aaiPenAmount            Float?    @map("AAI_PEN_AMOUNT")
+  aaiAdjust               Float?    @map("AAI_ADJUST")
+  aoVehicleId             Int?      @map("AO_VEHICLE_ID")
+  aiVehicleMake           String?   @map("AI_vehicle_make")
+  aiVehicleModel          String?   @map("AI_VEHICLE_MODEL")
+  aiVehicleChasisno       String?   @map("AI_VEHICLE_CHASISNO")
+  aiVehicleEngineno       String?   @map("AI_VEHICLE_ENGINENO")
+  aiVehicleDoi            String?   @map("AI_VEHICLE_DOI")
+  aiVehicleRegistrationno String?   @map("AI_VEHICLE_REGISTRATIONNO")
+  crmTransId              BigInt?   @map("CRM_TRANS_ID")
+  bankName                String    @map("BANK_NAME")
+  coCompanyName           String?   @map("CO_Company_Name")
+  crmInsuredby            String?   @map("CRM_InsuredBy")
+  crmCustomername         String?   @map("CRM_CustomerName")
+  logDatetimeInsert       DateTime? @map("LOG_DATETIME_INSERT")
+  coCorporate             Boolean?  @map("CO_Corporate")
+
+  @@map("CRM_ATS_PAYMENT_RECEIPT_V_TBL")
+}
+
+model LegacyAutoCrmKjn001 {
+  vehicleId                          BigInt    @id @map("Vehicle_Id")
+  customerid                         BigInt    @map("CustomerId")
+  packageid                          BigInt?   @map("PackageID")
+  vehicleMake                        String?   @map("Vehicle_Make")
+  vehicleModel                       String?   @map("Vehicle_Model")
+  vehicleYear                        String?   @map("Vehicle_Year")
+  vehicleColor                       String?   @map("Vehicle_Color")
+  vehicleCc                          String?   @map("Vehicle_CC")
+  vehicleTransmission                String    @map("Vehicle_Transmission")
+  vehicleEngineno                    String?   @map("Vehicle_EngineNo")
+  vehicleChasisno                    String?   @map("Vehicle_ChasisNo")
+  vehicleRegistrationno              String    @map("Vehicle_RegistrationNo")
+  vehicleIsleased                    String    @map("Vehicle_IsLeased")
+  vehicleLeasedCompanyid             Int?      @map("Vehicle_Leased_CompanyId")
+  vehicleLeasedContactid             Int?      @map("Vehicle_Leased_ContactId")
+  vehicleLessee                      String?   @map("Vehicle_Lessee")
+  vehicleLeaseteanure                Int?      @map("Vehicle_LeaseTeanure")
+  vehicleIsinsured                   String    @map("Vehicle_IsInsured")
+  vehicleInsuranceCompanyid          Int?      @map("Vehicle_Insurance_CompanyId")
+  vehicleInsuranceContactid          Int?      @map("Vehicle_Insurance_ContactId")
+  vehicleInsurancevalue              String?   @map("Vehicle_InsuranceValue")
+  vehiclePaymentterms                Int?      @map("Vehicle_PaymentTerms")
+  vehicleTrackingpassword            String    @map("Vehicle_TrackingPassword")
+  vehicleTrackingaveragekmperday     Int?      @map("Vehicle_TrackingAverageKmPerDay")
+  vehicleTrackingspecialinstructions String?   @map("Vehicle_TrackingSpecialInstructions")
+  vehicleDeviceserial                String?   @map("Vehicle_DeviceSerial")
+  vehicleSim                         String?   @map("Vehicle_SIM")
+  vehicleSalespersonname             String?   @map("Vehicle_SalesPersonName")
+  vehicleSalescode                   Int?      @map("Vehicle_SalesCode")
+  vehicleImeino                      String?   @map("Vehicle_IMEINo")
+  vehicleSalesok                     Int?      @map("Vehicle_SalesOk")
+  vehicleCicok                       Int?      @map("Vehicle_CICOk")
+  vehicleDatacenterok                Int?      @map("Vehicle_DataCenterOk")
+  vehicleSecurityok                  Int?      @map("Vehicle_SecurityOk")
+  vehicleCallcenterok                Int?      @map("Vehicle_CallCenterOk")
+  vehicleFinanceok                   Int?      @map("Vehicle_FinanceOk")
+  vehicleAgreementdate               Int?      @map("Vehicle_AgreementDate")
+  vehicleAgreementfiepath            Int?      @map("Vehicle_AgreementFiePath")
+  vehicleBonnetlock                  Int?      @map("Vehicle_BonnetLock")
+  vehicleMname                       Int?      @map("Vehicle_MName")
+  vehicleInstallationLocation        String?   @map("Vehicle_Installation_location")
+  vehiclePono                        String?   @map("Vehicle_PONo")
+  vehicleTechnician                  String?   @map("Vehicle_Technician")
+  firstinstallment                   Int?      @map("FirstInstallment")
+  secinstallment                     Int?      @map("SecInstallment")
+  thirdinstallment                   Int?      @map("ThirdInstallment")
+  forthinstallment                   Int?      @map("ForthInstallment")
+  fifthinstallment                   Int?      @map("FifthInstallment")
+  sixthinstallment                   Int?      @map("SixthInstallment")
+  lnl                                String    @map("LNL")
+  vehiclePolicy                      Int?      @map("Vehicle_Policy")
+  firstDuedate                       Int?      @map("First_DueDate")
+  secondDuedate                      Int?      @map("Second_DueDate")
+  thirdDuedate                       Int?      @map("Third_DueDate")
+  forthDuedate                       Int?      @map("Forth_DueDate")
+  fifthDuedate                       Int?      @map("Fifth_DueDate")
+  sixthDuedate                       Int?      @map("Sixth_DueDate")
+  firstClosing                       Int?      @map("First_Closing")
+  secClosing                         Int?      @map("Sec_Closing")
+  thirdClosing                       Int?      @map("Third_Closing")
+  forthClosing                       Int?      @map("Forth_Closing")
+  fifthClosing                       Int?      @map("Fifth_Closing")
+  sixthClosing                       Int?      @map("Sixth_Closing")
+  vehicleDevice                      String?   @map("Vehicle_Device")
+  customername                       String?   @map("CustomerName")
+  address1                           String?   @map("Address1")
+  address2                           String?   @map("Address2")
+  telephoneno                        String    @map("TelephoneNo")
+  cellno                             String?   @map("CellNo")
+  vehid                              BigInt    @map("vehid")
+  nic                                String?   @map("NIC")
+  insuredby                          String?   @map("InsuredBy")
+  vehicleDateofinstallation          DateTime? @map("Vehicle_DateOfInstallation")
+  product                            String?   @map("PRODUCT")
+  corporateId                        Int?      @map("CORPORATE_ID")
+  bId                                BigInt?   @map("B_ID")
+  packageType                        String?   @map("PACKAGE_TYPE")
+
+  @@map("CRM_KJN001")
+}
+
+model LegacyAutoCrmPaymentreceiptposted {
+  vehicleid   BigInt    @id @map("VehicleId")
+  engine      String?   @map("Engine")
+  chassis     String?   @map("Chassis")
+  amount      Float?    @map("Amount")
+  mode        String?   @map("Mode")
+  paymentfor  String?   @map("PaymentFor")
+  bankid      Int?      @map("BankID")
+  aiNo        BigInt?   @map("AI_NO")
+  taxdetails  String?   @map("TaxDetails")
+  nooftaxes   Int?      @map("NoOfTaxes")
+  refno       String?   @map("RefNo")
+  logtime     DateTime? @map("LogTime")
+  postingtime DateTime? @map("PostingTime")
+  postedby    String?   @map("PostedBy")
+  depositdate DateTime? @map("DepositDate")
+  atsPostDate DateTime? @map("ATS_Post_Date")
+  atsPost     Boolean?  @map("ATS_Post")
+  transid     BigInt?   @map("TransID")
+  customerid  BigInt?   @map("CustomerId")
+  aiCoId      BigInt?   @map("AI_CO_ID")
+  aiAmount    BigInt?   @map("AI_Amount")
+  aiDate      DateTime? @map("AI_Date")
+  aprNo       BigInt?   @map("APR_NO")
+
+  @@map("CRM_PaymentReceiptPosted")
+}
+
+model LegacyAutoCrmVehicleId {
+  crmVehicleId BigInt @id @map("CRM_VEHICLE_ID")
+
+  @@map("CRM_VEHICLE_ID")
+}
+
+model LegacyAutoCrmVehiclesdetails {
+  vehicleId                          BigInt    @id @map("Vehicle_Id")
+  customerid                         BigInt?   @map("CustomerId")
+  packageid                          BigInt?   @map("PackageID")
+  vehicleMake                        String?   @map("Vehicle_Make")
+  vehicleModel                       String?   @map("Vehicle_Model")
+  vehicleYear                        String?   @map("Vehicle_Year")
+  vehicleColor                       String?   @map("Vehicle_Color")
+  vehicleCc                          String?   @map("Vehicle_CC")
+  vehicleTransmission                String?   @map("Vehicle_Transmission")
+  vehicleEngineno                    String?   @map("Vehicle_EngineNo")
+  vehicleChasisno                    String?   @map("Vehicle_ChasisNo")
+  vehicleRegistrationno              String?   @map("Vehicle_RegistrationNo")
+  vehicleIsleased                    String?   @map("Vehicle_IsLeased")
+  vehicleLeasedCompanyid             BigInt?   @map("Vehicle_Leased_CompanyId")
+  vehicleLeasedContactid             BigInt?   @map("Vehicle_Leased_ContactId")
+  vehicleLessee                      String?   @map("Vehicle_Lessee")
+  vehicleLeaseteanure                String?   @map("Vehicle_LeaseTeanure")
+  vehicleIsinsured                   String?   @map("Vehicle_IsInsured")
+  vehicleInsuranceCompanyid          BigInt?   @map("Vehicle_Insurance_CompanyId")
+  vehicleInsuranceContactid          BigInt?   @map("Vehicle_Insurance_ContactId")
+  vehicleInsurancevalue              String?   @map("Vehicle_InsuranceValue")
+  vehiclePaymentterms                Int?      @map("Vehicle_PaymentTerms")
+  vehicleTrackingpassword            String?   @map("Vehicle_TrackingPassword")
+  vehicleTrackingaveragekmperday     Int?      @map("Vehicle_TrackingAverageKmPerDay")
+  vehicleTrackingspecialinstructions String?   @map("Vehicle_TrackingSpecialInstructions")
+  vehicleDeviceserial                String?   @map("Vehicle_DeviceSerial")
+  vehicleSim                         String?   @map("Vehicle_SIM")
+  vehicleSalespersonname             String?   @map("Vehicle_SalesPersonName")
+  vehicleSalescode                   Int?      @map("Vehicle_SalesCode")
+  vehicleImeino                      String?   @map("Vehicle_IMEINo")
+  vehicleSalesok                     String?   @map("Vehicle_SalesOk")
+  vehicleCicok                       String?   @map("Vehicle_CICOk")
+  vehicleDatacenterok                String?   @map("Vehicle_DataCenterOk")
+  vehicleSecurityok                  String?   @map("Vehicle_SecurityOk")
+  vehicleCallcenterok                String?   @map("Vehicle_CallCenterOk")
+  vehicleFinanceok                   String?   @map("Vehicle_FinanceOk")
+  vehicleAgreementdate               String?   @map("Vehicle_AgreementDate")
+  vehicleAgreementfiepath            String?   @map("Vehicle_AgreementFiePath")
+  vehicleBonnetlock                  String?   @map("Vehicle_BonnetLock")
+  vehicleMname                       String?   @map("Vehicle_MName")
+  vehicleInstallationLocation        String?   @map("Vehicle_Installation_location")
+  vehiclePono                        String?   @map("Vehicle_PONo")
+  vehicleTechnician                  String?   @map("Vehicle_Technician")
+  firstinstallment                   Int?      @map("FirstInstallment")
+  secinstallment                     Int?      @map("SecInstallment")
+  thirdinstallment                   Int?      @map("ThirdInstallment")
+  forthinstallment                   Int?      @map("ForthInstallment")
+  fifthinstallment                   Int?      @map("FifthInstallment")
+  sixthinstallment                   Int?      @map("SixthInstallment")
+  lnl                                String?   @map("LNL")
+  vehiclePolicy                      Int?      @map("Vehicle_Policy")
+  firstDuedate                       Int?      @map("First_DueDate")
+  secondDuedate                      Int?      @map("Second_DueDate")
+  thirdDuedate                       Int?      @map("Third_DueDate")
+  forthDuedate                       Int?      @map("Forth_DueDate")
+  fifthDuedate                       Int?      @map("Fifth_DueDate")
+  sixthDuedate                       Int?      @map("Sixth_DueDate")
+  firstClosing                       Int?      @map("First_Closing")
+  secClosing                         Int?      @map("Sec_Closing")
+  thirdClosing                       Int?      @map("Third_Closing")
+  forthClosing                       Int?      @map("Forth_Closing")
+  fifthClosing                       Int?      @map("Fifth_Closing")
+  sixthClosing                       Int?      @map("Sixth_Closing")
+  vehicleDevice                      String?   @map("Vehicle_Device")
+  customername                       String?   @map("CustomerName")
+  address1                           String?   @map("Address1")
+  address2                           String?   @map("Address2")
+  telephoneno                        String?   @map("TelephoneNo")
+  cellno                             String?   @map("CellNo")
+  vehid                              BigInt?   @map("vehid")
+  nic                                String?   @map("NIC")
+  insuredby                          String?   @map("InsuredBy")
+  vehicleDateofinstallation          DateTime? @map("Vehicle_DateOfInstallation")
+  product                            String?   @map("PRODUCT")
+  corporateId                        BigInt?   @map("CORPORATE_ID")
+  bId                                BigInt?   @map("B_ID")
+  packageType                        String?   @map("PACKAGE_TYPE")
+  fleetType                          String?   @map("FLEET_TYPE")
+  branchName                         String?   @map("BRANCH_NAME")
+  poSpecialInstructions              String?   @map("PO_SPECIAL_INSTRUCTIONS")
+  objectid                           BigInt?   @map("OBJECTID")
+  amount                             Float?    @map("Amount")
+  commissionvalue                    Float?    @map("CommissionValue")
+
+  @@map("CRM_VEHICLESDETAILS")
+}
+
+model LegacyAutoCurrentmonthsummary {
+  atsDate                   DateTime @id @map("ATS_Date")
+  bankIslamiPakistanLimited Float    @map("Bank Islami Pakistan Limited")
+  dubaiIslamicBankLimited   Float    @map("Dubai Islamic Bank Limited")
+  meezanBankLimited         Float    @map("Meezan Bank Limited")
+  total                     Float    @map("Total")
+
+  @@map("CurrentMonthSummary")
+}
+
+model LegacyAutoDashboardsummarymasterdata {
+  type                    String    @id @map("TYPE")
+  aprNo                   BigInt    @map("APR_NO")
+  atsDate                 DateTime? @map("ATS_Date")
+  aprBankId               Int?      @map("APR_BANK_ID")
+  bankName                String    @map("BANK_NAME")
+  totReceiptAmt           Float?    @map("Tot_Receipt_Amt")
+  aprCoId                 BigInt?   @map("APR_CO_ID")
+  coCompanyName           String?   @map("CO_Company_Name")
+  crmInsuredby            String?   @map("CRM_InsuredBy")
+  crmCustomername         String?   @map("CRM_CustomerName")
+  logDate                 DateTime? @map("LOG_DATE")
+  aaiAiNo                 BigInt?   @map("AAI_AI_NO")
+  aoVehicleId             Int?      @map("AO_VEHICLE_ID")
+  aiVehicleMake           String?   @map("AI_vehicle_make")
+  aiVehicleModel          String?   @map("AI_VEHICLE_MODEL")
+  aiVehicleChasisno       String?   @map("AI_VEHICLE_CHASISNO")
+  aiVehicleEngineno       String?   @map("AI_VEHICLE_ENGINENO")
+  aiVehicleDoi            String?   @map("AI_VEHICLE_DOI")
+  aiVehicleRegistrationno String?   @map("AI_VEHICLE_REGISTRATIONNO")
+
+  @@map("DashboardSummaryMasterData")
+}
+
+model LegacyAutoDataEntryLog {
+  vchNo             BigInt    @id @map("VCH_NO")
+  vchType           String?   @map("VCH_TYPE")
+  pcInsert          String?   @map("PC_INSERT")
+  logDatetimeInsert DateTime? @map("LOG_DATETIME_INSERT")
+  pcUpdate          String?   @map("PC_UPDATE")
+  logDatetimeUpdate DateTime? @map("LOG_DATETIME_UPDATE")
+
+  @@map("Data_Entry_LOG")
+}
+
+model LegacyAutoGlJeLineUpdateDate {
+  jeLineId    BigInt  @id @map("JE_LINE_ID")
+  jeHeaderId  BigInt? @map("JE_HEADER_ID")
+  jeAcId      Int?    @map("JE_AC_ID")
+  jeEnteredDr BigInt? @map("JE_ENTERED_DR")
+  jeEnteredCr BigInt? @map("JE_ENTERED_CR")
+
+  @@map("GL_JE_LINE_UPDATE_DATE")
+}
+
+model LegacyAutoInvBom {
+  ibId      BigInt  @id @map("IB_ID")
+  finItemId BigInt? @map("FIN_ITEM_ID")
+  rawItem   BigInt? @map("RAW_ITEM")
+  qty       Float?  @map("QTY")
+
+  @@map("INV_BOM")
+}
+
+model LegacyAutoInvConfiguration {
+  configNo   BigInt    @id @map("Config_No")
+  configDate DateTime? @map("Config_Date")
+  remarks    String?   @map("Remarks")
+  dProductId BigInt?   @map("D_Product_ID")
+  serialNo   String?   @map("Serial_No")
+  sProductId BigInt?   @map("S_Product_ID")
+  voiceNo    String?   @map("Voice_No")
+  tgdid      String?   @map("TGDID")
+  seqno      Int?      @map("SeqNo")
+
+  @@map("INV_Configuration")
+}
+
+model LegacyAutoInvContain {
+  contId    Int  @id @map("CONT_ID")
+  contDescr Int? @map("CONT_Descr")
+
+  @@map("INV_Contain")
+}
+
+model LegacyAutoInvEntry {
+  ieId              BigInt    @id @map("IE_ID")
+  jvNo              BigInt?   @map("JV_NO")
+  type              String?   @map("TYPE")
+  date              DateTime? @map("DATE")
+  ieType            String?   @map("IE_TYPE")
+  coId              Int?      @map("CO_ID")
+  remarks           String?   @map("REMARKS")
+  harrcpt           Boolean?  @map("HarRcpt")
+  item              BigInt?   @map("ITEM")
+  itemType          String?   @map("Item_Type")
+  itemSerialVoiceNo String?   @map("Item_Serial_Voice_No")
+  recdate           DateTime? @map("RecDate")
+  status            String?   @map("Status")
+  qty               Float?    @map("QTY")
+  others            String?   @map("Others")
+  tgdid             String?   @map("TGDID")
+  fgdid             String?   @map("FGDID")
+  serialno          String?   @map("SerialNo")
+  voiceno           String?   @map("VoiceNo")
+  receivername      String?   @map("ReceiverName")
+  registrationno    String?   @map("RegistrationNo")
+  engineno          String?   @map("EngineNo")
+  chasisno          String?   @map("ChasisNo")
+  modelno           String?   @map("ModelNo")
+  seqno             BigInt?   @map("SeqNo")
+
+  @@map("INV_ENTRY")
+}
+
+model LegacyAutoInvItemMstr {
+  itemCombinationId Int     @id @map("Item_Combination_ID")
+  iscCombinationId  Int     @map("ISC_Combination_ID")
+  icId              Int     @map("IC_ID")
+  iscId             Int     @map("ISC_ID")
+  itemId            BigInt  @map("Item_ID")
+  itemCode          String  @map("Item_Code")
+  itemDescr         String? @map("Item_Descr")
+  icAcId            Int     @map("IC_AC_ID")
+
+  @@map("INV_Item_Mstr")
+}
+
+model LegacyAutoInvItemSubCategory {
+  iscCombinationId Int     @id @map("ISC_Combination_ID")
+  icId             Int?    @map("IC_ID")
+  icDescr          String? @map("IC_Descr")
+  iscId            Int     @map("ISC_ID")
+  iscDescr         String? @map("ISC_Descr")
+
+  @@map("INV_Item_Sub_Category")
+}
+
+model LegacyAutoInvLocItemOpen {
+  ilio   BigInt @id @map("ILIO")
+  gdid   String @map("GDID")
+  item   BigInt @map("ITEM")
+  opBalQ Float? @map("OP_BAL_Q")
+  opRate Float? @map("OP_RATE")
+
+  @@map("INV_LOC_ITEM_OPEN")
+}
+
+model LegacyAutoInvLocation {
+  gdid      String  @id @map("GDID")
+  gdname    String? @map("GDNAME")
+  gdaddress String? @map("GDADDRESS")
+
+  @@map("INV_LOCATION")
+}
+
+model LegacyAutoInvPacking {
+  pkId    Int     @id @map("PK_ID")
+  pkDescr String? @map("PK_Descr")
+
+  @@map("INV_Packing")
+}
+
+model LegacyAutoJeDataLog {
+  userid     Int?      @map("USERID")
+  entryDate  DateTime? @map("Entry_date")
+  statement  String?   @map("STATEMENT")
+  navistatus Int?      @map("navistatus")
+  logid      BigInt    @id @map("logid")
+
+  @@map("je_Data_LOG")
+}
+
+model LegacyAutoLastmonthsummary {
+  atsDate                   DateTime @id @map("ATS_Date")
+  bankIslamiPakistanLimited Decimal  @map("Bank Islami Pakistan Limited")
+  dubaiIslamicBankLimited   Decimal  @map("Dubai Islamic Bank Limited")
+  meezanBankLimited         Decimal  @map("Meezan Bank Limited")
+  total                     Decimal? @map("Total")
+
+  @@map("LastMonthSummary")
+}
+
+model LegacyAutoNotesmaster {
+  noteid          Float   @map("NoteID")
+  combinationId   BigInt  @id @map("COMBINATION_ID")
+  notedetail      String? @map("NoteDetail")
+  notecategory    String? @map("NoteCategory")
+  notedescription String? @map("NoteDescription")
+
+  @@map("NotesMaster")
+}
+
+model LegacyAutoPaymentSms {
+  sno     Int       @id @map("SNo")
+  aprNo   BigInt    @map("APR_NO")
+  aprDate DateTime? @map("APR_DATE")
+  smsSend Boolean?  @map("SMS_SEND")
+
+  @@map("payment_sms")
+}
+
+model LegacyAutoPaymentreceiptsForCrmDashboard {
+  aprNo                   String    @id @map("APR_NO")
+  aprDate                 DateTime? @map("APR_DATE")
+  aprDescription          String?   @map("APR_DESCRIPTION")
+  aprCoId                 Int?      @map("APR_CO_ID")
+  aprBankId               Int?      @map("APR_BANK_ID")
+  aprPost                 Boolean?  @map("APR_POST")
+  aprGl                   Boolean?  @map("APR_GL")
+  aprCancel               Boolean?  @map("APR_Cancel")
+  aaiAiNo                 String?   @map("AAI_AI_NO")
+  aaiAiDate               DateTime? @map("AAI_AI_DATE")
+  aaiAiAmount             Decimal?  @map("AAI_AI_AMOUNT")
+  aaiPenAmount            Decimal?  @map("AAI_PEN_AMOUNT")
+  aaiAdjust               Decimal?  @map("AAI_ADJUST")
+  aoVehicleId             String?   @map("AO_VEHICLE_ID")
+  aiVehicleMake           String?   @map("AI_vehicle_make")
+  aiVehicleModel          String?   @map("AI_VEHICLE_MODEL")
+  aiVehicleChasisno       String?   @map("AI_VEHICLE_CHASISNO")
+  aiVehicleEngineno       String?   @map("AI_VEHICLE_ENGINENO")
+  aiVehicleDoi            DateTime? @map("AI_VEHICLE_DOI")
+  aiVehicleRegistrationno String?   @map("AI_VEHICLE_REGISTRATIONNO")
+  crmTransId              Int?      @map("CRM_TRANS_ID")
+  bankName                String?   @map("BANK_NAME")
+  coCompanyName           String?   @map("CO_Company_Name")
+  crmInsuredby            String?   @map("CRM_InsuredBy")
+  crmCustomername         String?   @map("CRM_CustomerName")
+
+  @@map("PaymentReceipts_For_CRM_Dashboard")
+}
+
+model LegacyAutoPeriodClosing {
+  periodCloseDate DateTime? @map("Period_Close_date")
+  periodCloseOn   DateTime? @map("Period_Close_on")
+  periodCloseBy   Int       @id @map("period_Close_by")
+
+  @@map("Period_Closing")
+}
+
+model LegacyAutoPiInvoiceItemSerialNos {
+  piNo                Int?    @map("PI_NO")
+  piItemCombinationId Int?    @map("PI_Item_Combination_ID")
+  itemType            String? @map("Item_Type")
+  dSerialNo           String? @map("D_Serial_No")
+  dImeiNo             String? @map("D_IMEI_No")
+  sSimNo              String? @map("S_SIM_No")
+  sImeiNo             String? @map("S_IMEI_No")
+  sIccidNo            String? @map("S_ICCID_No")
+  sMsisdnNo           String? @map("S_MSISDN_No")
+  piid                Int     @id @map("PIID")
+
+  @@map("PI_Invoice_Item_Serial_Nos")
+}
+
+model LegacyAutoPiIssuanceDiag {
+  idsrmNo             Int      @id @map("IDSRM_No")
+  idsrmDate           DateTime @map("IDSRM_Date")
+  itemType            String   @map("Item_Type")
+  idsrmRemarks        String?  @map("IDSRM_Remarks")
+  piItemCombinationId Int      @map("PI_Item_Combination_ID")
+  issQty              Float    @map("Iss_Qty")
+  idsrmPost           Boolean? @map("IDSRM_Post")
+  idsrmCancel         Boolean? @map("IDSRM_Cancel")
+
+  @@map("PI_Issuance_Diag")
+}
+
+model LegacyAutoPiIssuanceDiagItemSerialNos {
+  idsrmNo             Int    @id @map("IDSRM_No")
+  piItemCombinationId Int    @map("PI_Item_Combination_ID")
+  idsrmType           String @map("IDSRM_TYPE")
+  issDtlQty           Float  @map("Iss_Dtl_Qty")
+  dsNo                String @map("DS_No")
+  idsrmId             Int    @map("IDSRM_ID")
+
+  @@map("PI_Issuance_Diag_Item_Serial_Nos")
+}
+
+model LegacyAutoPiIssuanceItemSerialNos {
+  idsrmNo             Int    @id @map("IDSRM_No")
+  piItemCombinationId Int    @map("PI_Item_Combination_ID")
+  idsrmType           String @map("IDSRM_TYPE")
+  issDtlQty           Float  @map("Iss_Dtl_Qty")
+  dsNo                String @map("DS_No")
+  idsrmId             Int    @map("IDSRM_ID")
+
+  @@map("PI_Issuance_Item_Serial_Nos")
+}
+
+model LegacyAutoSysdiagrams {
+  name        String @id @map("name")
+  principalId Int    @map("principal_id")
+  diagramId   Int    @map("diagram_id")
+  version     Int?   @map("version")
+  definition  Bytes? @map("definition")
+
+  @@map("sysdiagrams")
+}
+
+model LegacyAutoTestTbEngRegChSearch {
+  aiVehicleEngineno       String  @id @map("AI_VEHICLE_ENGINENO")
+  aiVehicleRegistrationno String? @map("AI_VEHICLE_REGISTRATIONNO")
+  aiVehicleChasisno       String? @map("AI_VEHICLE_CHASISNO")
+
+  @@map("Test_TB_Eng_Reg_Ch_Search")
+}
+
+model LegacyAutoUpdateArInvoiceCoId {
+  aprNo          BigInt  @id @map("APR_NO")
+  aprDescription String? @map("APR_DESCRIPTION")
+
+  @@map("Update_AR_Invoice_Co_ID")
+}
+
+model LegacyAutoUpdateArInvoiceInfoSelected {
+  aiAoNo String @id @map("AI_AO_NO")
+
+  @@map("Update_AR_INVOICE_INFO_SELECTED")
+}
+
+model LegacyAutoUpdateArOrderAoDate {
+  aoNo      BigInt    @id @map("AO_NO")
+  aiInvDate DateTime? @map("AI_INV_DATE")
+
+  @@map("Update_AR_ORDER_AO_DATE")
+}
+
+model LegacyAutoUpdateArOrderPrice {
+  aoNo      Int    @id @map("AO_NO")
+  aoPrice2  Float? @map("AO_PRICE2")
+  aoPrice3  Float? @map("AO_PRICE3")
+  aoPrice4  Float? @map("AO_PRICE4")
+  aoPrice5  Float? @map("AO_PRICE5")
+  aoPrice6  Float? @map("AO_PRICE6")
+  aoPrice7  Float? @map("AO_PRICE7")
+  aoPrice8  Float? @map("AO_PRICE8")
+  aoPrice9  Float? @map("AO_PRICE9")
+  aoPrice10 Float? @map("AO_PRICE10")
+  aoPrice11 Float? @map("AO_PRICE11")
+  aoPrice12 Float? @map("AO_PRICE12")
+  seqno     Int?   @map("SeqNo")
+  elementid Int?   @map("ElementID")
+
+  @@map("update_Ar_Order_Price")
+}
+
+// AUTO-GENERATED LEGACY TABLES END

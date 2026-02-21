@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+// Use relative /api so browser hits same origin; Next.js rewrites proxy to the backend (avoids CORS/network errors)
+const getBaseURL = () => process.env.NEXT_PUBLIC_API_URL || '/api';
+
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api',
+  baseURL: getBaseURL(),
   headers: {
     'Content-Type': 'application/json',
   },
@@ -61,7 +64,7 @@ const refreshAccessToken = async (): Promise<string> => {
   }
 
   const response = await axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api'}/auth/refresh`,
+    `${getBaseURL()}/auth/refresh`,
     { refreshToken }
   );
 
@@ -148,6 +151,11 @@ apiClient.interceptors.response.use(
       }
     }
 
+    // Network Error = API not reachable (proxy target down or wrong)
+    const baseURL = getBaseURL();
+    if (!error.response && (error.message === 'Network Error' || error.code === 'ERR_NETWORK')) {
+      error.apiHint = `Cannot reach API. Start the backend: in apps/api run "pnpm run start:dev" (default: ${baseURL === '/api' ? 'http://127.0.0.1:3001/api via proxy' : baseURL}).`;
+    }
     return Promise.reject(error);
   }
 );

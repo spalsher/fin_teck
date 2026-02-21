@@ -1,0 +1,556 @@
+{
+  "comparison": [
+    {
+      "table": "organizations",
+      "sqlCount": 0,
+      "pgCount": 1,
+      "match": false
+    },
+    {
+      "table": "branches",
+      "sqlCount": 0,
+      "pgCount": 1,
+      "match": false
+    },
+    {
+      "table": "chart_of_accounts",
+      "sqlCount": 594,
+      "pgCount": 594,
+      "match": true
+    },
+    {
+      "table": "customers",
+      "sqlCount": 59277,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "vendors",
+      "sqlCount": 504,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "invoices",
+      "sqlCount": 693041,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "bills",
+      "sqlCount": 35298,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "receipts",
+      "sqlCount": 147500,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "journal_entries",
+      "sqlCount": 1498638,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "journal_entry_lines",
+      "sqlCount": 5752567,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "departments",
+      "sqlCount": 0,
+      "pgCount": 1,
+      "match": false
+    },
+    {
+      "table": "designations",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "employees",
+      "sqlCount": 0,
+      "pgCount": 1,
+      "match": false
+    },
+    {
+      "table": "\"update_Ar_Order_Price\"",
+      "sqlCount": 38,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "sysdiagrams",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "payment_sms",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"je_Data_LOG\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"Users\"",
+      "sqlCount": 4,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"User_Resp\"",
+      "sqlCount": 3,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"UserLogin\"",
+      "sqlCount": 13,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"Update_AR_ORDER_AO_DATE\"",
+      "sqlCount": 38,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"Update_AR_Invoice_Co_ID\"",
+      "sqlCount": 243,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"Update_AR_INVOICE_INFO_SELECTED\"",
+      "sqlCount": 22,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"USER_MENU_ASSIGN\"",
+      "sqlCount": 819,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"Test_TB_Eng_Reg_Ch_Search\"",
+      "sqlCount": 3054,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"TAX_MASTER\"",
+      "sqlCount": 44,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"TAX_DETAIL\"",
+      "sqlCount": 45,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"SUB_ACCOUNT\"",
+      "sqlCount": 7,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"Responsibilties\"",
+      "sqlCount": 5,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"Period_Closing\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"PaymentReceipts_For_CRM_Dashboard\"",
+      "sqlCount": 375266,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"PI_Issuance_Item_Serial_Nos\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"PI_Issuance_Diag_Item_Serial_Nos\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"PI_Issuance_Diag\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"PI_Issuance\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"PI_Invoice_Item_Serial_Nos\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"PI_INVOICE\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"Organizational_Unit\"",
+      "sqlCount": 5,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"NotesMaster\"",
+      "sqlCount": 317,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"NATURAL_ACCOUNT\"",
+      "sqlCount": 479,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"Menu_option\"",
+      "sqlCount": 68,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"LastMonthSummary\"",
+      "sqlCount": 14,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"INV_UnitOfMeasure\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"INV_Requisition\"",
+      "sqlCount": 11,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"INV_Packing\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"INV_LOC_ITEM_OPEN\"",
+      "sqlCount": 6,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"INV_LOCATION\"",
+      "sqlCount": 14,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"INV_Item_Sub_Category\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"INV_Item_Mstr\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"INV_ITEM\"",
+      "sqlCount": 126,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"INV_ENTRY\"",
+      "sqlCount": 18,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"INV_Contain\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"INV_Configuration\"",
+      "sqlCount": 1,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"INV_BOM\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"GL_JE_LINE_UPDATE_DATE\"",
+      "sqlCount": 53,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"Data_Entry_LOG\"",
+      "sqlCount": 1102509,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"DashboardSummaryMasterData\"",
+      "sqlCount": 171479,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"CurrentMonthSummary\"",
+      "sqlCount": 20,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"CancelInvoice\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"CRM_VEHICLE_ID\"",
+      "sqlCount": 21724,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"CRM_VEHICLESDETAILS\"",
+      "sqlCount": 178987,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"CRM_PaymentReceiptPosted\"",
+      "sqlCount": 108072,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"CRM_KJN001\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"CRM_ATS_PAYMENT_RECEIPT_V_TBL\"",
+      "sqlCount": 269677,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"CRM_AR_TAX_TEMP_TEST\"",
+      "sqlCount": 2,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"CRM_AR_TAX_TEMP\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"CRM_250621\"",
+      "sqlCount": 42590,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"CRM_14062022\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"COST_CENTER\"",
+      "sqlCount": 9,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"Bank_Master\"",
+      "sqlCount": 41,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"AR_VEHICLE\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"AR_UE_MSTR\"",
+      "sqlCount": 2312190,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"AR_UE_ELEMENTS\"",
+      "sqlCount": 3,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"AR_Prepared_Invoice_Table\"",
+      "sqlCount": 1,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"AR_Pending_Payment\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"AR_PAYMENT_TAX\"",
+      "sqlCount": 25755,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"AR_PAYMENT_RECEIPT_LOG\"",
+      "sqlCount": 101481,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"AR_PACKAGE_DETAIL\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"AR_ORDER_V_TEMP\"",
+      "sqlCount": 2,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"AR_ORDER\"",
+      "sqlCount": 334282,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"AR_INVOICE_TEMP\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"AR_INVOICE_ELEMENTS\"",
+      "sqlCount": 33,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"AR_INVOICE_AGEING\"",
+      "sqlCount": 779799,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"AR_DEAL_MASTER\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"AR_DEAL_DETAIL\"",
+      "sqlCount": 0,
+      "pgCount": 0,
+      "match": true
+    },
+    {
+      "table": "\"AR_CREDIT_NOTE\"",
+      "sqlCount": 25401,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"AR_ADJUST_INVOICE\"",
+      "sqlCount": 374744,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"AP_PAYMENT_TAX\"",
+      "sqlCount": 4837,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"AP_PAYMENT_RECEIPT\"",
+      "sqlCount": 9858,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"AP_INV_DEL_DATA\"",
+      "sqlCount": 575,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"AP_DEBIT_NOTE\"",
+      "sqlCount": 4,
+      "pgCount": 0,
+      "match": false
+    },
+    {
+      "table": "\"AP_ADJUST_INVOICE\"",
+      "sqlCount": 12480,
+      "pgCount": 0,
+      "match": false
+    }
+  ]
+}

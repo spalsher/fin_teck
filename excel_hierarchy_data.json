@@ -1,0 +1,2867 @@
+{
+  "Hierarchy": {
+    "headers": [
+      "Hierarchy for Procurements and Requisition",
+      "Column2",
+      "Column3",
+      "Column4",
+      "Column5",
+      "Column6",
+      "Column7",
+      "Column8",
+      "Column9",
+      "Column10",
+      "Column11",
+      "Column12"
+    ],
+    "data": [
+      {
+        "Hierarchy for Procurements and Requisition": "Starts",
+        "Column2": "Category",
+        "Column3": "Employee",
+        "Column4": "",
+        "Column5": "HOD",
+        "Column6": "HR / Finance",
+        "Column7": "Procurement Committee Discussion",
+        "Column8": "Department",
+        "Column9": "Quotations",
+        "Column10": "Final Procurement Committee",
+        "Column11": "CEO",
+        "Column12": "Execution"
+      },
+      {
+        "Hierarchy for Procurements and Requisition": "Requisition",
+        "Column2": "Stationary",
+        "Column3": "Initiate",
+        "Column4": "",
+        "Column5": "For Info",
+        "Column6": "—",
+        "Column7": "—",
+        "Column8": "Admin",
+        "Column9": "N/A",
+        "Column10": "—",
+        "Column11": "—",
+        "Column12": "Admin"
+      },
+      {
+        "Hierarchy for Procurements and Requisition": "Requisition",
+        "Column2": "Vehicle Maintenance",
+        "Column3": "Initiate",
+        "Column4": "",
+        "Column5": "For Info",
+        "Column6": "—",
+        "Column7": "—",
+        "Column8": "Admin",
+        "Column9": "N/A",
+        "Column10": "—",
+        "Column11": "—",
+        "Column12": "Admin"
+      },
+      {
+        "Hierarchy for Procurements and Requisition": "Requisition",
+        "Column2": "Vehicle Repair",
+        "Column3": "Initiate",
+        "Column4": "",
+        "Column5": "For Info",
+        "Column6": "—",
+        "Column7": "Review Technical & Financial Cost",
+        "Column8": "Admin",
+        "Column9": "Collect Quotation",
+        "Column10": "Review Technical & Financial Cost",
+        "Column11": "Approve",
+        "Column12": "Admin"
+      },
+      {
+        "Hierarchy for Procurements and Requisition": "Requisition",
+        "Column2": "Other Repair & Maintenance",
+        "Column3": "Initiate",
+        "Column4": "",
+        "Column5": "For Info",
+        "Column6": "—",
+        "Column7": "Review Technical & Financial Cost",
+        "Column8": "Admin",
+        "Column9": "Collect Quotation",
+        "Column10": "If Required Material  Repair & Maintenance",
+        "Column11": "Approve",
+        "Column12": "Admin"
+      },
+      {
+        "Hierarchy for Procurements and Requisition": "Requisition",
+        "Column2": "Loan & Advance Salary",
+        "Column3": "Initiate",
+        "Column4": "",
+        "Column5": "Approval",
+        "Column6": "Approve up to 50k",
+        "Column7": "—",
+        "Column8": "Finance",
+        "Column9": "N/A",
+        "Column10": "—",
+        "Column11": "Approve above 50k",
+        "Column12": "Finance"
+      },
+      {
+        "Hierarchy for Procurements and Requisition": "Requisition",
+        "Column2": "Event",
+        "Column3": "Initiate",
+        "Column4": "",
+        "Column5": "Approval",
+        "Column6": "—",
+        "Column7": "—",
+        "Column8": "Procurement Team",
+        "Column9": "Collect Quotations",
+        "Column10": "—",
+        "Column11": "Approve",
+        "Column12": "Procurement Team"
+      },
+      {
+        "Hierarchy for Procurements and Requisition": "Requisition",
+        "Column2": "Specialized Projects",
+        "Column3": "Initiate",
+        "Column4": "",
+        "Column5": "—",
+        "Column6": "—",
+        "Column7": "Review Technical & Financial Cost",
+        "Column8": "",
+        "Column9": "",
+        "Column10": "Review Technical & Financial Cost",
+        "Column11": "Approve",
+        "Column12": "Procurement Team"
+      },
+      {
+        "Hierarchy for Procurements and Requisition": "Requisition",
+        "Column2": "IT Equipments",
+        "Column3": "Initiate",
+        "Column4": "",
+        "Column5": "—",
+        "Column6": "—",
+        "Column7": "Review Technical & Financial Cost",
+        "Column8": "Procurement Team",
+        "Column9": "Collect Quotations",
+        "Column10": "Review Technical & Financial Cost",
+        "Column11": "Approve",
+        "Column12": "Procurement Team"
+      },
+      {
+        "Hierarchy for Procurements and Requisition": "Requisition",
+        "Column2": "General Procurements Grocerry & Others",
+        "Column3": "Initiate",
+        "Column4": "",
+        "Column5": "—",
+        "Column6": "—",
+        "Column7": "Review Technical & Financial Cost",
+        "Column8": "Procurement Team",
+        "Column9": "Collect Quotations",
+        "Column10": "Review Technical & Financial Cost",
+        "Column11": "Approve",
+        "Column12": "Procurement Team"
+      },
+      {
+        "Hierarchy for Procurements and Requisition": "Requisition",
+        "Column2": "General Procurements Electric Appliances",
+        "Column3": "Initiate",
+        "Column4": "",
+        "Column5": "—",
+        "Column6": "—",
+        "Column7": "Review Technical & Financial Cost",
+        "Column8": "Procurement Team",
+        "Column9": "Collect Quotations",
+        "Column10": "Review Technical & Financial Cost",
+        "Column11": "Approve",
+        "Column12": "Procurement Team"
+      },
+      {
+        "Hierarchy for Procurements and Requisition": "Requisition",
+        "Column2": "Devices / Accessories",
+        "Column3": "Initiate",
+        "Column4": "",
+        "Column5": "—",
+        "Column6": "—",
+        "Column7": "Review Technical & Financial Cost",
+        "Column8": "Procurement Team",
+        "Column9": "",
+        "Column10": "Review Technical & Financial Cost",
+        "Column11": "Approve",
+        "Column12": "Procurement Team"
+      },
+      {
+        "Hierarchy for Procurements and Requisition": "Footnotes",
+        "Column2": "",
+        "Column3": "",
+        "Column4": "",
+        "Column5": "",
+        "Column6": "",
+        "Column7": "",
+        "Column8": "",
+        "Column9": "",
+        "Column10": "",
+        "Column11": "",
+        "Column12": ""
+      },
+      {
+        "Hierarchy for Procurements and Requisition": "*Loan eligibility based on last paid loan and employment tenure",
+        "Column2": "",
+        "Column3": "",
+        "Column4": "",
+        "Column5": "",
+        "Column6": "",
+        "Column7": "",
+        "Column8": "",
+        "Column9": "",
+        "Column10": "",
+        "Column11": "",
+        "Column12": ""
+      },
+      {
+        "Hierarchy for Procurements and Requisition": "** Loans up to PKR 50,000 require HR & CFO approval",
+        "Column2": "",
+        "Column3": "",
+        "Column4": "",
+        "Column5": "",
+        "Column6": "",
+        "Column7": "",
+        "Column8": "",
+        "Column9": "",
+        "Column10": "",
+        "Column11": "",
+        "Column12": ""
+      },
+      {
+        "Hierarchy for Procurements and Requisition": "*** Each role must complete its action Max 24 working hours, minimum it will take 2 to 3 hours for execution",
+        "Column2": "",
+        "Column3": "",
+        "Column4": "",
+        "Column5": "",
+        "Column6": "",
+        "Column7": "",
+        "Column8": "",
+        "Column9": "",
+        "Column10": "",
+        "Column11": "",
+        "Column12": ""
+      }
+    ]
+  },
+  "SOP": {
+    "headers": [
+      "Standard Operating Procedure (SOP)"
+    ],
+    "data": [
+      {
+        "Standard Operating Procedure (SOP)": "Procurement & Requisition Management"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "1. Purpose"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "This SOP defines the standardized process for initiating, reviewing, approving, and executing procurement and requisition requests to ensure transparency, control, and timely processing across the organization."
+      },
+      {
+        "Standard Operating Procedure (SOP)": "2. Scope"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "This SOP applies to all employees, departments, and management involved in requisition and procurement activities, including loans, advance salaries, events, IT equipment, devices, and general procurements."
+      },
+      {
+        "Standard Operating Procedure (SOP)": "3. Roles & Responsibilities"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Employee: Initiates requisition requests with complete justification."
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Head of Department (HOD): Reviews and initiates requests where applicable."
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Admin: Takes action on approved requisitions and coordinates documentation."
+      },
+      {
+        "Standard Operating Procedure (SOP)": "HR / CFO: Reviews and approves financial matters (as per limits)."
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Procurement Committee: Reviews technical and financial feasibility where required."
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Procurement Team: Collects quotations and executes approved procurements."
+      },
+      {
+        "Standard Operating Procedure (SOP)": "CEO: Provides final approval where applicable."
+      },
+      {
+        "Standard Operating Procedure (SOP)": "4. Requisition Categories & Approval Matrix"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "4.1 Stationery"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Employee: Raise requisition"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "HOD: For information"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Admin: For action"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "4.2 Loan"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "HOD: Initiate"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "HR/CFO: Approval up to PKR 50,000"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "CEO: Approval required for amounts above PKR 50,000"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "4.3 Advance Salary"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "HOD: Initiate"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "HR/CFO: Approval up to PKR 50,000"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "CEO: Approval required for amounts above PKR 50,000"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "4.4 Events"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "HOD: Initiate"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Procurement Team: Collect quotations"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "CEO: Approval"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Procurement Team: Execute"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "4.5 Specialized Projects / IT Equipment / General Procurements / Devices & Accessories"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "HOD: Initiate"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Procurement Committee: Review technical & financial cost"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Procurement Team: Collect quotations"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "CEO: Approval"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Procurement Team: Execute"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "5. Processing Timeline"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Each stakeholder must complete their assigned role within 24 hours of receiving the request."
+      },
+      {
+        "Standard Operating Procedure (SOP)": "6. Special Notes"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Loan eligibility is based on the last paid loan and employment period."
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Loans up to PKR 50,000 require HR & CFO approval."
+      },
+      {
+        "Standard Operating Procedure (SOP)": "All approvals must be documented and archived for audit purposes."
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Management Flowchart (Process Overview)"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Start → Employee Raises Requisition → HOD Review / Initiation → Admin / HR-CFO Review (if applicable) → Procurement Committee Review (Technical & Financial – if applicable) → Procurement Team Collects Quotations → CEO Approval → Procurement Team Executes Purchase → End"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "7. Compliance & Audit"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "All procurement and requisition activities must comply with this SOP. Any deviation requires written approval from the CEO and CFO. Records must be retained for audit and compliance purposes."
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Approved By: ______________________"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Effective Date: ____________________"
+      },
+      {
+        "Standard Operating Procedure (SOP)": "Review Cycle: Annual"
+      }
+    ]
+  },
+  "REQ_CATEGORY": {
+    "headers": [
+      "CategoryID",
+      "CategoryName"
+    ],
+    "data": [
+      {
+        "CategoryID": 1,
+        "CategoryName": "Stationary"
+      },
+      {
+        "CategoryID": 2,
+        "CategoryName": "Vehicle Maintenance"
+      },
+      {
+        "CategoryID": 3,
+        "CategoryName": "Vehicle Repair"
+      },
+      {
+        "CategoryID": 4,
+        "CategoryName": "Other Repair & Maintenance"
+      },
+      {
+        "CategoryID": 5,
+        "CategoryName": "Loan & Advance Salary"
+      },
+      {
+        "CategoryID": 6,
+        "CategoryName": "Event"
+      },
+      {
+        "CategoryID": 7,
+        "CategoryName": "Specialized Projects"
+      },
+      {
+        "CategoryID": 8,
+        "CategoryName": "IT Equipments"
+      },
+      {
+        "CategoryID": 9,
+        "CategoryName": "General Procurements - Grocery & Others"
+      },
+      {
+        "CategoryID": 10,
+        "CategoryName": "General Procurements - Electric Appliances"
+      },
+      {
+        "CategoryID": 11,
+        "CategoryName": "Devices / Accessories"
+      }
+    ]
+  },
+  "Stationary": {
+    "headers": [
+      "ST_ID",
+      "ST_Name"
+    ],
+    "data": [
+      {
+        "ST_ID": 1,
+        "ST_Name": "Pencil"
+      },
+      {
+        "ST_ID": 2,
+        "ST_Name": "Ball Point"
+      },
+      {
+        "ST_ID": 3,
+        "ST_Name": "Eraser"
+      },
+      {
+        "ST_ID": 4,
+        "ST_Name": "Shopner"
+      },
+      {
+        "ST_ID": 5,
+        "ST_Name": "Transparent Squash Tape (Thin)"
+      },
+      {
+        "ST_ID": 6,
+        "ST_Name": "Transparent Squash Tape (Thick)"
+      },
+      {
+        "ST_ID": 7,
+        "ST_Name": "Paper Tape"
+      },
+      {
+        "ST_ID": 8,
+        "ST_Name": "Carton Packing Tape"
+      },
+      {
+        "ST_ID": 9,
+        "ST_Name": "Paper Rims"
+      },
+      {
+        "ST_ID": 10,
+        "ST_Name": "Permenant Marker"
+      },
+      {
+        "ST_ID": 11,
+        "ST_Name": "Paper Tray"
+      },
+      {
+        "ST_ID": 12,
+        "ST_Name": "Stationery Stand"
+      },
+      {
+        "ST_ID": 13,
+        "ST_Name": "Stapler"
+      },
+      {
+        "ST_ID": 14,
+        "ST_Name": "Stapler Pins"
+      },
+      {
+        "ST_ID": 15,
+        "ST_Name": "Pin Remover"
+      },
+      {
+        "ST_ID": 16,
+        "ST_Name": "Scale"
+      },
+      {
+        "ST_ID": 17,
+        "ST_Name": "Glue Stick"
+      },
+      {
+        "ST_ID": 18,
+        "ST_Name": "Paper Pin"
+      },
+      {
+        "ST_ID": 19,
+        "ST_Name": "Spounge"
+      },
+      {
+        "ST_ID": 20,
+        "ST_Name": "Price Tag"
+      },
+      {
+        "ST_ID": 21,
+        "ST_Name": "Sticky Note"
+      },
+      {
+        "ST_ID": 22,
+        "ST_Name": "Writing Pad"
+      },
+      {
+        "ST_ID": 23,
+        "ST_Name": "Touch Pin"
+      },
+      {
+        "ST_ID": 24,
+        "ST_Name": "Paper Clip"
+      },
+      {
+        "ST_ID": 25,
+        "ST_Name": "Highlighter"
+      },
+      {
+        "ST_ID": 26,
+        "ST_Name": "Knife Cutter"
+      },
+      {
+        "ST_ID": 27,
+        "ST_Name": "Knife Blade"
+      },
+      {
+        "ST_ID": 28,
+        "ST_Name": "Envelop A4 Size"
+      },
+      {
+        "ST_ID": 29,
+        "ST_Name": "Envelop A3 Size"
+      },
+      {
+        "ST_ID": 30,
+        "ST_Name": "Envelop Dl Size"
+      },
+      {
+        "ST_ID": 31,
+        "ST_Name": "Box Files"
+      },
+      {
+        "ST_ID": 32,
+        "ST_Name": "Punching Machine"
+      },
+      {
+        "ST_ID": 33,
+        "ST_Name": "Document Folder"
+      },
+      {
+        "ST_ID": 34,
+        "ST_Name": "Paper File"
+      },
+      {
+        "ST_ID": 35,
+        "ST_Name": "Tape Dispenser"
+      },
+      {
+        "ST_ID": 36,
+        "ST_Name": "Scissor"
+      },
+      {
+        "ST_ID": 37,
+        "ST_Name": "Carton Boxes"
+      },
+      {
+        "ST_ID": 38,
+        "ST_Name": "Remote Cell"
+      },
+      {
+        "ST_ID": 39,
+        "ST_Name": "Calculator"
+      },
+      {
+        "ST_ID": 40,
+        "ST_Name": "Register Ledger"
+      },
+      {
+        "ST_ID": 41,
+        "ST_Name": "Stamp Paid"
+      },
+      {
+        "ST_ID": 42,
+        "ST_Name": "Stamp Paper"
+      }
+    ]
+  },
+  "IT Equipments": {
+    "headers": [
+      "IT_ID",
+      "IT_Name"
+    ],
+    "data": [
+      {
+        "IT_ID": 1,
+        "IT_Name": "Desktop System"
+      },
+      {
+        "IT_ID": 2,
+        "IT_Name": "LCD Screen"
+      },
+      {
+        "IT_ID": 3,
+        "IT_Name": "Laptop"
+      },
+      {
+        "IT_ID": 4,
+        "IT_Name": "Keyboard"
+      },
+      {
+        "IT_ID": 5,
+        "IT_Name": "Mouse (Wired)"
+      },
+      {
+        "IT_ID": 6,
+        "IT_Name": "Mouse (Wire-Less)"
+      },
+      {
+        "IT_ID": 7,
+        "IT_Name": "VGA Cord"
+      },
+      {
+        "IT_ID": 8,
+        "IT_Name": "Power Cable"
+      },
+      {
+        "IT_ID": 9,
+        "IT_Name": "Printer"
+      },
+      {
+        "IT_ID": 10,
+        "IT_Name": "Copier"
+      },
+      {
+        "IT_ID": 11,
+        "IT_Name": "IP Phone"
+      },
+      {
+        "IT_ID": 12,
+        "IT_Name": "IP Phone Adaptor"
+      },
+      {
+        "IT_ID": 13,
+        "IT_Name": "Server"
+      },
+      {
+        "IT_ID": 14,
+        "IT_Name": "RAM"
+      },
+      {
+        "IT_ID": 15,
+        "IT_Name": "Hard Drive"
+      },
+      {
+        "IT_ID": 16,
+        "IT_Name": "SSD Drive"
+      },
+      {
+        "IT_ID": 17,
+        "IT_Name": "External Hard Drive"
+      },
+      {
+        "IT_ID": 18,
+        "IT_Name": "Apple Macbook"
+      },
+      {
+        "IT_ID": 19,
+        "IT_Name": "Network Switch"
+      },
+      {
+        "IT_ID": 20,
+        "IT_Name": "Network Cable"
+      },
+      {
+        "IT_ID": 21,
+        "IT_Name": "U.P.S"
+      },
+      {
+        "IT_ID": 22,
+        "IT_Name": "C.D Rom"
+      },
+      {
+        "IT_ID": 23,
+        "IT_Name": "Hard Drive Case"
+      },
+      {
+        "IT_ID": 24,
+        "IT_Name": "12 Volt Adaptor"
+      },
+      {
+        "IT_ID": 25,
+        "IT_Name": "LAN To Usb Convertor Cable"
+      },
+      {
+        "IT_ID": 26,
+        "IT_Name": "USB "
+      },
+      {
+        "IT_ID": 27,
+        "IT_Name": "USB Extension Cable"
+      },
+      {
+        "IT_ID": 28,
+        "IT_Name": "Cleaner Spray"
+      },
+      {
+        "IT_ID": 29,
+        "IT_Name": "Network Plug"
+      },
+      {
+        "IT_ID": 30,
+        "IT_Name": "HDMI Cable"
+      },
+      {
+        "IT_ID": 31,
+        "IT_Name": "WEB Camera"
+      },
+      {
+        "IT_ID": 32,
+        "IT_Name": "Laptop Battery"
+      },
+      {
+        "IT_ID": 33,
+        "IT_Name": "D-Port Cable"
+      },
+      {
+        "IT_ID": 34,
+        "IT_Name": "USB HUB"
+      },
+      {
+        "IT_ID": 35,
+        "IT_Name": "Card Reader"
+      },
+      {
+        "IT_ID": 36,
+        "IT_Name": "RF Reader Card"
+      },
+      {
+        "IT_ID": 37,
+        "IT_Name": "Processor"
+      },
+      {
+        "IT_ID": 38,
+        "IT_Name": "Head Phone"
+      }
+    ]
+  },
+  "Generl PurchaseGrocery": {
+    "headers": [
+      "GPG_ID",
+      "GPG_Name"
+    ],
+    "data": [
+      {
+        "GPG_ID": 1,
+        "GPG_Name": "Everyday Milk"
+      },
+      {
+        "GPG_ID": 2,
+        "GPG_Name": "Milk Pack"
+      },
+      {
+        "GPG_ID": 3,
+        "GPG_Name": "Tea Bag"
+      },
+      {
+        "GPG_ID": 4,
+        "GPG_Name": "Sugar"
+      },
+      {
+        "GPG_ID": 5,
+        "GPG_Name": "Air Freshener"
+      },
+      {
+        "GPG_ID": 6,
+        "GPG_Name": "Morten Spray"
+      },
+      {
+        "GPG_ID": 7,
+        "GPG_Name": "Scoth Brite"
+      },
+      {
+        "GPG_ID": 8,
+        "GPG_Name": "Lemon Max Dish Soap"
+      },
+      {
+        "GPG_ID": 9,
+        "GPG_Name": "Lemon Max Dish Liquid"
+      },
+      {
+        "GPG_ID": 10,
+        "GPG_Name": "Nestle Coffee"
+      },
+      {
+        "GPG_ID": 11,
+        "GPG_Name": "Duster"
+      },
+      {
+        "GPG_ID": 12,
+        "GPG_Name": "David Off Coffee"
+      },
+      {
+        "GPG_ID": 13,
+        "GPG_Name": "Peek Freans Lemon Sandwich "
+      },
+      {
+        "GPG_ID": 14,
+        "GPG_Name": "Peek Freans Party Biscuit"
+      },
+      {
+        "GPG_ID": 15,
+        "GPG_Name": "Lu Zeera Plus "
+      },
+      {
+        "GPG_ID": 16,
+        "GPG_Name": "Peek Freans Gluco Biscuit"
+      },
+      {
+        "GPG_ID": 17,
+        "GPG_Name": "Crush"
+      },
+      {
+        "GPG_ID": 18,
+        "GPG_Name": "Peek Freans Peanut Pik Biscuit"
+      },
+      {
+        "GPG_ID": 19,
+        "GPG_Name": "Peek Freans Chocolate Sandwich Biscuit"
+      },
+      {
+        "GPG_ID": 20,
+        "GPG_Name": "Green Tea"
+      },
+      {
+        "GPG_ID": 21,
+        "GPG_Name": "Chat Masala Shan"
+      },
+      {
+        "GPG_ID": 22,
+        "GPG_Name": "Lux Soap"
+      },
+      {
+        "GPG_ID": 23,
+        "GPG_Name": "Surf"
+      },
+      {
+        "GPG_ID": 24,
+        "GPG_Name": "Harpic Green"
+      },
+      {
+        "GPG_ID": 25,
+        "GPG_Name": "Harpic Blue"
+      },
+      {
+        "GPG_ID": 26,
+        "GPG_Name": "Sweep"
+      },
+      {
+        "GPG_ID": 27,
+        "GPG_Name": "Glint"
+      },
+      {
+        "GPG_ID": 28,
+        "GPG_Name": "Dettol Cleaner"
+      },
+      {
+        "GPG_ID": 29,
+        "GPG_Name": "Gerbig Bag 24/30 "
+      },
+      {
+        "GPG_ID": 30,
+        "GPG_Name": "Gerbig Bag  30/24"
+      },
+      {
+        "GPG_ID": 31,
+        "GPG_Name": "Caroline Phynayel"
+      },
+      {
+        "GPG_ID": 32,
+        "GPG_Name": "Broom Hard And Soft "
+      },
+      {
+        "GPG_ID": 33,
+        "GPG_Name": "Dettol Antiseptic Liquid"
+      },
+      {
+        "GPG_ID": 34,
+        "GPG_Name": "Mop Riffle 600 Gram "
+      },
+      {
+        "GPG_ID": 35,
+        "GPG_Name": "Wiper"
+      },
+      {
+        "GPG_ID": 36,
+        "GPG_Name": "Supri"
+      },
+      {
+        "GPG_ID": 37,
+        "GPG_Name": "Dry Mop With Riffle"
+      },
+      {
+        "GPG_ID": 38,
+        "GPG_Name": "Hand Wash"
+      },
+      {
+        "GPG_ID": 39,
+        "GPG_Name": "Glass Wiper"
+      },
+      {
+        "GPG_ID": 40,
+        "GPG_Name": "Dry Mop Metal Rod"
+      }
+    ]
+  },
+  "Generl Purchase Appliances": {
+    "headers": [
+      "GPA_ID",
+      "GPA_Name"
+    ],
+    "data": [
+      {
+        "GPA_ID": 1,
+        "GPA_Name": "Air Conditioner Split 1 Ton"
+      },
+      {
+        "GPA_ID": 2,
+        "GPA_Name": "Air Conditioner Split 1.5 Ton"
+      },
+      {
+        "GPA_ID": 3,
+        "GPA_Name": "Air Conditioner Split 2 Ton"
+      },
+      {
+        "GPA_ID": 4,
+        "GPA_Name": "Water Dispenser"
+      },
+      {
+        "GPA_ID": 5,
+        "GPA_Name": "Refrigerator"
+      },
+      {
+        "GPA_ID": 6,
+        "GPA_Name": "Microwave Oven"
+      },
+      {
+        "GPA_ID": 7,
+        "GPA_Name": "Electric Kettle"
+      },
+      {
+        "GPA_ID": 8,
+        "GPA_Name": "Ceiling Fan"
+      },
+      {
+        "GPA_ID": 9,
+        "GPA_Name": "Projector"
+      },
+      {
+        "GPA_ID": 10,
+        "GPA_Name": "Video Conferencing System"
+      },
+      {
+        "GPA_ID": 11,
+        "GPA_Name": "CCTV System"
+      },
+      {
+        "GPA_ID": 12,
+        "GPA_Name": "Biometric Attendance Machine"
+      }
+    ]
+  },
+  "REQ_ROLE": {
+    "headers": [
+      "RoleID",
+      "RoleName"
+    ],
+    "data": [
+      {
+        "RoleID": 1,
+        "RoleName": "Employee"
+      },
+      {
+        "RoleID": 2,
+        "RoleName": "HOD"
+      },
+      {
+        "RoleID": 3,
+        "RoleName": "HR"
+      },
+      {
+        "RoleID": 4,
+        "RoleName": "Finance"
+      },
+      {
+        "RoleID": 5,
+        "RoleName": "Procurement Committee"
+      },
+      {
+        "RoleID": 6,
+        "RoleName": "Department Admin"
+      },
+      {
+        "RoleID": 7,
+        "RoleName": "Procurement Team"
+      },
+      {
+        "RoleID": 8,
+        "RoleName": "CEO"
+      },
+      {
+        "RoleID": 9,
+        "RoleName": "Execution Team"
+      }
+    ]
+  },
+  "REQ_WORKFLOW": {
+    "headers": [
+      "WorkflowID",
+      "CategoryID",
+      "Category Name",
+      "SequenceNo",
+      "RoleID",
+      "Role Name",
+      "ActionName",
+      "AmountFrom",
+      "AmountTo",
+      "IsMandatory"
+    ],
+    "data": [
+      {
+        "WorkflowID": 1,
+        "CategoryID": 1,
+        "Category Name": "Stationary",
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionName": "Initiate",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 2,
+        "CategoryID": 1,
+        "Category Name": "Stationary",
+        "SequenceNo": 2,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "ActionName": "For Information",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 3,
+        "CategoryID": 1,
+        "Category Name": "Stationary",
+        "SequenceNo": 3,
+        "RoleID": 6,
+        "Role Name": "Department Admin",
+        "ActionName": "Admin",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 4,
+        "CategoryID": 1,
+        "Category Name": "Stationary",
+        "SequenceNo": 4,
+        "RoleID": 9,
+        "Role Name": "Execution Team",
+        "ActionName": "Execute",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 5,
+        "CategoryID": 2,
+        "Category Name": "Vehicle Maintenance",
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionName": "Initiate",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 6,
+        "CategoryID": 2,
+        "Category Name": "Vehicle Maintenance",
+        "SequenceNo": 2,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "ActionName": "For Information",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 7,
+        "CategoryID": 2,
+        "Category Name": "Vehicle Maintenance",
+        "SequenceNo": 3,
+        "RoleID": 6,
+        "Role Name": "Department Admin",
+        "ActionName": "Admin",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 8,
+        "CategoryID": 2,
+        "Category Name": "Vehicle Maintenance",
+        "SequenceNo": 4,
+        "RoleID": 9,
+        "Role Name": "Execution Team",
+        "ActionName": "Execute",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 9,
+        "CategoryID": 3,
+        "Category Name": "Vehicle Repair",
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionName": "Initiate",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 10,
+        "CategoryID": 3,
+        "Category Name": "Vehicle Repair",
+        "SequenceNo": 2,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "ActionName": "For Information",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 11,
+        "CategoryID": 3,
+        "Category Name": "Vehicle Repair",
+        "SequenceNo": 3,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionName": "Review Technical & Financial Cost",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 12,
+        "CategoryID": 3,
+        "Category Name": "Vehicle Repair",
+        "SequenceNo": 4,
+        "RoleID": 6,
+        "Role Name": "Department Admin",
+        "ActionName": "Admin",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 13,
+        "CategoryID": 3,
+        "Category Name": "Vehicle Repair",
+        "SequenceNo": 5,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionName": "Collect Quotations",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 14,
+        "CategoryID": 3,
+        "Category Name": "Vehicle Repair",
+        "SequenceNo": 6,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionName": "Review Technical & Financial Cost",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 15,
+        "CategoryID": 3,
+        "Category Name": "Vehicle Repair",
+        "SequenceNo": 7,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "ActionName": "Approve",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 16,
+        "CategoryID": 3,
+        "Category Name": "Vehicle Repair",
+        "SequenceNo": 8,
+        "RoleID": 9,
+        "Role Name": "Execution Team",
+        "ActionName": "Execute",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 17,
+        "CategoryID": 4,
+        "Category Name": "Other Repair & Maintenance",
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionName": "Initiate",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 18,
+        "CategoryID": 4,
+        "Category Name": "Other Repair & Maintenance",
+        "SequenceNo": 2,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "ActionName": "For Information",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 19,
+        "CategoryID": 4,
+        "Category Name": "Other Repair & Maintenance",
+        "SequenceNo": 3,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionName": "Review Technical & Financial Cost",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 20,
+        "CategoryID": 4,
+        "Category Name": "Other Repair & Maintenance",
+        "SequenceNo": 4,
+        "RoleID": 6,
+        "Role Name": "Department Admin",
+        "ActionName": "Admin",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 21,
+        "CategoryID": 4,
+        "Category Name": "Other Repair & Maintenance",
+        "SequenceNo": 5,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionName": "Collect Quotations",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 22,
+        "CategoryID": 4,
+        "Category Name": "Other Repair & Maintenance",
+        "SequenceNo": 6,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionName": "If Required Material R&M Review",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 23,
+        "CategoryID": 4,
+        "Category Name": "Other Repair & Maintenance",
+        "SequenceNo": 7,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "ActionName": "Approve",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 24,
+        "CategoryID": 4,
+        "Category Name": "Other Repair & Maintenance",
+        "SequenceNo": 8,
+        "RoleID": 9,
+        "Role Name": "Execution Team",
+        "ActionName": "Execute",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 25,
+        "CategoryID": 5,
+        "Category Name": "Loan & Advance Salary",
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionName": "Initiate",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 26,
+        "CategoryID": 5,
+        "Category Name": "Loan & Advance Salary",
+        "SequenceNo": 2,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "ActionName": "Approve",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 27,
+        "CategoryID": 5,
+        "Category Name": "Loan & Advance Salary",
+        "SequenceNo": 3,
+        "RoleID": 3,
+        "Role Name": "HR",
+        "ActionName": "Approve",
+        "AmountFrom": 0,
+        "AmountTo": 50000,
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 28,
+        "CategoryID": 5,
+        "Category Name": "Loan & Advance Salary",
+        "SequenceNo": 4,
+        "RoleID": 4,
+        "Role Name": "Finance",
+        "ActionName": "Approve",
+        "AmountFrom": 0,
+        "AmountTo": 50000,
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 29,
+        "CategoryID": 5,
+        "Category Name": "Loan & Advance Salary",
+        "SequenceNo": 5,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "ActionName": "Approve",
+        "AmountFrom": 50001,
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 30,
+        "CategoryID": 5,
+        "Category Name": "Loan & Advance Salary",
+        "SequenceNo": 6,
+        "RoleID": 4,
+        "Role Name": "Finance",
+        "ActionName": "Execute",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 31,
+        "CategoryID": 6,
+        "Category Name": "Event",
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionName": "Initiate",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 32,
+        "CategoryID": 6,
+        "Category Name": "Event",
+        "SequenceNo": 2,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "ActionName": "Approve",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 33,
+        "CategoryID": 6,
+        "Category Name": "Event",
+        "SequenceNo": 3,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionName": "Collect Quotations",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 34,
+        "CategoryID": 6,
+        "Category Name": "Event",
+        "SequenceNo": 4,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "ActionName": "Approve",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 35,
+        "CategoryID": 6,
+        "Category Name": "Event",
+        "SequenceNo": 5,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionName": "Execute",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 36,
+        "CategoryID": 7,
+        "Category Name": "Specialized Projects",
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionName": "Initiate",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 37,
+        "CategoryID": 7,
+        "Category Name": "Specialized Projects",
+        "SequenceNo": 2,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionName": "Review Technical & Financial Cost",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 38,
+        "CategoryID": 7,
+        "Category Name": "Specialized Projects",
+        "SequenceNo": 3,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionName": "Collect Quotations",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 39,
+        "CategoryID": 7,
+        "Category Name": "Specialized Projects",
+        "SequenceNo": 4,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionName": "Review Technical & Financial Cost",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 40,
+        "CategoryID": 7,
+        "Category Name": "Specialized Projects",
+        "SequenceNo": 5,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "ActionName": "Approve",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 41,
+        "CategoryID": 7,
+        "Category Name": "Specialized Projects",
+        "SequenceNo": 6,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionName": "Execute",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 42,
+        "CategoryID": 8,
+        "Category Name": "IT Equipments",
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionName": "Initiate",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 43,
+        "CategoryID": 8,
+        "Category Name": "IT Equipments",
+        "SequenceNo": 2,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionName": "Review Technical & Financial Cost",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 44,
+        "CategoryID": 8,
+        "Category Name": "IT Equipments",
+        "SequenceNo": 3,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionName": "Collect Quotations",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 45,
+        "CategoryID": 8,
+        "Category Name": "IT Equipments",
+        "SequenceNo": 4,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionName": "Review Technical & Financial Cost",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 46,
+        "CategoryID": 8,
+        "Category Name": "IT Equipments",
+        "SequenceNo": 5,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "ActionName": "Approve",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 47,
+        "CategoryID": 8,
+        "Category Name": "IT Equipments",
+        "SequenceNo": 6,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionName": "Execute",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 48,
+        "CategoryID": 9,
+        "Category Name": "General Procurements - Grocery & Others",
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionName": "Initiate",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 49,
+        "CategoryID": 9,
+        "Category Name": "General Procurements - Grocery & Others",
+        "SequenceNo": 2,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionName": "Review Technical & Financial Cost",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 50,
+        "CategoryID": 9,
+        "Category Name": "General Procurements - Grocery & Others",
+        "SequenceNo": 3,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionName": "Collect Quotations",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 51,
+        "CategoryID": 9,
+        "Category Name": "General Procurements - Grocery & Others",
+        "SequenceNo": 4,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionName": "Review Technical & Financial Cost",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 52,
+        "CategoryID": 9,
+        "Category Name": "General Procurements - Grocery & Others",
+        "SequenceNo": 5,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "ActionName": "Approve",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 53,
+        "CategoryID": 9,
+        "Category Name": "General Procurements - Grocery & Others",
+        "SequenceNo": 6,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionName": "Execute",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 54,
+        "CategoryID": 10,
+        "Category Name": "General Procurements - Electric Appliances",
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionName": "Initiate",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 55,
+        "CategoryID": 10,
+        "Category Name": "General Procurements - Electric Appliances",
+        "SequenceNo": 2,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionName": "Review Technical & Financial Cost",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 56,
+        "CategoryID": 10,
+        "Category Name": "General Procurements - Electric Appliances",
+        "SequenceNo": 3,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionName": "Collect Quotations",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 57,
+        "CategoryID": 10,
+        "Category Name": "General Procurements - Electric Appliances",
+        "SequenceNo": 4,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionName": "Review Technical & Financial Cost",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 58,
+        "CategoryID": 10,
+        "Category Name": "General Procurements - Electric Appliances",
+        "SequenceNo": 5,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "ActionName": "Approve",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 59,
+        "CategoryID": 10,
+        "Category Name": "General Procurements - Electric Appliances",
+        "SequenceNo": 6,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionName": "Execute",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 60,
+        "CategoryID": 11,
+        "Category Name": "Devices / Accessories",
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionName": "Initiate",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 61,
+        "CategoryID": 11,
+        "Category Name": "Devices / Accessories",
+        "SequenceNo": 2,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionName": "Review Technical & Financial Cost",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 62,
+        "CategoryID": 11,
+        "Category Name": "Devices / Accessories",
+        "SequenceNo": 3,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionName": "Collect Quotations",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 63,
+        "CategoryID": 11,
+        "Category Name": "Devices / Accessories",
+        "SequenceNo": 4,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionName": "Review Technical & Financial Cost",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 64,
+        "CategoryID": 11,
+        "Category Name": "Devices / Accessories",
+        "SequenceNo": 5,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "ActionName": "Approve",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      },
+      {
+        "WorkflowID": 65,
+        "CategoryID": 11,
+        "Category Name": "Devices / Accessories",
+        "SequenceNo": 6,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionName": "Execute",
+        "AmountFrom": "NULL",
+        "AmountTo": "NULL",
+        "IsMandatory": 1
+      }
+    ]
+  },
+  "EMP_REQUISITION": {
+    "headers": [
+      "ReqID",
+      "EmployeeID",
+      "CategoryID",
+      "Column4",
+      "ReqAmount",
+      "ReqPurpose",
+      "Status",
+      "CurrentSequence",
+      "Sequence Name",
+      "CreatedDate"
+    ],
+    "data": [
+      {
+        "ReqID": 1,
+        "EmployeeID": 101,
+        "CategoryID": 1,
+        "Column4": "Stationary",
+        "ReqAmount": 5000,
+        "ReqPurpose": "Office stationary purchase",
+        "Status": "Executed",
+        "CurrentSequence": 4,
+        "Sequence Name": "Execution Team",
+        "CreatedDate": "2025-12-20 14:54:47.030000"
+      },
+      {
+        "ReqID": 2,
+        "EmployeeID": 102,
+        "CategoryID": 2,
+        "Column4": "Vehicle Maintenance",
+        "ReqAmount": 12000,
+        "ReqPurpose": "Routine vehicle maintenance",
+        "Status": "Executed",
+        "CurrentSequence": 4,
+        "Sequence Name": "Execution Team",
+        "CreatedDate": "2025-12-20 14:54:47.030000"
+      },
+      {
+        "ReqID": 3,
+        "EmployeeID": 103,
+        "CategoryID": 3,
+        "Column4": "Vehicle Repair",
+        "ReqAmount": 85000,
+        "ReqPurpose": "Engine repair",
+        "Status": "Pending CEO Approval",
+        "CurrentSequence": 7,
+        "Sequence Name": "CEO",
+        "CreatedDate": "2025-12-20 14:54:47.030000"
+      },
+      {
+        "ReqID": 4,
+        "EmployeeID": 104,
+        "CategoryID": 4,
+        "Column4": "Other Repair & Maintenance",
+        "ReqAmount": 45000,
+        "ReqPurpose": "Office AC repair",
+        "Status": "Under Committee Review",
+        "CurrentSequence": 6,
+        "Sequence Name": "Procurement Committee",
+        "CreatedDate": "2025-12-20 14:54:47.030000"
+      },
+      {
+        "ReqID": 5,
+        "EmployeeID": 105,
+        "CategoryID": 5,
+        "Column4": "Loan & Advance Salary",
+        "ReqAmount": 40000,
+        "ReqPurpose": "Personal loan",
+        "Status": "Pending Finance Approval",
+        "CurrentSequence": 4,
+        "Sequence Name": "Execution Team",
+        "CreatedDate": "2025-12-20 14:54:47.030000"
+      },
+      {
+        "ReqID": 6,
+        "EmployeeID": 106,
+        "CategoryID": 5,
+        "Column4": "Loan & Advance Salary",
+        "ReqAmount": 75000,
+        "ReqPurpose": "Medical loan",
+        "Status": "Pending CEO Approval",
+        "CurrentSequence": 5,
+        "Sequence Name": "Procurement Team",
+        "CreatedDate": "2025-12-20 14:54:47.030000"
+      },
+      {
+        "ReqID": 7,
+        "EmployeeID": 107,
+        "CategoryID": 6,
+        "Column4": "Event",
+        "ReqAmount": 150000,
+        "ReqPurpose": "Annual staff event",
+        "Status": "Pending CEO Approval",
+        "CurrentSequence": 4,
+        "Sequence Name": "Execution Team",
+        "CreatedDate": "2025-12-20 14:54:47.030000"
+      },
+      {
+        "ReqID": 8,
+        "EmployeeID": 108,
+        "CategoryID": 7,
+        "Column4": "Specialized Projects",
+        "ReqAmount": 500000,
+        "ReqPurpose": "ERP customization",
+        "Status": "Under Committee Review",
+        "CurrentSequence": 4,
+        "Sequence Name": "Execution Team",
+        "CreatedDate": "2025-12-20 14:54:47.030000"
+      },
+      {
+        "ReqID": 9,
+        "EmployeeID": 109,
+        "CategoryID": 8,
+        "Column4": "IT Equipments",
+        "ReqAmount": 350000,
+        "ReqPurpose": "Laptop purchase",
+        "Status": "Quotation Collection",
+        "CurrentSequence": 3,
+        "Sequence Name": "Department Admin",
+        "CreatedDate": "2025-12-20 14:54:47.030000"
+      },
+      {
+        "ReqID": 10,
+        "EmployeeID": 110,
+        "CategoryID": 9,
+        "Column4": "General Procurements - Grocery & Others",
+        "ReqAmount": 90000,
+        "ReqPurpose": "Office groceries",
+        "Status": "Quotation Collection",
+        "CurrentSequence": 3,
+        "Sequence Name": "Department Admin",
+        "CreatedDate": "2025-12-20 14:54:47.030000"
+      },
+      {
+        "ReqID": 11,
+        "EmployeeID": 111,
+        "CategoryID": 11,
+        "Column4": "Devices / Accessories",
+        "ReqAmount": 25000,
+        "ReqPurpose": "Barcode scanners",
+        "Status": "Pending CEO Approval",
+        "CurrentSequence": 5,
+        "Sequence Name": "Procurement Team",
+        "CreatedDate": "2025-12-20 14:54:47.030000"
+      }
+    ]
+  },
+  "EMP_REQ_FLOW": {
+    "headers": [
+      "FlowID",
+      "ReqID",
+      "SequenceNo",
+      "RoleID",
+      "Role Name",
+      "IsCompleted"
+    ],
+    "data": [
+      {
+        "FlowID": 1,
+        "ReqID": 1,
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 2,
+        "ReqID": 1,
+        "SequenceNo": 2,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 3,
+        "ReqID": 1,
+        "SequenceNo": 3,
+        "RoleID": 6,
+        "Role Name": "Department Admin",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 4,
+        "ReqID": 1,
+        "SequenceNo": 4,
+        "RoleID": 9,
+        "Role Name": "Execution Team",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 5,
+        "ReqID": 2,
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 6,
+        "ReqID": 2,
+        "SequenceNo": 2,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 7,
+        "ReqID": 2,
+        "SequenceNo": 3,
+        "RoleID": 6,
+        "Role Name": "Department Admin",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 8,
+        "ReqID": 2,
+        "SequenceNo": 4,
+        "RoleID": 9,
+        "Role Name": "Execution Team",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 9,
+        "ReqID": 3,
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 10,
+        "ReqID": 3,
+        "SequenceNo": 2,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 11,
+        "ReqID": 3,
+        "SequenceNo": 3,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 12,
+        "ReqID": 3,
+        "SequenceNo": 4,
+        "RoleID": 6,
+        "Role Name": "Department Admin",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 13,
+        "ReqID": 3,
+        "SequenceNo": 5,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 14,
+        "ReqID": 3,
+        "SequenceNo": 6,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 15,
+        "ReqID": 3,
+        "SequenceNo": 7,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 16,
+        "ReqID": 3,
+        "SequenceNo": 8,
+        "RoleID": 9,
+        "Role Name": "Execution Team",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 17,
+        "ReqID": 4,
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 18,
+        "ReqID": 4,
+        "SequenceNo": 2,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 19,
+        "ReqID": 4,
+        "SequenceNo": 3,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 20,
+        "ReqID": 4,
+        "SequenceNo": 4,
+        "RoleID": 6,
+        "Role Name": "Department Admin",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 21,
+        "ReqID": 4,
+        "SequenceNo": 5,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 22,
+        "ReqID": 4,
+        "SequenceNo": 6,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 23,
+        "ReqID": 4,
+        "SequenceNo": 7,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 24,
+        "ReqID": 4,
+        "SequenceNo": 8,
+        "RoleID": 9,
+        "Role Name": "Execution Team",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 25,
+        "ReqID": 5,
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 26,
+        "ReqID": 5,
+        "SequenceNo": 2,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 27,
+        "ReqID": 5,
+        "SequenceNo": 3,
+        "RoleID": 3,
+        "Role Name": "HR",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 28,
+        "ReqID": 5,
+        "SequenceNo": 4,
+        "RoleID": 4,
+        "Role Name": "Finance",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 29,
+        "ReqID": 5,
+        "SequenceNo": 5,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 30,
+        "ReqID": 5,
+        "SequenceNo": 6,
+        "RoleID": 4,
+        "Role Name": "Finance",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 31,
+        "ReqID": 6,
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 32,
+        "ReqID": 6,
+        "SequenceNo": 2,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 33,
+        "ReqID": 6,
+        "SequenceNo": 3,
+        "RoleID": 3,
+        "Role Name": "HR",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 34,
+        "ReqID": 6,
+        "SequenceNo": 4,
+        "RoleID": 4,
+        "Role Name": "Finance",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 35,
+        "ReqID": 6,
+        "SequenceNo": 5,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 36,
+        "ReqID": 6,
+        "SequenceNo": 6,
+        "RoleID": 4,
+        "Role Name": "Finance",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 37,
+        "ReqID": 7,
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 38,
+        "ReqID": 7,
+        "SequenceNo": 2,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 39,
+        "ReqID": 7,
+        "SequenceNo": 3,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 40,
+        "ReqID": 7,
+        "SequenceNo": 4,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 41,
+        "ReqID": 7,
+        "SequenceNo": 5,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 42,
+        "ReqID": 8,
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 43,
+        "ReqID": 8,
+        "SequenceNo": 2,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 44,
+        "ReqID": 8,
+        "SequenceNo": 3,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 45,
+        "ReqID": 8,
+        "SequenceNo": 4,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 46,
+        "ReqID": 8,
+        "SequenceNo": 5,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 47,
+        "ReqID": 8,
+        "SequenceNo": 6,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 48,
+        "ReqID": 9,
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 49,
+        "ReqID": 9,
+        "SequenceNo": 2,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 50,
+        "ReqID": 9,
+        "SequenceNo": 3,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 51,
+        "ReqID": 9,
+        "SequenceNo": 4,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 52,
+        "ReqID": 9,
+        "SequenceNo": 5,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 53,
+        "ReqID": 9,
+        "SequenceNo": 6,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 54,
+        "ReqID": 10,
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 55,
+        "ReqID": 10,
+        "SequenceNo": 2,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 56,
+        "ReqID": 10,
+        "SequenceNo": 3,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 57,
+        "ReqID": 10,
+        "SequenceNo": 4,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 58,
+        "ReqID": 10,
+        "SequenceNo": 5,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 59,
+        "ReqID": 10,
+        "SequenceNo": 6,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "IsCompleted": 0
+      },
+      {
+        "FlowID": 60,
+        "ReqID": 11,
+        "SequenceNo": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 61,
+        "ReqID": 11,
+        "SequenceNo": 2,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 62,
+        "ReqID": 11,
+        "SequenceNo": 3,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 63,
+        "ReqID": 11,
+        "SequenceNo": 4,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 64,
+        "ReqID": 11,
+        "SequenceNo": 5,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "IsCompleted": 1
+      },
+      {
+        "FlowID": 65,
+        "ReqID": 11,
+        "SequenceNo": 6,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "IsCompleted": 0
+      }
+    ]
+  },
+  "REQ_ACTION_LOG": {
+    "headers": [
+      "LogID",
+      "ReqID",
+      "RoleID",
+      "Role Name",
+      "ActionBy",
+      "ActionTaken",
+      "Remarks",
+      "ActionDate"
+    ],
+    "data": [
+      {
+        "LogID": 1,
+        "ReqID": 1,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionBy": 101,
+        "ActionTaken": "Initiated",
+        "Remarks": "Request created",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 2,
+        "ReqID": 1,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "ActionBy": 201,
+        "ActionTaken": "Viewed",
+        "Remarks": "HOD informed",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 3,
+        "ReqID": 1,
+        "RoleID": 6,
+        "Role Name": "Department Admin",
+        "ActionBy": 301,
+        "ActionTaken": "Processed",
+        "Remarks": "Admin processed",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 4,
+        "ReqID": 1,
+        "RoleID": 9,
+        "Role Name": "Execution Team",
+        "ActionBy": 401,
+        "ActionTaken": "Executed",
+        "Remarks": "Items issued",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 5,
+        "ReqID": 2,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionBy": 102,
+        "ActionTaken": "Initiated",
+        "Remarks": "Maintenance request",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 6,
+        "ReqID": 2,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "ActionBy": 202,
+        "ActionTaken": "Viewed",
+        "Remarks": "HOD informed",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 7,
+        "ReqID": 2,
+        "RoleID": 6,
+        "Role Name": "Department Admin",
+        "ActionBy": 302,
+        "ActionTaken": "Processed",
+        "Remarks": "Admin approved",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 8,
+        "ReqID": 2,
+        "RoleID": 9,
+        "Role Name": "Execution Team",
+        "ActionBy": 402,
+        "ActionTaken": "Executed",
+        "Remarks": "Vehicle serviced",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 9,
+        "ReqID": 3,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionBy": 103,
+        "ActionTaken": "Initiated",
+        "Remarks": "Engine issue",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 10,
+        "ReqID": 3,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "ActionBy": 203,
+        "ActionTaken": "Viewed",
+        "Remarks": "HOD informed",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 11,
+        "ReqID": 3,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionBy": 501,
+        "ActionTaken": "Reviewed",
+        "Remarks": "Estimated cost approved",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 12,
+        "ReqID": 3,
+        "RoleID": 6,
+        "Role Name": "Department Admin",
+        "ActionBy": 303,
+        "ActionTaken": "Processed",
+        "Remarks": "Admin forwarded",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 13,
+        "ReqID": 3,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionBy": 601,
+        "ActionTaken": "Quoted",
+        "Remarks": "Vendor quotations uploaded",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 14,
+        "ReqID": 3,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionBy": 502,
+        "ActionTaken": "Reviewed",
+        "Remarks": "Final cost approved",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 15,
+        "ReqID": 5,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionBy": 105,
+        "ActionTaken": "Initiated",
+        "Remarks": "Loan request",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 16,
+        "ReqID": 5,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "ActionBy": 205,
+        "ActionTaken": "Approved",
+        "Remarks": "HOD approved",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 17,
+        "ReqID": 5,
+        "RoleID": 3,
+        "Role Name": "HR",
+        "ActionBy": 305,
+        "ActionTaken": "Approved",
+        "Remarks": "HR approved",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 18,
+        "ReqID": 6,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionBy": 106,
+        "ActionTaken": "Initiated",
+        "Remarks": "Medical loan",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 19,
+        "ReqID": 6,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "ActionBy": 206,
+        "ActionTaken": "Approved",
+        "Remarks": "HOD approved",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 20,
+        "ReqID": 6,
+        "RoleID": 3,
+        "Role Name": "HR",
+        "ActionBy": 306,
+        "ActionTaken": "Approved",
+        "Remarks": "HR approved",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 21,
+        "ReqID": 6,
+        "RoleID": 4,
+        "Role Name": "Finance",
+        "ActionBy": 406,
+        "ActionTaken": "Approved",
+        "Remarks": "Finance approved",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 22,
+        "ReqID": 7,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionBy": 107,
+        "ActionTaken": "Initiated",
+        "Remarks": "Annual event",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 23,
+        "ReqID": 7,
+        "RoleID": 2,
+        "Role Name": "HOD",
+        "ActionBy": 207,
+        "ActionTaken": "Approved",
+        "Remarks": "HOD approved",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 24,
+        "ReqID": 7,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionBy": 607,
+        "ActionTaken": "Quoted",
+        "Remarks": "Event vendors contacted",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 25,
+        "ReqID": 9,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionBy": 109,
+        "ActionTaken": "Initiated",
+        "Remarks": "Laptop request",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 26,
+        "ReqID": 9,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionBy": 505,
+        "ActionTaken": "Reviewed",
+        "Remarks": "Specs approved",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 27,
+        "ReqID": 9,
+        "RoleID": 7,
+        "Role Name": "Procurement Team",
+        "ActionBy": 607,
+        "ActionTaken": "Quoted",
+        "Remarks": "Quotations uploaded",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 28,
+        "ReqID": 10,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionBy": 110,
+        "ActionTaken": "Initiated",
+        "Remarks": "Grocery items",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 29,
+        "ReqID": 10,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionBy": 506,
+        "ActionTaken": "Reviewed",
+        "Remarks": "Budget approved",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 30,
+        "ReqID": 11,
+        "RoleID": 1,
+        "Role Name": "Employee",
+        "ActionBy": 111,
+        "ActionTaken": "Initiated",
+        "Remarks": "Scanner request",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 31,
+        "ReqID": 11,
+        "RoleID": 5,
+        "Role Name": "Procurement Committee",
+        "ActionBy": 507,
+        "ActionTaken": "Reviewed",
+        "Remarks": "Technical approved",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      },
+      {
+        "LogID": 32,
+        "ReqID": 11,
+        "RoleID": 8,
+        "Role Name": "CEO",
+        "ActionBy": 801,
+        "ActionTaken": "Approved",
+        "Remarks": "CEO approved",
+        "ActionDate": "2025-12-20 14:55:26.797000"
+      }
+    ]
+  }
+}

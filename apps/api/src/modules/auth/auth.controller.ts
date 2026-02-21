@@ -85,4 +85,12 @@ export class AuthController {
   async getMe(@CurrentUser('id') userId: string) {
     return this.authService.getMe(userId);
   }
+
+  @Get('ensure-employee')
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Ensure current user has an employee record (for Requisition)' })
+  @ApiResponse({ status: 200, description: 'Employee ID returned or created' })
+  async ensureEmployee(@CurrentUser('id') userId: string) {
+    return this.authService.ensureEmployee(userId);
+  }
 }

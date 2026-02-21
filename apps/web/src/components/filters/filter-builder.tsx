@@ -123,7 +123,7 @@ export function FilterBuilder({ fields, filters, onChange }: FilterBuilderProps)
         {filters.length === 0 ? (
           <div className="text-center py-8 text-muted-foreground">
             <Filter className="mx-auto h-12 w-12 mb-2 opacity-50" />
-            <p>No filters applied. Click "Add Filter" to get started.</p>
+            <p>No filters applied. Click &quot;Add Filter&quot; to get started.</p>
           </div>
         ) : (
           <div className="space-y-3">

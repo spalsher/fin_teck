@@ -1,0 +1,27 @@
+{
+  "name": "migrate-sqlserver-to-pg",
+  "version": "1.0.0",
+  "private": true,
+  "description": "One-time migration from SQL Server to PostgreSQL (iteck_erp)",
+  "scripts": {
+    "migrate": "ts-node run.ts",
+    "discover": "ts-node discover.ts",
+    "verify": "ts-node verify.ts",
+    "schema-convert": "ts-node schema-convert.ts",
+    "apply-schema": "ts-node apply-schema.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "mssql": "^10.0.1",
+    "pg": "^8.11.3",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/mssql": "^9.0.4",
+    "@types/node": "^20.10.0",
+    "@types/pg": "^8.10.9",
+    "@types/uuid": "^9.0.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

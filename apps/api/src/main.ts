@@ -35,15 +35,18 @@ async function bootstrap() {
     credentials: true,
   });
 
-  // Global validation pipe
+  // Global validation: no whitelist so extra props (e.g. employeeType) are never rejected
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
+      whitelist: false,
+      forbidNonWhitelisted: false,
       transform: true,
       transformOptions: {
         enableImplicitConversion: true,
       },
+      skipMissingProperties: false,
+      skipNullProperties: false,
+      skipUndefinedProperties: false,
     }),
   );
 

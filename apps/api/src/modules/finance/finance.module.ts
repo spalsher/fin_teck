@@ -11,6 +11,11 @@ import { BillService } from './services/bill.service';
 import { ChartOfAccountService } from './services/chart-of-account.service';
 import { JournalEntryService } from './services/journal-entry.service';
 import { BankAccountService } from './services/bank-account.service';
+import { GlReportsService } from './services/gl-reports.service';
+import { FinancePostingService } from './services/finance-posting.service';
+import { TaxCategoryService } from './services/tax-category.service';
+import { VehicleBookingService } from './services/vehicle-booking.service';
+import { ProformaInvoiceService } from './services/proforma-invoice.service';
 
 // Controllers
 import { CustomerController } from './controllers/customer.controller';
@@ -21,6 +26,10 @@ import { BillController } from './controllers/bill.controller';
 import { ChartOfAccountController } from './controllers/chart-of-account.controller';
 import { JournalEntryController } from './controllers/journal-entry.controller';
 import { BankAccountController } from './controllers/bank-account.controller';
+import { GlReportsController } from './controllers/gl-reports.controller';
+import { TaxCategoryController } from './controllers/tax-category.controller';
+import { VehicleBookingController } from './controllers/vehicle-booking.controller';
+import { ProformaInvoiceController } from './controllers/proforma-invoice.controller';
 
 @Module({
   imports: [SharedModule, CoreModule],
@@ -33,6 +42,10 @@ import { BankAccountController } from './controllers/bank-account.controller';
     ChartOfAccountController,
     JournalEntryController,
     BankAccountController,
+    GlReportsController,
+    TaxCategoryController,
+    VehicleBookingController,
+    ProformaInvoiceController,
   ],
   providers: [
     CustomerService,
@@ -43,6 +56,11 @@ import { BankAccountController } from './controllers/bank-account.controller';
     ChartOfAccountService,
     JournalEntryService,
     BankAccountService,
+    GlReportsService,
+    FinancePostingService,
+    TaxCategoryService,
+    VehicleBookingService,
+    ProformaInvoiceService,
   ],
   exports: [
     CustomerService,
@@ -53,6 +71,7 @@ import { BankAccountController } from './controllers/bank-account.controller';
     ChartOfAccountService,
     JournalEntryService,
     BankAccountService,
+    GlReportsService,
   ],
 })
 export class FinanceModule {}

@@ -19,8 +19,12 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
+    const normalizedEmail = email?.trim?.()?.toLowerCase?.() || email;
+    if (!normalizedEmail || !password) {
+      throw new UnauthorizedException('Invalid email or password');
+    }
     const user = await this.prisma.user.findUnique({
-      where: { email },
+      where: { email: normalizedEmail },
       include: {
         organization: true,
         branch: true,
@@ -41,17 +45,17 @@ export class AuthService {
     });
 
     if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new UnauthorizedException('Invalid email or password');
     }
 
     if (!user.isActive) {
-      throw new UnauthorizedException('Account is inactive');
+      throw new UnauthorizedException('Account is inactive. Please contact administrator.');
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
 
     if (!isPasswordValid) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new UnauthorizedException('Invalid email or password');
     }
 
     // Extract permissions
@@ -272,7 +276,7 @@ export class AuthService {
   }
 
   async getMe(userId: string) {
-    const user = await this.prisma.user.findUnique({
+    let user = await this.prisma.user.findUnique({
       where: { id: userId },
       select: {
         id: true,
@@ -281,10 +285,13 @@ export class AuthService {
         lastName: true,
         organizationId: true,
         branchId: true,
+        employeeId: true,
         isActive: true,
         preferences: true,
         lastLogin: true,
         createdAt: true,
+        organization: { select: { id: true, name: true, code: true } },
+        branch: { select: { id: true, name: true, code: true } },
         userRoles: {
           include: {
             role: {
@@ -292,6 +299,11 @@ export class AuthService {
                 id: true,
                 name: true,
                 code: true,
+                rolePermissions: {
+                  include: {
+                    permission: { select: { id: true, code: true, module: true, entity: true, action: true } },
+                  },
+                },
               },
             },
           },
@@ -303,9 +315,101 @@ export class AuthService {
       throw new UnauthorizedException('User not found');
     }
 
+    if (!user.employeeId) {
+      try {
+        const { employeeId } = await this.ensureEmployee(userId);
+        user = { ...user, employeeId } as typeof user;
+      } catch {
+        // ignore; return user without employeeId
+      }
+    }
+
+    const permissions = user.userRoles.flatMap((ur) =>
+      ur.role.rolePermissions.map((rp) => rp.permission.code)
+    );
+    const uniquePermissions = [...new Set(permissions)];
+
     return {
       ...user,
-      roles: user.userRoles.map((ur) => ur.role),
+      roles: user.userRoles.map((ur) => ({ id: ur.role.id, name: ur.role.name, code: ur.role.code })),
+      permissions: uniquePermissions,
     };
+  }
+
+  /**
+   * Ensure the current user has an employee record (for Requisition flow).
+   * If user.employeeId is null, creates department + employee and links user.
+   */
+  async ensureEmployee(userId: string): Promise<{ employeeId: string }> {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true, employeeId: true, organizationId: true, branchId: true, email: true, firstName: true, lastName: true },
+    });
+    if (!user) throw new UnauthorizedException('User not found');
+    if (user.employeeId) return { employeeId: user.employeeId };
+
+    const organizationId = user.organizationId;
+    let branchId = user.branchId;
+    if (!branchId) {
+      let branch = await this.prisma.branch.findFirst({ where: { organizationId }, select: { id: true } });
+      if (!branch) {
+        const org = await this.prisma.organization.findUnique({ where: { id: organizationId }, select: { code: true } });
+        branch = await this.prisma.branch.create({
+          data: {
+            organizationId,
+            name: 'Head Office',
+            code: org?.code ? `${org.code}-HO` : 'HO',
+            address: {},
+            isHeadOffice: true,
+            isActive: true,
+          },
+        });
+      }
+      branchId = branch.id;
+    }
+
+    let dept = await this.prisma.department.findFirst({
+      where: { organizationId, code: 'ADMIN' },
+    });
+    if (!dept) {
+      dept = await this.prisma.department.create({
+        data: {
+          organizationId,
+          branchId,
+          code: 'ADMIN',
+          name: 'Administration',
+          createdBy: userId,
+          updatedBy: userId,
+        },
+      });
+    }
+
+    let employee = await this.prisma.employee.findFirst({
+      where: { organizationId, email: user.email },
+      select: { id: true },
+    });
+    if (!employee) {
+      employee = await this.prisma.employee.create({
+        data: {
+          organizationId,
+          branchId,
+          employeeCode: `EMP-${Date.now().toString(36).toUpperCase()}`,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          hireDate: new Date(),
+          departmentId: dept.id,
+          status: 'ACTIVE',
+          createdBy: userId,
+          updatedBy: userId,
+        },
+      });
+    }
+
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { employeeId: employee.id },
+    });
+    return { employeeId: employee.id };
   }
 }

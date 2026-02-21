@@ -1,0 +1,23 @@
+export declare const DEFAULT_PAGE_SIZE = 10;
+export declare const MAX_PAGE_SIZE = 100;
+export declare const PASSWORD_MIN_LENGTH = 8;
+export declare const PASSWORD_MAX_LENGTH = 128;
+export declare const JWT_ACCESS_TOKEN_EXPIRES_IN = "15m";
+export declare const JWT_REFRESH_TOKEN_EXPIRES_IN = "7d";
+export declare const RATE_LIMIT_WINDOW_MS: number;
+export declare const RATE_LIMIT_MAX_REQUESTS = 100;
+export declare const AUTH_RATE_LIMIT_MAX_REQUESTS = 5;
+export declare const MAX_FILE_SIZE_MB = 10;
+export declare const ALLOWED_IMAGE_TYPES: string[];
+export declare const ALLOWED_DOCUMENT_TYPES: string[];
+export declare const CURRENCIES: {
+    readonly PKR: "PKR";
+    readonly USD: "USD";
+    readonly EUR: "EUR";
+    readonly GBP: "GBP";
+};
+export declare const DEFAULT_CURRENCY: "PKR";
+export declare const DATE_FORMAT = "YYYY-MM-DD";
+export declare const DATETIME_FORMAT = "YYYY-MM-DD HH:mm:ss";
+export declare const DISPLAY_DATE_FORMAT = "DD MMM YYYY";
+export declare const DISPLAY_DATETIME_FORMAT = "DD MMM YYYY, HH:mm";

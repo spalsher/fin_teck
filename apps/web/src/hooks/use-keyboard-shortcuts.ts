@@ -7,7 +7,7 @@ interface KeyboardShortcut {
   shiftKey?: boolean;
   altKey?: boolean;
   metaKey?: boolean;
-  action: () => void;
+  action: (e?: KeyboardEvent) => void;
   description: string;
 }
 

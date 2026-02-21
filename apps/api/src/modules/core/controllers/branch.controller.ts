@@ -9,11 +9,36 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { IsOptional, IsNumber, IsString, IsEnum, Min, Max } from 'class-validator';
+import { Type } from 'class-transformer';
 import { BranchService } from '../services/branch.service';
 import { CurrentUser } from '../../../shared/decorators/current-user.decorator';
 import { RequirePermissions } from '../../../shared/decorators/permissions.decorator';
-import { PERMISSIONS, PaginationDto } from '@iteck/shared';
+import { PERMISSIONS } from '@iteck/shared';
 import { CreateBranchDto, UpdateBranchDto } from '@iteck/shared';
+
+class BranchQueryDto {
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(1)
+  page?: number;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(1)
+  @Max(100)
+  limit?: number;
+
+  @IsOptional()
+  @IsString()
+  sortBy?: string;
+
+  @IsOptional()
+  @IsEnum(['asc', 'desc'])
+  sortOrder?: 'asc' | 'desc';
+}
 
 @ApiTags('core')
 @ApiBearerAuth()
@@ -38,10 +63,17 @@ export class BranchController {
   @ApiOperation({ summary: 'Get all branches' })
   @ApiResponse({ status: 200, description: 'Branches retrieved' })
   async findAll(
-    @Query() query: PaginationDto,
+    @Query() query: BranchQueryDto,
     @CurrentUser('organizationId') organizationId: string,
   ) {
-    return this.branchService.findAll(organizationId, query);
+    // Transform query params to PaginationParams format
+    const params = {
+      page: query.page || 1,
+      limit: query.limit || 10,
+      sortBy: query.sortBy || 'name',
+      sortOrder: query.sortOrder || 'asc',
+    };
+    return this.branchService.findAll(organizationId, params);
   }
 
   @Get(':id')
